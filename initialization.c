@@ -1,4 +1,4 @@
-#include "cub3d.h"
+#include "includes/Cub3d.h"
 
 void init_player(t_player *player)
 {
@@ -21,31 +21,32 @@ void	init_window(t_window *window)
         perror("Error in allocation");
         exit(EXIT_FAILURE);
     }
-	window->mlx_con = mlx_init();
+	window->mlx_con = mlx_init(WIDTH, HIGHT, window->title, true);
 	if (!window->mlx_con)
 		(perror("Error in allocation"), exit(EXIT_FAILURE));
-	window->mlx_window = mlx_new_window(window->mlx_con, WIDTH, \
-			HIGHT, \
-			window->title);
-	if (!window->mlx_window)
-		(perror("Error in allocation"), exit(EXIT_FAILURE));
-	window->img.img = mlx_new_image(window->mlx_con, WIDTH, HIGHT);
+	// window->mlx_window = mlx_new_window(window->mlx_con, WIDTH, \
+	// 		HIGHT, \
+	// 		window->title);
+	// if (!window->mlx_window)
+	// 	(perror("Error in allocation"), exit(EXIT_FAILURE));
 	
-	if (!window->img.img)
+	window->img = mlx_new_image(window->mlx_con, WIDTH, HIGHT);
+	
+	if (!window->img)
 	{
-		mlx_destroy_window(window->mlx_con, window->mlx_window);
+		mlx_delete_image(window->mlx_con, window->img);
 		(perror("Error in allocation"), exit(EXIT_FAILURE));
 	}
-	window->img.addr = mlx_get_data_addr(window->img.img, \
-		&window->img.bits_per_pixel, \
-		&window->img.line_length, \
-		&window->img.endian);
-	if (!window->img.addr)
-	{
-		mlx_destroy_image(window->mlx_con, window->img.img);
-		mlx_destroy_window(window->mlx_con, window->mlx_window);
-		(perror("Error in allocation"), exit(EXIT_FAILURE));
-	}
-	window->map = NULL;
+	// window->img.addr = mlx_get_data_addr(window->img.img, \
+	// 	&window->img.bits_per_pixel, \
+	// 	&window->img.line_length, \
+	// 	&window->img.endian);
+	// if (!window->img.addr)
+	// {
+	// 	mlx_destroy_image(window->mlx_con, window->img.img);
+	// 	mlx_destroy_window(window->mlx_con, window->mlx_window);
+	// 	(perror("Error in allocation"), exit(EXIT_FAILURE));
+	// }
+	// window->map = NULL;
 	// init_data(window);
 }

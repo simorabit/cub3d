@@ -1,5 +1,5 @@
 
-#include "cub3d.h"
+#include "includes/Cub3d.h"
 // void update_player(t_player *player)
 // {
 // 	int move_step;
@@ -31,20 +31,22 @@
 
 int	close_handler(t_window *window)
 {
-	mlx_destroy_image(window->mlx_con, \
-			window->img.img);
-	mlx_destroy_window(window->mlx_con, window->mlx_window);
+	mlx_delete_image(window->mlx_con, \
+			window->img);
+	// mlx_destroy_window(window->mlx_con, window->mlx_window);
 	exit(EXIT_SUCCESS);
 	return (0);
 }
-static int	key_handler(int keycode, t_window *window)
+void my_keyhook(mlx_key_data_t keydata, void* param)
 {
 	double new_x;
 	double new_y;
 
-	if (keycode == KEY_ESC)
+    t_window *window = (t_window *)param;
+
+	if (keydata.key == MLX_KEY_ESCAPE)
 		close_handler(window);
-	if (keycode == KEY_UP)
+	if (keydata.key == MLX_KEY_UP)
 	{
 		new_x = window->player.x + (cos(window->player.rotation_angle) * 30);
 		new_y =	window->player.y + (sin(window->player.rotation_angle) * 30);
@@ -57,7 +59,7 @@ static int	key_handler(int keycode, t_window *window)
 			window->player.x = new_x;
 		}
 	}
-	else if (keycode == KEY_DOWN)
+	else if (keydata.key == MLX_KEY_DOWN)
 	{
 		new_x = window->player.x - (cos(window->player.rotation_angle) * 30);
 		new_y =	window->player.y - (sin(window->player.rotation_angle) * 30);
@@ -70,16 +72,15 @@ static int	key_handler(int keycode, t_window *window)
 			window->player.x = new_x;
 		}
 	}
-	else if (keycode == KEY_RIGHT)
+	else if (keydata.key == MLX_KEY_RIGHT)
 		window->player.rotation_angle += 1 * window->player.turn_speed;
-	else if (keycode == KEY_LEFT)
+	else if (keydata.key == MLX_KEY_LEFT)
 		window->player.rotation_angle -= 1 * window->player.turn_speed;
     render(window);
-	return (0);
 }
 
 
 void listen_events(t_window *window)
 {
-    mlx_hook(window->mlx_window, KEY_PRESS, 0, key_handler, window);
+    mlx_key_hook(window->mlx_con, my_keyhook, window);
 }

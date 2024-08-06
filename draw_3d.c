@@ -1,5 +1,5 @@
 
-#include "cub3d.h"
+#include "includes/Cub3d.h"
 
 void render_walls(t_window *window)
 {
@@ -25,9 +25,9 @@ void render_walls(t_window *window)
         while (y < wall_bottom_pixel)
         {
             if(window->ray_list[i].was_hit_vertical)
-                put_pixel(&window->img, i, y, GRAY);
+                mlx_put_pixel(window->img, i, y, GRAY);
             else
-                put_pixel(&window->img, i, y, White);
+                mlx_put_pixel(window->img, i, y, White);
             y++;
         }
         i++;

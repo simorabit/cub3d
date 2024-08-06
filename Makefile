@@ -1,31 +1,36 @@
+.PHONY: all clean fclean re
+
 CC = cc
+FLAGS = #-Wall -Wextra -Werror #-g -fsanitize=address -fsanitize=undefined
+RM = rm -rf
+NAME = cub3D
+# B_NAME = Cub3d_bonus
 
-SRCS       = initialization.c main.c events.c get_next_line/get_next_line.c get_next_line/get_next_line_utils.c \
-				utils.c raycasting.c render.c draw_3d.c
-# //-fsanitize=address -g
-# -fsanitize=address -g
-CFLAGS = -Wall -Wextra -Werror -O3 -fsanitize=address -g
+CFILES = parsing.c list_making.c initialization.c main.c events.c utils.c \
+	raycasting.c render.c draw_3d.c
 
-MLX_FLAGS = -lmlx -framework OpenGL -framework AppKit 
+OBJ = $(patsubst %.c, %.o, $(CFILES))
+B_OBJ = $(patsubst %.c, %.o, $(BFILES))
 
-OBJS = $(SRCS:.c=.o)
+all: lib $(NAME)
 
+lib:
+	@make -C libft
 
-TARGET = cub3d
+$(OBJ) : %.o: %.c
+	@$(CC) $(FLAGS) -c $< -o $@
 
+$(NAME) : libft/libft.a $(OBJ) Includes/Cub3d.h
+	@$(CC) $(FLAGS) $(OBJ) ./MLX42/build/libmlx42.a -lglfw -L/Users/$(USER)/.brew/opt/glfw/lib -pthread -lm libft/libft.a -o $(NAME)
+	@echo making ... Done.
 
-all : $(TARGET)
+clean:
+	@$(RM) $(OBJ) $(B_OBJ)
+	@make -C libft clean
+	@echo cleaning ... Done.
 
-$(TARGET): $(OBJS) 
-	$(CC) $(CFLAGS) -lmlx -framework OpenGL -framework AppKit -o $@ $^
+fclean: clean
+	$(RM) $(NAME) $(B_NAME)
+	make -C libft fclean
 
-%.o: %.c  cub3d.h
-	$(CC) $(CFLAGS) -c $< -o $@
-
-clean :
-	rm -rf $(OBJS)
-
-fclean : clean
-	rm -rf $(TARGET)
-
-re : fclean all
+re: fclean all

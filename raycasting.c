@@ -1,5 +1,5 @@
 
-#include "cub3d.h"
+#include "includes/Cub3d.h"
 
 void DDA(int X0, int Y0, int X1, int Y1, t_window *window, t_ray *mray)
 {
@@ -17,7 +17,7 @@ void DDA(int X0, int Y0, int X1, int Y1, t_window *window, t_ray *mray)
     float Y = Y0;
     while (i <= steps)
     {
-        put_pixel(&window->img, SCALE_FACTOR * X, SCALE_FACTOR * Y, 0xffff00);
+        mlx_put_pixel(window->img, SCALE_FACTOR * X, SCALE_FACTOR * Y, 0xffff00);
         X += Xinc; // increment in x at each step
         Y += Yinc; // increment in y at each step
         i++;

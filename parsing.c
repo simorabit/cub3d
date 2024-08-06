@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 08:12:50 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/08/06 14:44:53 by moel-fat         ###   ########.fr       */
+/*   Updated: 2024/08/06 14:55:56 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -475,10 +475,6 @@ void map_init(t_map *map)
 	map->data = NULL;
 }
 
-void leaks()
-{
-	system("leaks Cub3D");
-}
 
 // int main (int ac, char **av)
 // {
