@@ -6,13 +6,14 @@
 
 # include <mlx.h>
 #include <fcntl.h>
+#include <stdbool.h>
 #include "get_next_line/get_next_line.h"
 # define HIGHT  448 // 14 * 32
 # define WIDTH  1024 // 32 * 32
 # define BLACK  0x000000
 # define White  0xffffff
 # define RED    0xFF0000
-
+# define GRAY   0xD3D3D3
 # define KEY_ESC 			53
 # define ZOOM_OUT 			4
 # define ZOOM_IN 			5
@@ -34,7 +35,7 @@
 #define MAP_NUM_COLS    32
 #define PI              3.14159265
 #define FOV_ANGLE       (60 * (PI / 180))
-#define SCALE_FACTOR 0.2
+#define SCALE_FACTOR    0.2
 
 typedef struct s_image
 {
@@ -50,6 +51,14 @@ typedef struct  s_ray
     double distance;
     double angle;
     double wall_stripe_height;
+    double wall_hit_x;
+    double wall_hit_y;
+    bool    is_facing_up;
+    bool    is_facing_down;
+    bool    is_facing_right;
+    bool    is_facing_left;
+    bool    was_hit_vertical;
+
 } t_ray;
 
 
@@ -74,7 +83,7 @@ typedef struct s_window
     char        **map;
 	char        *title;
     t_player    player;
-    t_ray       ray_list[WIDTH];
+    t_ray       ray_list[WIDTH + 1];
 }	t_window;
 
 

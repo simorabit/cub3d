@@ -24,7 +24,10 @@ void render_walls(t_window *window)
         y = wall_top_pixel;
         while (y < wall_bottom_pixel)
         {
-            put_pixel(&window->img, i, y, White);
+            if(window->ray_list[i].was_hit_vertical)
+                put_pixel(&window->img, i, y, GRAY);
+            else
+                put_pixel(&window->img, i, y, White);
             y++;
         }
         i++;

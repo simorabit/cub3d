@@ -3,7 +3,8 @@ CC = cc
 SRCS       = initialization.c main.c events.c get_next_line/get_next_line.c get_next_line/get_next_line_utils.c \
 				utils.c raycasting.c render.c draw_3d.c
 # //-fsanitize=address -g
-CFLAGS = -Wall -Wextra -Werror -O3 
+# -fsanitize=address -g
+CFLAGS = -Wall -Wextra -Werror -O3 -fsanitize=address -g
 
 MLX_FLAGS = -lmlx -framework OpenGL -framework AppKit 
 
