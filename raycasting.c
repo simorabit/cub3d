@@ -87,7 +87,7 @@ bool horizontal_casting(t_ray *ray, t_window *window)
     init_horz_cast(&xstep, &ystep, &yintercept, ray);
     while (xintercept >= 0 && xintercept <= WIDTH && yintercept >= 0 && yintercept <= HEIGHT)
     {
-        if (window->map[(int)yintercept / TILE_SIZE][(int)xintercept / TILE_SIZE] == '1')
+        if (window->my_map[(int)yintercept / TILE_SIZE][(int)xintercept / TILE_SIZE] == '1')
         {
             ray->wall_hit_x = xintercept;
             ray->wall_hit_y = yintercept;
@@ -115,7 +115,7 @@ bool verical_casting(t_ray *ray, t_window *window)
     init_vert_cast(&xstep, &ystep, &xintercept, ray);
     while (xintercept >= 0 && xintercept <= WIDTH && yintercept >= 0 && yintercept <= HEIGHT)
     {
-        if (window->map[(int)yintercept / TILE_SIZE][(int)xintercept / TILE_SIZE] == '1')
+        if (window->my_map[(int)yintercept / TILE_SIZE][(int)xintercept / TILE_SIZE] == '1')
         {
             ray->wall_hit_x_ver = xintercept;
             ray->wall_hit_y_ver = yintercept;

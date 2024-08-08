@@ -9,17 +9,18 @@ void read_map(t_window *window)
     fd = open("map", O_RDONLY);
     if (fd < 0)
         (perror("Failed to open map file"), exit(EXIT_FAILURE));
-    window->map = malloc((MAP_NUM_ROWS + 1) * sizeof(char *));
-    if (!window->map)
+    window->my_map = malloc((MAP_NUM_ROWS + 1) * sizeof(char *));
+    if (!window->my_map)
         (perror("Failed to read line from map"), exit(EXIT_FAILURE));
     while (i < MAP_NUM_ROWS)
     {
-        window->map[i] = get_next_line(fd);
-        if (!window->map[i])
-            (perror("Failed to read line from map"), exit(EXIT_FAILURE));
+        window->my_map[i] = get_next_line(fd);
+        // printf("%s\n",  window->my_map[i]);
+        if (!window->my_map[i])
+            (perror("Failed to read line fromvbv map"), exit(EXIT_FAILURE));
         i++;
     }
-    window->map[MAP_NUM_ROWS] = NULL;
+    window->my_map[MAP_NUM_ROWS] = NULL;
     close(fd);
 }
 
@@ -54,20 +55,20 @@ static void display_window(t_window *window)
 int main(int argc, char *argv[])
 {
     t_window window;
-    t_map *map;
+    // t_map *map;
 
-	if (argc != 2)
-	ft_error(NULL, 1);
-    map = safe_malloc(sizeof (t_map));
-    map_init(map);
-    check_read_map(argv[1], map);
-    int i = 0;
-    while (map->v_map[i])
-    {
-        printf("%s\n", map->v_map[i]);
-        i++;
-    }
-    window.map = map->v_map;
+	// if (argc != 2)
+	// ft_error(NULL, 1);
+    // map = safe_malloc(sizeof (t_map));
+    // map_init(map);
+    // check_read_map(argv[1], map);
+    // int i = 0;
+    // while (map->v_map[i])
+    // {
+    //     printf("%s\n", map->v_map[i]);
+    //     i++;
+    // }
+    // window.map = map;
     (void)argc;
     (void)argv;
     display_window(&window);
