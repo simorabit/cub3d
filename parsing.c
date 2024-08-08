@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
+/*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 08:12:50 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/08/06 14:55:56 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/08/08 10:12:39 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -412,6 +412,25 @@ bool is_surrounded_by_walls(t_map *map)
     return true;
 }
 
+void remove_x(t_map *map)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (i < map->height)
+	{
+		j = 0;
+		while (j < map->width)
+		{
+			if (map->v_map[i][j] == 'x')
+				map->v_map[i][j] = '0';
+			j++;
+		}
+		i++;
+	}
+}
+
 void parse_map(t_map *map)
 {
 	map->so = check_texture(map->so);
@@ -426,6 +445,7 @@ void parse_map(t_map *map)
 		ft_error(map, 3);
 	if (check_if_map_is_valid(map) == false)
 		ft_error(map, 3);
+	remove_x(map);
 }
 
 

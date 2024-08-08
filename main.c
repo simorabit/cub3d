@@ -54,26 +54,23 @@ static void display_window(t_window *window)
 int main(int argc, char *argv[])
 {
     t_window window;
-    // t_map *map;
+    t_map *map;
 
 	if (argc != 2)
-		ft_error(NULL, 1);
-	// map = safe_malloc(sizeof (t_map));
-	// // map_init(map);
-
-	// check_read_map(argv[1], map);
-    // window.map = map->map;
+	ft_error(NULL, 1);
+    map = safe_malloc(sizeof (t_map));
+    map_init(map);
+    check_read_map(argv[1], map);
+    int i = 0;
+    while (map->v_map[i])
+    {
+        printf("%s\n", map->v_map[i]);
+        i++;
+    }
+    window.map = map->v_map;
     (void)argc;
     (void)argv;
     display_window(&window);
 
-    // mlx_t* mlx = mlx_init(WIDTH, HEIGHT, "42Balls", true);
-	// if (!mlx)
-	// 	return 1;
-	// mlx_image_t* img = mlx_new_image(mlx, 256, 256);
-	// if (!img || (mlx_image_to_window(mlx, img, 0, 0) < 0))
-	// 	return 1;
-
-	// mlx_loop(mlx);
     return 0;
 }
