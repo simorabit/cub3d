@@ -1,5 +1,5 @@
 
-#include "includes/Cub3d.h"
+#include "../includes/Cub3d.h"
 
 
 int get_wall_height(t_window *window, int i)

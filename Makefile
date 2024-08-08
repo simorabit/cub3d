@@ -6,8 +6,15 @@ RM = rm -rf
 NAME = cub3D
 # B_NAME = Cub3d_bonus
 
-CFILES = parsing.c list_making.c initialization.c main.c events.c utils.c \
-	raycasting.c render.c draw_3d.c
+CFILES = main.c\
+		 src/parsing.c\
+		 src/list_making.c\
+		 src/initialization.c\
+		 src/events.c\
+		 src/utils.c \
+		 src/raycasting.c\
+		 src/render.c\
+		 src/draw_3d.c
 
 OBJ = $(patsubst %.c, %.o, $(CFILES))
 B_OBJ = $(patsubst %.c, %.o, $(BFILES))

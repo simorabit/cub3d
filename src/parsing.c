@@ -6,11 +6,11 @@
 /*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 08:12:50 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/08/08 10:12:39 by moel-fat         ###   ########.fr       */
+/*   Updated: 2024/08/08 18:45:03 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/Cub3d.h"
+#include "../includes/Cub3d.h"
 
 //**chack map name if valid;
 

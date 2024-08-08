@@ -1,5 +1,5 @@
 
-#include "includes/Cub3d.h"
+#include "../includes/Cub3d.h"
 
 void update_player(t_player *player)
 {

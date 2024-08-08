@@ -1,5 +1,5 @@
 
-#include "includes/Cub3d.h"
+#include "../includes/Cub3d.h"
 
 void render_walls(t_window *window)
 {

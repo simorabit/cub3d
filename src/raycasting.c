@@ -1,5 +1,5 @@
 
-#include "includes/Cub3d.h"
+#include "../includes/Cub3d.h"
 
 void DDA(int X1, int Y1, t_window *window)
 {

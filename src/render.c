@@ -1,4 +1,4 @@
-#include "includes/Cub3d.h"
+#include "../includes/Cub3d.h"
 
 void draw_all_in_black(t_window *window)
 {
