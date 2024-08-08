@@ -2,15 +2,15 @@
 
 void init_player(t_player *player)
 {
-    player->x = 1 * TILE_SIZE;
-    player->y = 8 * TILE_SIZE;
+    player->x = (12 * TILE_SIZE) + (TILE_SIZE / 2);
+    player->y = (8 * TILE_SIZE) + (TILE_SIZE / 2);
     player->width = 10;
-    player->hight = 10;
+    player->height = 10;
     player->walk_direction = 0;
     player->turn_direction = 0;
-    player->rotation_angle = 0;
+    player->rotation_angle = M_PI / 2;
     player->walk_speed = 10;
-    player->turn_speed = 10 * (PI / 180);
+    player->turn_speed = 8 * (M_PI / 180);
 }
 
 void	init_window(t_window *window)
@@ -21,32 +21,15 @@ void	init_window(t_window *window)
         perror("Error in allocation");
         exit(EXIT_FAILURE);
     }
-	window->mlx_con = mlx_init(WIDTH, HIGHT, window->title, true);
+	window->mlx_con = mlx_init(WIDTH, HEIGHT, window->title, true);
 	if (!window->mlx_con)
 		(perror("Error in allocation"), exit(EXIT_FAILURE));
-	// window->mlx_window = mlx_new_window(window->mlx_con, WIDTH, \
-	// 		HIGHT, \
-	// 		window->title);
-	// if (!window->mlx_window)
-	// 	(perror("Error in allocation"), exit(EXIT_FAILURE));
-	
-	window->img = mlx_new_image(window->mlx_con, WIDTH, HIGHT);
+	window->img = mlx_new_image(window->mlx_con, WIDTH, HEIGHT);
 	
 	if (!window->img)
 	{
 		mlx_delete_image(window->mlx_con, window->img);
 		(perror("Error in allocation"), exit(EXIT_FAILURE));
 	}
-	// window->img.addr = mlx_get_data_addr(window->img.img, \
-	// 	&window->img.bits_per_pixel, \
-	// 	&window->img.line_length, \
-	// 	&window->img.endian);
-	// if (!window->img.addr)
-	// {
-	// 	mlx_destroy_image(window->mlx_con, window->img.img);
-	// 	mlx_destroy_window(window->mlx_con, window->mlx_window);
-	// 	(perror("Error in allocation"), exit(EXIT_FAILURE));
-	// }
-	// window->map = NULL;
-	// init_data(window);
+	mlx_image_to_window(window->mlx_con ,window->img, 0, 0);
 }

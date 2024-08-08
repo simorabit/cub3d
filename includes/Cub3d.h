@@ -6,47 +6,36 @@
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 08:11:00 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/08/06 18:31:45 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/08/08 09:50:14 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 # include <stdio.h>
-# include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
 # include <math.h>
-// # include <mlx.h>
 # include "../MLX42/include/MLX42/MLX42.h"
 # include <stdbool.h>
 # include "../libft/libft.h"
-
-//** tools **// 
-
-
 # include <stdlib.h>
-# include <math.h>
-# include <stdio.h>
-# include <unistd.h>
 # include <string.h>
 
-// # include <mlx.h>
-#include <fcntl.h>
-#include <stdbool.h>
-// #include "../get_next_line/get_next_line.h"
-# define HIGHT  448 // 14 * 32
-# define WIDTH  1024 // 32 * 32
+# define PLAYER_SPEED	10
+# define HEIGHT  		(MAP_NUM_ROWS * TILE_SIZE)
+# define WIDTH  		(MAP_NUM_COLS * TILE_SIZE)
+
 # define BLACK  0x000000FF
 # define White  0xFFFFFFFF
 # define RED    0xFF0000FF
 # define GRAY   0xD3D3D3FF
 
-# define KEY_PRESS	    2
-#define TILE_SIZE       32
-#define PLAYER_SIZE      15
-#define MAP_NUM_ROWS    14
-#define MAP_NUM_COLS    32
+# define KEY_PRESS		2
+#define TILE_SIZE       64
+#define PLAYER_SIZE     15
+#define MAP_NUM_ROWS    30
+#define MAP_NUM_COLS    16
 #define PI              3.14159265
 #define FOV_ANGLE       (60 * (PI / 180))
 #define SCALE_FACTOR    0.2
@@ -91,30 +80,31 @@ typedef struct s_image
 
 typedef struct  s_ray
 {
-    double distance;
-    double angle;
-    double wall_stripe_height;
-    double wall_hit_x;
-    double wall_hit_y;
+    float distance;
+    float angle;
+    float wall_stripe_height;
+    float wall_hit_x;
+    float wall_hit_y;
     bool    is_facing_up;
     bool    is_facing_down;
     bool    is_facing_right;
     bool    is_facing_left;
     bool    was_hit_vertical;
-
+	float	wall_hit_x_ver;
+	float	wall_hit_y_ver;
 } t_ray;
 
 typedef struct  s_player
 {
-    double  x;
-    double  y;
-    int  width;
-    int  hight;
+    float  	x;
+    float  	y;
+    int		width;
+    int		height;
     int     turn_direction;
     int     walk_direction;
-    double  rotation_angle;
-    double  walk_speed;
-    double  turn_speed;
+    float  	rotation_angle;
+    float  	walk_speed;
+    float  	turn_speed;
 } t_player;
 
 typedef struct s_window
@@ -137,7 +127,7 @@ void    init_player(t_player *player);
 void    draw_all_in_black(t_window *window);
 void    put_pixel(t_image *img, int x, int y, int color);
 void    draw_map(int x, int y, t_window *window);
-void    ray_casting(t_window *window);
+void    rays_casting(t_window *window);
 int     get_wall_height(t_window *window, int i);
 void    draw_player(t_window *window);
 void    render_walls(t_window *window);

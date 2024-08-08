@@ -23,20 +23,38 @@ void read_map(t_window *window)
     close(fd);
 }
 
+void    re_init_window(t_window *window)
+{
+    mlx_delete_image(window->mlx_con, window->img);
+    window->img = mlx_new_image(window->mlx_con, WIDTH, HEIGHT);
+    if (!window->img)
+        (write(2, "Error\n", 6), exit(1));
+	mlx_image_to_window(window->mlx_con ,window->img, 0, 0);
+}
+
+void    loop_func(void *param)
+{
+    t_window *window;
+
+    window = (t_window *)param;
+    re_init_window(window);
+    render(window);
+}
+
 static void display_window(t_window *window)
 {
     init_window(window);
     init_player(&window->player);
     read_map(window); 
-    render(window);
     listen_events(window);
+    mlx_loop_hook(window->mlx_con, loop_func, window);
     mlx_loop(window->mlx_con);
 }
 
 int main(int argc, char *argv[])
 {
     t_window window;
-    t_map *map;
+    // t_map *map;
 
 	if (argc != 2)
 		ft_error(NULL, 1);
@@ -49,7 +67,7 @@ int main(int argc, char *argv[])
     (void)argv;
     display_window(&window);
 
-    // mlx_t* mlx = mlx_init(WIDTH, HIGHT, "42Balls", true);
+    // mlx_t* mlx = mlx_init(WIDTH, HEIGHT, "42Balls", true);
 	// if (!mlx)
 	// 	return 1;
 	// mlx_image_t* img = mlx_new_image(mlx, 256, 256);

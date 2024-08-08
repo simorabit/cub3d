@@ -7,7 +7,7 @@ void draw_all_in_black(t_window *window)
 
     y = 0;
 
-    while (y < HIGHT)
+    while (y < HEIGHT)
     {
         x = 0;
         while (x < WIDTH)
@@ -19,20 +19,6 @@ void draw_all_in_black(t_window *window)
     }
 }
 
-void draw_line(t_window *window, int x_start, int y_start, int length, int color)
-{
-    int x = x_start + TILE_SIZE / 2;
-    int y = y_start + TILE_SIZE / 2;
-    int i;
-
-    i = 0;
-    while (i < length)
-    {
-        mlx_put_pixel(window->img, SCALE_FACTOR * x, SCALE_FACTOR * y, color);
-        y--; // move right
-        i++;
-    }
-}
 
 void draw_player(t_window *window)
 {
@@ -57,7 +43,7 @@ void draw_map(int x, int y, t_window *window)
     int map_x = x / TILE_SIZE;
     int map_y = y / TILE_SIZE;
 
-    if ((window->map[map_y][map_x] == '1') && ((x % TILE_SIZE) && (y % TILE_SIZE)))
+    if (window->map[map_y][map_x] == '1')
         mlx_put_pixel(window->img, x * SCALE_FACTOR, SCALE_FACTOR * y, White);
     else
         mlx_put_pixel(window->img, SCALE_FACTOR * x, SCALE_FACTOR * y, BLACK);
@@ -70,7 +56,7 @@ void render(t_window *window)
 
     y = 0;
     draw_all_in_black(window);
-    while (y < HIGHT)
+    while (y < HEIGHT)
     {
         x = 0;
         while (x < WIDTH)
@@ -81,11 +67,6 @@ void render(t_window *window)
         y++;
     }
     draw_player(window);
-    ray_casting(window);
+    rays_casting(window);
     render_walls(window);
-    mlx_image_to_window(window->mlx_con ,window->img, 0, 0);
-    // mlx_put_image_to_window(window->mlx_con,
-    //                         window->mlx_window,
-    //                         window->img.img,
-    //                         0, 0);
 }
