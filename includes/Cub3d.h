@@ -6,7 +6,7 @@
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 08:11:00 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/08/09 11:43:18 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/08/09 11:47:10 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@
 #define MAP_NUM_COLS    32
 #define PI              3.14159265
 #define FOV_ANGLE       (60 * (PI / 180))
-#define SCALE_FACTOR    1
+#define SCALE_FACTOR    0.2
 
 typedef struct s_data
 {
