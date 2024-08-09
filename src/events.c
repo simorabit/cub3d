@@ -6,7 +6,7 @@
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 08:18:00 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/08/09 11:38:30 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/08/09 14:36:35 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 void update_player(t_window *window)
 {
 	int move_step;
-	float new_x;
-	float new_y;
+	double new_x;
+	double new_y;
 
 	window->player.rotation_angle += window->player.turn_direction * window->player.turn_speed;
 	move_step = window->player.walk_direction * window->player.walk_speed;
