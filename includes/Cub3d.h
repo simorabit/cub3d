@@ -6,7 +6,7 @@
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 08:11:00 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/08/09 09:16:23 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/08/09 11:43:18 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@
 # include <string.h>
 
 # define PLAYER_SPEED	10
-# define HEIGHT  		448 //(MAP_NUM_ROWS * TILE_SIZE)
-# define WIDTH  		1024 //(MAP_NUM_COLS * TILE_SIZE)
+# define HEIGHT  		1080 //(MAP_NUM_ROWS * TILE_SIZE)
+# define WIDTH  		1920 //(MAP_NUM_COLS * TILE_SIZE)
+// # define HEIGHT  		448 //(MAP_NUM_ROWS * TILE_SIZE)
+// # define WIDTH  		1024 //(MAP_NUM_COLS * TILE_SIZE)
 
 # define BLACK  0x000000FF
 # define White  0xFFFFFFFF
@@ -32,13 +34,13 @@
 # define GRAY   0xD3D3D3FF
 
 # define KEY_PRESS		2
-#define TILE_SIZE       32
 #define PLAYER_SIZE     15
+#define TILE_SIZE       32
 #define MAP_NUM_ROWS    14
 #define MAP_NUM_COLS    32
 #define PI              3.14159265
 #define FOV_ANGLE       (60 * (PI / 180))
-#define SCALE_FACTOR    0.2
+#define SCALE_FACTOR    1
 
 typedef struct s_data
 {
@@ -127,12 +129,16 @@ int	    close_handler(t_window *window);
 void    init_player(t_player *player);
 void    draw_all_in_black(t_window *window);
 void    put_pixel(t_image *img, int x, int y, int color);
-void    draw_map(int x, int y, t_window *window);
+// void    draw_map(int x, int y, t_window *window);
+void draw_map(t_window *window, float scale_factor);
+
 void    rays_casting(t_window *window);
 int     get_wall_height(t_window *window, int i);
-void    draw_player(t_window *window);
+// void    draw_player(t_window *window);
+void draw_player(t_window *window, float scale_factor);
 void    render_walls(t_window *window);
 void    draw_all_in_black(t_window *window);
+float calculate_scale_factor(t_window *window);
 
 //parsing
 void map_init(t_map *map);
