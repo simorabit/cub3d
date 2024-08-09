@@ -6,7 +6,7 @@
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 08:17:40 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/08/09 09:06:26 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/08/09 09:26:52 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,21 @@ void read_map(t_window *window)
     fd = open("maps/map", O_RDONLY);
     if (fd < 0)
         (perror("Failed to open map file"), exit(EXIT_FAILURE));
-    window->map = malloc((MAP_NUM_ROWS + 1) * sizeof(char *));
-    if (!window->map)
+    window->my_map = malloc((MAP_NUM_ROWS + 1) * sizeof(char *));
+    if (!window->my_map)
         (perror("Failed to read line from map"), exit(EXIT_FAILURE));
     while (i < MAP_NUM_ROWS)
     {
-        window->map[i] = get_next_line(fd);
-        if (!window->map[i])
+        window->my_map[i] = get_next_line(fd);
+        // printf("%s\n",  window->my_map[i]);
+        if (!window->my_map[i])
+            (perror("Failed to read line fromvbv map"), exit(EXIT_FAILURE));
+        window->my_map[i] = get_next_line(fd);
+        if (!window->my_map[i])
            break ;
         i++;
     }
-    window->map[MAP_NUM_ROWS] = NULL;
+    window->my_map[MAP_NUM_ROWS] = NULL;
     close(fd);
 }
 
@@ -79,9 +83,9 @@ int main(int argc, char *argv[])
         printf("%s\n", map->v_map[i]);
         i++;
     }
-    window.map = map->v_map;
-    (void)argc;
-    (void)argv;
+    window.map = map;
+    // (void)argc;
+    // (void)argv;
     display_window(&window);
 
     return 0;

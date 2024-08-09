@@ -6,7 +6,7 @@
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 08:11:00 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/08/09 09:35:08 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/08/09 09:40:57 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,13 +109,14 @@ typedef struct  s_player
 
 typedef struct s_window
 {
-	mlx_t        *mlx_con;
-	void        *mlx_window;
+	mlx_t        	*mlx_con;
+	void        	*mlx_window;
 	mlx_image_t     *img;
-    char        **map;
-	char        *title;
-    t_player    player;
-    t_ray       ray_list[WIDTH + 1];
+    t_map			*map;
+	char			**my_map;
+	char        	*title;
+    t_player    	player;
+    t_ray       	ray_list[WIDTH + 1];
 }	t_window;
 
 //functions

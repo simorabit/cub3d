@@ -56,7 +56,7 @@ void draw_map(int x, int y, t_window *window)
     int map_x = x / TILE_SIZE;
     int map_y = y / TILE_SIZE;
 
-    if (window->map[map_y][map_x] == '1')
+    if (window->my_map[map_y][map_x] == '1')
         mlx_put_pixel(window->img, x * SCALE_FACTOR, SCALE_FACTOR * y, White);
     else
         mlx_put_pixel(window->img, SCALE_FACTOR * x, SCALE_FACTOR * y, BLACK);
@@ -73,7 +73,7 @@ void render(t_window *window)
     {
         x = 0;
         while (x < WIDTH)
-        {
+        {  
             draw_map(x, y, window);
             x++;
         }
