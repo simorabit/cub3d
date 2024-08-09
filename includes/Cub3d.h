@@ -6,7 +6,7 @@
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 08:11:00 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/08/08 11:39:59 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/08/09 09:16:23 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,36 +22,18 @@
 # include <stdlib.h>
 # include <string.h>
 
-// # define PLAYER_SPEED	10
-
-// # define BLACK  0x000000FF
-// # define White  0xFFFFFFFF
-// # define RED    0xFF0000FF
-// # define GRAY   0xD3D3D3FF
-
-// # define HEIGHT  		2048  //(MAP_NUM_ROWS * TILE_SIZE) 896
-// # define WIDTH  		896 //(MAP_NUM_COLS * TILE_SIZE) 2048
-
-// # define KEY_PRESS		2
-// #define TILE_SIZE       64
-// #define PLAYER_SIZE     15
-// #define MAP_NUM_ROWS    14
-// #define MAP_NUM_COLS    32
-// #define PI              3.14159265
-// #define FOV_ANGLE       (60 * (PI / 180))
-// #define SCALE_FACTOR    0.2
-
-# define HEIGHT  896 // 14 * 32
-# define WIDTH  2048 // 32 * 32
+# define PLAYER_SPEED	10
+# define HEIGHT  		448 //(MAP_NUM_ROWS * TILE_SIZE)
+# define WIDTH  		1024 //(MAP_NUM_COLS * TILE_SIZE)
 
 # define BLACK  0x000000FF
 # define White  0xFFFFFFFF
 # define RED    0xFF0000FF
 # define GRAY   0xD3D3D3FF
 
-# define KEY_PRESS	    2
-#define TILE_SIZE       64
-#define PLAYER_SIZE      15
+# define KEY_PRESS		2
+#define TILE_SIZE       32
+#define PLAYER_SIZE     15
 #define MAP_NUM_ROWS    14
 #define MAP_NUM_COLS    32
 #define PI              3.14159265

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/09 08:17:40 by moel-fat          #+#    #+#             */
+/*   Updated: 2024/08/09 09:16:10 by mal-mora         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "includes/Cub3d.h"
 
 void read_map(t_window *window)
@@ -6,7 +18,7 @@ void read_map(t_window *window)
     int i;
 
     i = 0;
-    fd = open("map", O_RDONLY);
+    fd = open("maps/map", O_RDONLY);
     if (fd < 0)
         (perror("Failed to open map file"), exit(EXIT_FAILURE));
     window->my_map = malloc((MAP_NUM_ROWS + 1) * sizeof(char *));
@@ -18,6 +30,9 @@ void read_map(t_window *window)
         // printf("%s\n",  window->my_map[i]);
         if (!window->my_map[i])
             (perror("Failed to read line fromvbv map"), exit(EXIT_FAILURE));
+        window->map[i] = get_next_line(fd);
+        if (!window->map[i])
+           break ;
         i++;
     }
     window->my_map[MAP_NUM_ROWS] = NULL;
@@ -46,7 +61,7 @@ static void display_window(t_window *window)
 {
     init_window(window);
     init_player(&window->player);
-    read_map(window); 
+    // read_map(window); 
     listen_events(window);
     mlx_loop_hook(window->mlx_con, loop_func, window);
     mlx_loop(window->mlx_con);
