@@ -6,7 +6,7 @@
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 08:17:40 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/08/09 09:26:52 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/08/09 11:44:38 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,6 @@ int main(int argc, char *argv[])
         i++;
     }
     window.map = map;
-    // (void)argc;
-    // (void)argv;
     display_window(&window);
 
     return 0;
