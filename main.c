@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 08:17:40 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/08/09 08:17:45 by moel-fat         ###   ########.fr       */
+/*   Updated: 2024/08/09 09:06:26 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void read_map(t_window *window)
     int i;
 
     i = 0;
-    fd = open("map", O_RDONLY);
+    fd = open("maps/map", O_RDONLY);
     if (fd < 0)
         (perror("Failed to open map file"), exit(EXIT_FAILURE));
     window->map = malloc((MAP_NUM_ROWS + 1) * sizeof(char *));
@@ -28,7 +28,7 @@ void read_map(t_window *window)
     {
         window->map[i] = get_next_line(fd);
         if (!window->map[i])
-            (perror("Failed to read line from map"), exit(EXIT_FAILURE));
+           break ;
         i++;
     }
     window->map[MAP_NUM_ROWS] = NULL;
@@ -57,7 +57,7 @@ static void display_window(t_window *window)
 {
     init_window(window);
     init_player(&window->player);
-    read_map(window); 
+    // read_map(window); 
     listen_events(window);
     mlx_loop_hook(window->mlx_con, loop_func, window);
     mlx_loop(window->mlx_con);
