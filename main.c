@@ -6,7 +6,7 @@
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 08:17:40 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/08/09 11:44:38 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/08/09 12:01:52 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ int main(int argc, char *argv[])
 {
     t_window window;
     t_map *map;
+
 
 	if (argc != 2)
 	ft_error(NULL, 1);
