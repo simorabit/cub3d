@@ -60,7 +60,7 @@ void render(t_window *window)
     {
         x = 0;
         while (x < WIDTH)
-        {
+        {  
             draw_map(x, y, window);
             x++;
         }
