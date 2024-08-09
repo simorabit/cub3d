@@ -6,7 +6,7 @@
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 08:18:19 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/08/09 18:33:07 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/08/09 18:42:59 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,25 +97,23 @@ bool horizontal_casting(t_ray *ray, t_window *window)
     yintercept = floor(window->player.y / TILE_SIZE) * TILE_SIZE;
     yintercept += ray->is_facing_down ? TILE_SIZE : 0;
     xintercept = window->player.x + (yintercept - window->player.y) / tan(ray->angle);
-    double nextX = xintercept;
-    double nextY = yintercept;
-    double x_new = nextX;
-    double y_new = nextY;
-    init_horz_cast(&xstep, &ystep, &nextY, ray);
-    while (nextX >= 0 && nextX <= window->width && nextY >= 0 && nextY <= window->height)
+    double x_new = xintercept;
+    double y_new = yintercept;
+    init_horz_cast(&xstep, &ystep, &yintercept, ray);
+    while (xintercept >= 0 && xintercept <= window->width && yintercept >= 0 && yintercept <= window->height)
     {
-         y_new = nextY + ((ray->is_facing_up) ? -1 : 0);
-         x_new = nextX;
+         y_new = yintercept + ((ray->is_facing_up) ? -1 : 0);
+         x_new = xintercept;
         if (window->map->v_map[(int)y_new / TILE_SIZE][(int)x_new / TILE_SIZE] == '1')
         {
-            ray->wall_hit_x = nextX;
-            ray->wall_hit_y = nextY;
+            ray->wall_hit_x = xintercept;
+            ray->wall_hit_y = yintercept;
             return (true);
         }
         else
         {
-            nextX += xstep;
-            nextY += ystep;
+            xintercept += xstep;
+            yintercept += ystep;
         }
     }
     return (false);
@@ -131,25 +129,23 @@ bool verical_casting(t_ray *ray, t_window *window)
     xintercept = floor(window->player.x / TILE_SIZE) * TILE_SIZE;
     xintercept += ray->is_facing_right ? TILE_SIZE : 0;
     yintercept = window->player.y + (xintercept - window->player.x) * tan(ray->angle);
-    double nextX = xintercept;
-    double nextY = yintercept;
     double x_new;
     double y_new;
-    init_vert_cast(&xstep, &ystep, &nextX, ray);
-    while (nextX >= 0 && nextX <= window->width && nextY >= 0 && nextY <= window->height)
+    init_vert_cast(&xstep, &ystep, &xintercept, ray);
+    while (xintercept >= 0 && xintercept <= window->width && yintercept >= 0 && yintercept <= window->height)
     {
-        x_new = nextX + ((ray->is_facing_left) ? -1 : 0);
-        y_new = nextY;
+        x_new = xintercept + ((ray->is_facing_left) ? -1 : 0);
+        y_new = yintercept;
         if (window->map->v_map[(int)y_new / TILE_SIZE][(int)x_new / TILE_SIZE] == '1')
         {
-            ray->wall_hit_x_ver = nextX;
-            ray->wall_hit_y_ver = nextY;
+            ray->wall_hit_x_ver = xintercept;
+            ray->wall_hit_y_ver = yintercept;
             return (true);
         }
         else
         {
-            nextX += xstep;
-            nextY += ystep;
+            xintercept += xstep;
+            yintercept += ystep;
         }
     }
     return (false);
