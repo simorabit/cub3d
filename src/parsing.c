@@ -6,7 +6,7 @@
 /*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 08:12:50 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/08/08 18:45:03 by moel-fat         ###   ########.fr       */
+/*   Updated: 2024/08/09 12:22:38 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -312,6 +312,7 @@ void fill_map(t_map *map)
 	int	i = 0;
 	int j;
 	get_map_width(map);
+	map->width--;
 	map->v_map = safe_malloc(sizeof(char *) * (map->height + 1));
 	// printf("width ->> %d\n", map->width);
 	while(i < map->height)
