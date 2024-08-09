@@ -6,7 +6,7 @@
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 08:11:00 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/08/09 11:57:05 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/08/09 18:33:38 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,12 @@
 # include <string.h>
 
 # define PLAYER_SPEED	10
-# define HEIGHT  		1080 //(MAP_NUM_ROWS * TILE_SIZE)
-# define WIDTH  		1920 //(MAP_NUM_COLS * TILE_SIZE)
+// # define HEIGHT  		1080 //(MAP_NUM_ROWS * TILE_SIZE)
+// # define WIDTH  		1920 //(MAP_NUM_COLS * TILE_SIZE)
 // # define HEIGHT  		448 //(MAP_NUM_ROWS * TILE_SIZE)
 // # define WIDTH  		1024 //(MAP_NUM_COLS * TILE_SIZE)
+# define HEIGHT  		1080 //(MAP_NUM_ROWS * TILE_SIZE)
+# define WIDTH  		1920 //(MAP_NUM_COLS * TILE_SIZE)
 
 # define BLACK  0x000000FF
 # define White  0xFFFFFFFF
@@ -82,31 +84,31 @@ typedef struct s_image
 
 typedef struct  s_ray
 {
-    float distance;
-    float angle;
-    float wall_stripe_height;
-    float wall_hit_x;
-    float wall_hit_y;
+    double distance;
+    double angle;
+    double wall_stripe_height;
+    double wall_hit_x;
+    double wall_hit_y;
     bool    is_facing_up;
     bool    is_facing_down;
     bool    is_facing_right;
     bool    is_facing_left;
-    bool    was_hit_vertical;
-	float	wall_hit_x_ver;
-	float	wall_hit_y_ver;
+    bool    was_hit_horz;
+	double	wall_hit_x_ver;
+	double	wall_hit_y_ver;
 } t_ray;
 
 typedef struct  s_player
 {
-    float  	x;
-    float  	y;
+    double  	x;
+    double  	y;
     int		width;
     int		height;
     int     turn_direction;
     int     walk_direction;
-    float  	rotation_angle;
-    float  	walk_speed;
-    float  	turn_speed;
+    double  	rotation_angle;
+    double  	walk_speed;
+    double  	turn_speed;
 } t_player;
 
 typedef struct s_window
@@ -117,6 +119,8 @@ typedef struct s_window
     t_map			*map;
 	char			**my_map;
 	char        	*title;
+	int				width;
+	int				height;
     t_player    	player;
     t_ray       	ray_list[WIDTH + 1];
 }	t_window;
@@ -129,16 +133,16 @@ int	    close_handler(t_window *window);
 void    init_player(t_player *player);
 void    draw_all_in_black(t_window *window);
 void    put_pixel(t_image *img, int x, int y, int color);
-// void    draw_map(int x, int y, t_window *window);
-void draw_map(t_window *window, float scale_factor);
+void    draw_map(int x, int y, t_window *window);
+// void 	draw_map(t_window *window);
 
 void    rays_casting(t_window *window);
-int     get_wall_height(t_window *window, int i);
+double get_wall_height(t_window *window, int i);
 // void    draw_player(t_window *window);
-void draw_player(t_window *window, float scale_factor);
+void 	draw_player(t_window *window);
 void    render_walls(t_window *window);
 void    draw_all_in_black(t_window *window);
-float calculate_scale_factor(t_window *window);
+
 
 //parsing
 void map_init(t_map *map);

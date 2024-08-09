@@ -6,7 +6,7 @@
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 08:18:07 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/08/09 11:55:43 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/08/09 17:50:53 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void init_player(t_player *player)
     player->height = 10;
     player->walk_direction = 0;
     player->turn_direction = 0;
-    player->rotation_angle = M_PI / 2;
+    player->rotation_angle = (M_PI / 2);
     player->walk_speed = 10;
     player->turn_speed = 8 * (M_PI / 180);
 }
@@ -44,5 +44,7 @@ void	init_window(t_window *window)
 		mlx_delete_image(window->mlx_con, window->img);
 		(perror("Error in allocation"), exit(EXIT_FAILURE));
 	}
+    window->width = window->map->width * TILE_SIZE;
+    window->height = window->map->height * TILE_SIZE;
 	mlx_image_to_window(window->mlx_con ,window->img, 0, 0);
 }
