@@ -1,10 +1,9 @@
-              NO ./assets/Bricks.xpm
-              SO ./assets/Bricks.xpm
-       F 200,100,11
-WE     ./assets/Bricks.xpm
-
-C 12  ,11,  200
-EA     ./assets/Bricks.xpm
+NO ./assets/Bricks.xpm
+SO ./assets/Bricks.xpm
+WE ./assets/Bricks.xpm
+EA ./assets/Bricks.xpm
+F 0,255,0
+C 255,0,0
 
 11111111111111111111111111111111
 10000010110001010001000010000001

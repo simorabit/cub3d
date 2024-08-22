@@ -6,7 +6,7 @@
 /*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 08:12:50 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/08/09 12:22:38 by moel-fat         ###   ########.fr       */
+/*   Updated: 2024/08/22 15:57:42 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -265,7 +265,6 @@ void copy_map(t_map *map)
 	char *tmp;
 	
 	current = map->data;
-	// printf("height ->> %d\n", map->height);
 	while (current != NULL && is_just_spaces(current->data) == true)
 	{
 		// if (current->data[0] == '\n')
@@ -314,7 +313,6 @@ void fill_map(t_map *map)
 	get_map_width(map);
 	map->width--;
 	map->v_map = safe_malloc(sizeof(char *) * (map->height + 1));
-	// printf("width ->> %d\n", map->width);
 	while(i < map->height)
 	{
 		j = 0;
@@ -432,6 +430,42 @@ void remove_x(t_map *map)
 	}
 }
 
+void check_deriction(t_map *map, char c)
+{
+	if (c == 'N')
+		map->deriction = NORTH;
+	else if (c == 'E')
+		map->deriction = EAST;
+	else if (c == 'S')
+		map->deriction = SOUTH;
+	else if (c == 'W')
+		map->deriction = WEST;
+}
+
+void find_player(t_map *map)
+{
+	int x;
+	int y;
+
+	y = 0;
+	while (map->v_map[y] != NULL)
+	{
+		x = 0;
+		while (map->v_map[y][x] != '\0')
+		{
+			if (map->v_map[y][x] == 'N' || map->v_map[y][x] == 'S' || map->v_map[y][x] == 'E' || map->v_map[y][x] == 'W')
+			{
+				check_deriction(map, map->v_map[y][x]);
+				map->player_x = x;
+				map->player_y = y;
+				return ;
+			}
+			x++;
+		}
+		y++;
+	}
+}
+
 void parse_map(t_map *map)
 {
 	map->so = check_texture(map->so);
@@ -447,6 +481,7 @@ void parse_map(t_map *map)
 	if (check_if_map_is_valid(map) == false)
 		ft_error(map, 3);
 	remove_x(map);
+	find_player(map);
 }
 
 
@@ -454,8 +489,7 @@ void store_map(t_map *map)
 {
     char *line;
     int count = 0;
-    // t_data *current;
-    
+
     while(1)
     {
         line = get_next_line(map->map_fd);

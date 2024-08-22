@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
+/*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 08:17:40 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/08/09 15:20:39 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/08/22 15:25:02 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void    loop_func(void *param)
 
     window = (t_window *)param;
     re_init_window(window);
+    update_player(window); // Update player position here instead of in listen_events for better performance
     render(window);
 }
 
@@ -79,6 +80,5 @@ int main(int argc, char *argv[])
     check_read_map(argv[1], map);
     window.map = map;
     display_window(&window);
-
     return 0;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
+/*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 08:11:00 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/08/09 18:33:38 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/08/22 15:31:36 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,15 @@
 // # define WIDTH  		1920 //(MAP_NUM_COLS * TILE_SIZE)
 // # define HEIGHT  		448 //(MAP_NUM_ROWS * TILE_SIZE)
 // # define WIDTH  		1024 //(MAP_NUM_COLS * TILE_SIZE)
-# define HEIGHT  		1080 //(MAP_NUM_ROWS * TILE_SIZE)
-# define WIDTH  		1920 //(MAP_NUM_COLS * TILE_SIZE)
+# define HEIGHT  		900 //(MAP_NUM_ROWS * TILE_SIZE)
+# define WIDTH  		1600 //(MAP_NUM_COLS * TILE_SIZE)
 
 # define BLACK  0x000000FF
 # define White  0xFFFFFFFF
 # define RED    0xFF0000FF
 # define GRAY   0xD3D3D3FF
+# define Maroon 0xFF800000
+# define Gold	0xFFEE82EE
 
 # define KEY_PRESS		2
 #define PLAYER_SIZE     15
@@ -69,6 +71,9 @@ typedef struct s_map
 	char 	**v_map;
 	int		height;
 	int		width;
+	int 	deriction;
+	int		player_x;
+	int		player_y;
 	int		map_fd;
 	t_data	*data;
 }t_map;
@@ -106,6 +111,7 @@ typedef struct  s_player
     int		height;
     int     turn_direction;
     int     walk_direction;
+	int     strafe_direction;
     double  	rotation_angle;
     double  	walk_speed;
     double  	turn_speed;
@@ -121,9 +127,19 @@ typedef struct s_window
 	char        	*title;
 	int				width;
 	int				height;
+	uint32_t		floor_color;
+	uint32_t		ceiling_color;
     t_player    	player;
     t_ray       	ray_list[WIDTH + 1];
 }	t_window;
+
+enum e_direction
+{
+	NORTH,
+	SOUTH,
+	EAST,
+	WEST
+};
 
 //functions
 void	init_window(t_window *window);
@@ -134,6 +150,7 @@ void    init_player(t_player *player);
 void    draw_all_in_black(t_window *window);
 void    put_pixel(t_image *img, int x, int y, int color);
 void    draw_map(int x, int y, t_window *window);
+void update_player(t_window *window);	
 // void 	draw_map(t_window *window);
 
 void    rays_casting(t_window *window);
@@ -145,12 +162,13 @@ void    draw_all_in_black(t_window *window);
 
 
 //parsing
-void map_init(t_map *map);
-void check_read_map(char *filename, t_map *map);
-int		ft_lstsizemap(t_data *lst);
-t_data	*ft_lstlastmap(t_data *lst);
-t_data	*ft_lstnewmap(char *data);
-void	ft_lstadd_backmap(t_data **lst, t_data *new);
-void	ft_error(t_map *map, int flag);
-void	*safe_malloc(size_t size);
+void		map_init(t_map *map);
+void		check_read_map(char *filename, t_map *map);
+int			ft_lstsizemap(t_data *lst);
+t_data		*ft_lstlastmap(t_data *lst);
+t_data		*ft_lstnewmap(char *data);
+void		ft_lstadd_backmap(t_data **lst, t_data *new);
+void		ft_error(t_map *map, int flag);
+void		*safe_malloc(size_t size);
+uint32_t	convert_color(t_color *color);
 #endif

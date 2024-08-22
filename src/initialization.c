@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialization.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
+/*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 08:18:07 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/08/09 17:50:53 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/08/22 14:42:34 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,17 @@
 
 void init_player(t_player *player)
 {
+    //TODO set the player view based on the map
     player->x = (12 * TILE_SIZE) + (TILE_SIZE / 2);
     player->y = (8 * TILE_SIZE) + (TILE_SIZE / 2);
     player->width = 10;
     player->height = 10;
     player->walk_direction = 0;
     player->turn_direction = 0;
+    player->strafe_direction = 0;
     player->rotation_angle = (M_PI / 2);
-    player->walk_speed = 10;
-    player->turn_speed = 8 * (M_PI / 180);
+    player->walk_speed = 5;
+    player->turn_speed = 4 * (M_PI / 180);
 }
 
 void	init_window(t_window *window)
@@ -47,4 +49,6 @@ void	init_window(t_window *window)
     window->width = window->map->width * TILE_SIZE;
     window->height = window->map->height * TILE_SIZE;
 	mlx_image_to_window(window->mlx_con ,window->img, 0, 0);
+    window->ceiling_color = convert_color(&window->map->floor);
+    window->floor_color = convert_color(&window->map->ceiling);
 }
