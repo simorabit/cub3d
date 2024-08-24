@@ -6,7 +6,7 @@
 /*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 08:12:50 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/08/22 15:57:42 by moel-fat         ###   ########.fr       */
+/*   Updated: 2024/08/24 17:23:19 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ void	ft_error(t_map *map, int flag)
 		ft_putstr_fd("Error\n Invalid RGB value must be between 0 and 255 with no spaces", 2);
 	else if (flag == 7)
 		ft_putstr_fd("Error\n Invalid arguments for RGB format", 2);
+	else if (flag == 8)
+		ft_putstr_fd("Error\n player not found or wrong dericetion", 2);
 	
 	if(map != NULL)
 		free_map(map);//TODO update to free everything after;
@@ -433,13 +435,13 @@ void remove_x(t_map *map)
 void check_deriction(t_map *map, char c)
 {
 	if (c == 'N')
-		map->deriction = NORTH;
+		map->player_dir = NORTH;
 	else if (c == 'E')
-		map->deriction = EAST;
+		map->player_dir = EAST;
 	else if (c == 'S')
-		map->deriction = SOUTH;
+		map->player_dir = SOUTH;
 	else if (c == 'W')
-		map->deriction = WEST;
+		map->player_dir = WEST;
 }
 
 void find_player(t_map *map)
@@ -464,6 +466,8 @@ void find_player(t_map *map)
 		}
 		y++;
 	}
+	if (map->player_x == -1 || map->player_y == -1 || map->player_dir == -1)
+		ft_error(map, 8);
 }
 
 void parse_map(t_map *map)
@@ -523,6 +527,9 @@ void map_init(t_map *map)
 	map->ceiling.r = -1;
 	map->ceiling.g = -1;
 	map->ceiling.b = -1;
+	map->player_dir = -1;
+	map->player_x = -1;
+	map->player_y = -1;
 	map->map = NULL;
 	map->height = 0;
 	map->width = 0;

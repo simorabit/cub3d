@@ -6,7 +6,7 @@
 /*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 08:11:00 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/08/22 15:31:36 by moel-fat         ###   ########.fr       */
+/*   Updated: 2024/08/24 17:37:43 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ typedef struct s_map
 	char 	**v_map;
 	int		height;
 	int		width;
-	int 	deriction;
+	int 	player_dir;
 	int		player_x;
 	int		player_y;
 	int		map_fd;
@@ -146,7 +146,7 @@ void	init_window(t_window *window);
 void	listen_events(t_window *window);
 void    render(t_window *window);
 int	    close_handler(t_window *window);
-void    init_player(t_player *player);
+void	init_player(t_player *player, t_map *map);
 void    draw_all_in_black(t_window *window);
 void    put_pixel(t_image *img, int x, int y, int color);
 void    draw_map(int x, int y, t_window *window);

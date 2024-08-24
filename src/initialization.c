@@ -6,26 +6,33 @@
 /*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 08:18:07 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/08/22 14:42:34 by moel-fat         ###   ########.fr       */
+/*   Updated: 2024/08/24 18:36:39 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "../includes/Cub3d.h"
 
-void init_player(t_player *player)
+void init_player(t_player *player, t_map *map)
 {
     //TODO set the player view based on the map
-    player->x = (12 * TILE_SIZE) + (TILE_SIZE / 2);
-    player->y = (8 * TILE_SIZE) + (TILE_SIZE / 2);
+    player->x = (map->player_x * TILE_SIZE) + (TILE_SIZE / 2);
+    player->y = (map->player_y * TILE_SIZE) + (TILE_SIZE / 2);
     player->width = 10;
     player->height = 10;
     player->walk_direction = 0;
     player->turn_direction = 0;
     player->strafe_direction = 0;
-    player->rotation_angle = (M_PI / 2);
     player->walk_speed = 5;
     player->turn_speed = 4 * (M_PI / 180);
+    if (map->player_dir == NORTH)
+        player->rotation_angle = 3 * (M_PI / 2);
+    else if (map->player_dir == EAST)
+        player->rotation_angle = 0;
+    else if (map->player_dir == SOUTH)
+        player->rotation_angle = (M_PI / 2);
+    else if (map->player_dir == WEST)
+        player->rotation_angle = M_PI;
 }
 
 void	init_window(t_window *window)
