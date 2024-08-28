@@ -6,7 +6,7 @@
 /*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 08:12:50 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/08/24 17:23:19 by moel-fat         ###   ########.fr       */
+/*   Updated: 2024/08/26 12:55:52 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,15 +90,17 @@ void	ft_error(t_map *map, int flag)
 	else if (flag == 3)
 		ft_putstr_fd("Error\nMap is not closed by walls or have extra elemnet", 2);
 	else if (flag == 4)
-		ft_putstr_fd("Error\n unwanted elemnet in the file", 2);
+		ft_putstr_fd("Error\nunwanted elemnet in the file", 2);
 	else if (flag == 5)
-		ft_putstr_fd("Error\n found empty line in inside the map", 2);
+		ft_putstr_fd("Error\nfound empty line in inside the map", 2);
 	else if (flag == 6)
-		ft_putstr_fd("Error\n Invalid RGB value must be between 0 and 255 with no spaces", 2);
+		ft_putstr_fd("Error\nInvalid RGB value must be between 0 and 255 with no spaces", 2);
 	else if (flag == 7)
-		ft_putstr_fd("Error\n Invalid arguments for RGB format", 2);
+		ft_putstr_fd("Error\nInvalid arguments for RGB format", 2);
 	else if (flag == 8)
-		ft_putstr_fd("Error\n player not found or wrong dericetion", 2);
+		ft_putstr_fd("Error\nplayer not found or wrong dericetion", 2);
+	else if (flag == 9)
+		ft_putstr_fd("Error\nmalloc fail\n", 2);
 	
 	if(map != NULL)
 		free_map(map);//TODO update to free everything after;

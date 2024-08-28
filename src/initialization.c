@@ -6,7 +6,7 @@
 /*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 08:18:07 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/08/24 18:36:39 by moel-fat         ###   ########.fr       */
+/*   Updated: 2024/08/27 15:43:24 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void init_player(t_player *player, t_map *map)
     player->walk_direction = 0;
     player->turn_direction = 0;
     player->strafe_direction = 0;
-    player->walk_speed = 5;
-    player->turn_speed = 4 * (M_PI / 180);
+    player->walk_speed = 15;
+    player->turn_speed = 12 * (M_PI / 180);
     if (map->player_dir == NORTH)
         player->rotation_angle = 3 * (M_PI / 2);
     else if (map->player_dir == EAST)
@@ -58,4 +58,16 @@ void	init_window(t_window *window)
 	mlx_image_to_window(window->mlx_con ,window->img, 0, 0);
     window->ceiling_color = convert_color(&window->map->floor);
     window->floor_color = convert_color(&window->map->ceiling);
+}
+
+void init_texture(t_window *window)
+{
+    window->texture = malloc(sizeof(mlx_texture_t *) * 4);
+
+    window->texture[NORTH] = mlx_load_png(window->map->no);
+    window->texture[SOUTH] = mlx_load_png(window->map->so);
+    window->texture[EAST] = mlx_load_png(window->map->ea);
+    window->texture[WEST] = mlx_load_png(window->map->we);
+    if (!window->texture[NORTH] || !window->texture[SOUTH] || !window->texture[EAST] || !window->texture[WEST])
+        ft_error(window->map, 6);
 }

@@ -6,7 +6,7 @@
 /*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 08:17:40 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/08/24 17:00:16 by moel-fat         ###   ########.fr       */
+/*   Updated: 2024/08/26 13:09:53 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ static void display_window(t_window *window)
 {
     init_window(window);
     init_player(&window->player, window->map);
+    init_texture(window);
     // read_map(window); 
     listen_events(window);
     mlx_loop_hook(window->mlx_con, loop_func, window);

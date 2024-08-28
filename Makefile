@@ -14,7 +14,8 @@ CFILES = main.c\
 		 src/utils.c \
 		 src/raycasting.c\
 		 src/render.c\
-		 src/draw_3d.c
+		 src/draw_3d.c\
+		 src/texture.c\
 
 OBJ = $(patsubst %.c, %.o, $(CFILES))
 B_OBJ = $(patsubst %.c, %.o, $(BFILES))

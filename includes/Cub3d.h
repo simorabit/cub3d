@@ -6,7 +6,7 @@
 /*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 08:11:00 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/08/24 17:37:43 by moel-fat         ###   ########.fr       */
+/*   Updated: 2024/08/27 15:40:40 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@
 
 # define KEY_PRESS		2
 #define PLAYER_SIZE     15
-#define TILE_SIZE       32
+#define TILE_SIZE       64
 #define MAP_NUM_ROWS    14
 #define MAP_NUM_COLS    32
 #define PI              3.14159265
@@ -129,6 +129,7 @@ typedef struct s_window
 	int				height;
 	uint32_t		floor_color;
 	uint32_t		ceiling_color;
+	mlx_texture_t	**texture;
     t_player    	player;
     t_ray       	ray_list[WIDTH + 1];
 }	t_window;
@@ -171,4 +172,5 @@ void		ft_lstadd_backmap(t_data **lst, t_data *new);
 void		ft_error(t_map *map, int flag);
 void		*safe_malloc(size_t size);
 uint32_t	convert_color(t_color *color);
+void		init_texture(t_window *window);
 #endif
