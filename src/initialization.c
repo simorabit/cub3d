@@ -6,7 +6,7 @@
 /*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 08:18:07 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/08/27 15:43:24 by moel-fat         ###   ########.fr       */
+/*   Updated: 2024/08/28 11:41:19 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void init_player(t_player *player, t_map *map)
     player->walk_direction = 0;
     player->turn_direction = 0;
     player->strafe_direction = 0;
-    player->walk_speed = 15;
-    player->turn_speed = 12 * (M_PI / 180);
+    player->walk_speed = 8;
+    player->turn_speed = 4 * (M_PI / 180);
     if (map->player_dir == NORTH)
         player->rotation_angle = 3 * (M_PI / 2);
     else if (map->player_dir == EAST)

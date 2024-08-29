@@ -6,7 +6,7 @@
 /*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 08:11:00 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/08/27 15:40:40 by moel-fat         ###   ########.fr       */
+/*   Updated: 2024/08/28 12:53:17 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <stdlib.h>
 # include <string.h>
 
-# define PLAYER_SPEED	10
+# define PLAYER_SPEED	12
 // # define HEIGHT  		1080 //(MAP_NUM_ROWS * TILE_SIZE)
 // # define WIDTH  		1920 //(MAP_NUM_COLS * TILE_SIZE)
 // # define HEIGHT  		448 //(MAP_NUM_ROWS * TILE_SIZE)
@@ -39,7 +39,7 @@
 
 # define KEY_PRESS		2
 #define PLAYER_SIZE     15
-#define TILE_SIZE       64
+#define TILE_SIZE       32
 #define MAP_NUM_ROWS    14
 #define MAP_NUM_COLS    32
 #define PI              3.14159265
