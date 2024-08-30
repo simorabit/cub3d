@@ -1,7 +1,7 @@
-NO ./assets/dirt.png
-SO ./assets/creeper.png
-WE ./assets/daimond.png
-EA ./assets/wall3.png
+NO ./assets/wall1.png
+SO ./assets/wall2.png
+WE ./assets/wall3.png
+EA ./assets/wall4.png
 F 155, 118, 83
 C 135, 206, 235
 
