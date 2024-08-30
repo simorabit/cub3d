@@ -6,7 +6,7 @@
 /*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 08:18:07 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/08/28 11:41:19 by moel-fat         ###   ########.fr       */
+/*   Updated: 2024/08/30 16:56:29 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	init_window(t_window *window)
         perror("Error in allocation");
         exit(EXIT_FAILURE);
     }
-	window->mlx_con = mlx_init(WIDTH, HEIGHT, window->title, true);
+	window->mlx_con = mlx_init(WIDTH, HEIGHT, window->title, false);
 	if (!window->mlx_con)
 		(perror("Error in allocation"), exit(EXIT_FAILURE));
 	window->img = mlx_new_image(window->mlx_con, WIDTH, HEIGHT);
