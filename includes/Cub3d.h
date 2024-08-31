@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 08:11:00 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/08/28 12:53:17 by moel-fat         ###   ########.fr       */
+/*   Updated: 2024/08/31 11:38:25 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include "../libft/libft.h"
 # include <stdlib.h>
 # include <string.h>
+#include <float.h>
 
 # define PLAYER_SPEED	12
 // # define HEIGHT  		1080 //(MAP_NUM_ROWS * TILE_SIZE)
@@ -59,6 +60,13 @@ typedef struct s_color
 	int		b;
 }t_color;
 
+typedef struct s_ray_cast
+{
+	double yinter;
+    double xinter;
+    double xstep;
+    double ystep;
+} t_ray_cast;
 typedef struct s_map
 {
 	char	*no;
@@ -148,20 +156,20 @@ void	listen_events(t_window *window);
 void    render(t_window *window);
 int	    close_handler(t_window *window);
 void	init_player(t_player *player, t_map *map);
-void    draw_all_in_black(t_window *window);
-void    put_pixel(t_image *img, int x, int y, int color);
+void    draw_floor_sky(t_window *window);
 void    draw_map(int x, int y, t_window *window);
-void update_player(t_window *window);	
-// void 	draw_map(t_window *window);
-
-void    rays_casting(t_window *window);
-double get_wall_height(t_window *window, int i);
-// void    draw_player(t_window *window);
-void 	draw_player(t_window *window);
-void    render_walls(t_window *window);
-void    draw_all_in_black(t_window *window);
-
-
+void	update_player(t_window *window);	
+void	rays_casting(t_window *window);
+double	get_wall_height(t_window *window, int i);
+void	draw_player(t_window *window);
+void	render_walls(t_window *window);
+void	draw_floor_sky(t_window *window);
+void	dda_algo(int X1, int Y1, double X, t_window *window);
+double	normalize_angle(double angle);
+double	calc_distance(double X0, double Y0, double X, double Y);
+int		get_step(double dx, double dy);
+void	init_vert_cast(t_ray_cast *ray_var, t_window *window, t_ray *ray);
+void	init_horz_cast(t_ray_cast *ray_cast, t_window *window, t_ray *ray);
 //parsing
 void		map_init(t_map *map);
 void		check_read_map(char *filename, t_map *map);

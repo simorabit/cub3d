@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 08:18:28 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/08/22 13:30:21 by moel-fat         ###   ########.fr       */
+/*   Updated: 2024/08/31 11:38:56 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "../includes/Cub3d.h"
 
-void draw_all_in_black(t_window *window)
+void draw_floor_sky(t_window *window)
 {
     int x;
     int y;
@@ -28,7 +28,7 @@ void draw_all_in_black(t_window *window)
             if (y < HEIGHT / 2)
                 mlx_put_pixel(window->img, x, y, window->floor_color);
             else
-                mlx_put_pixel(window->img, x, y, window->ceiling_color);//TODO change red to ceiling color and black to floor color
+                mlx_put_pixel(window->img, x, y, window->ceiling_color);
             // mlx_put_pixel(window->img, x, y, RED); //TODO split the screen in half for floor and ceiling collors 
             x++;
         }
@@ -72,8 +72,7 @@ void render(t_window *window)
     int y;
 
     y = 0;
-    draw_all_in_black(window); //TODO chnage name to match draw floor and ceiling
-
+    draw_floor_sky(window);
     while (y < window->height)
     {
         x = 0;

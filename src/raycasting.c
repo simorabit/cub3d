@@ -6,35 +6,71 @@
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 08:18:19 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/08/09 18:42:59 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/08/31 11:36:12 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "../includes/Cub3d.h"
 
-void DDA(int X1, int Y1, t_window *window)
+bool horizontal_casting(t_ray *ray, t_window *window)
 {
-    int dx = round(X1) - round(window->player.x + PLAYER_SIZE / 2);
-    int dy = round(Y1) - round(window->player.y + PLAYER_SIZE / 2);
-    int i = 0;
-
-    int steps = abs(dx) > abs(dy) ? abs(dx) : abs(dy);
-    double Xinc = dx / (double)steps;
-    double Yinc = dy / (double)steps;
-
-    double X = (window->player.x + PLAYER_SIZE / 2);
-    double Y = (window->player.y + PLAYER_SIZE / 2);
-    while (i <= steps)
+    t_ray_cast  ray_var;
+    double      x_new;
+    double      y_new;
+    
+    init_horz_cast(&ray_var, window, ray);
+    while (ray_var.xinter >= 0 && ray_var.xinter <= window->width \
+        && ray_var.yinter >= 0 && ray_var.yinter <= window->height)
     {
-        mlx_put_pixel(window->img, SCALE_FACTOR * round(X), SCALE_FACTOR * round(Y), 0xffff00ff);
-        X += Xinc; // increment in x at each step
-        Y += Yinc; // increment in y at each step
-        i++;
+        if (ray->is_facing_up)
+            y_new = ray_var.yinter -1;
+        else
+            y_new = ray_var.yinter;
+        x_new = ray_var.xinter ;
+        if (window->map->v_map[(int)y_new / TILE_SIZE][(int)x_new / TILE_SIZE] 
+            == '1')
+        {
+            ray->wall_hit_x = ray_var.xinter ;
+            ray->wall_hit_y = ray_var.yinter;
+            return (true);
+        }
+        else
+           (1) && (ray_var.xinter += ray_var.xstep,ray_var.yinter += ray_var.ystep);
     }
+    return (false);
 }
 
-void init_ray(t_ray *ray)
+bool verical_casting(t_ray *ray, t_window *window)
+{
+    t_ray_cast  ray_var;
+    double      x_new;
+    double      y_new;
+
+    init_vert_cast(&ray_var, window, ray);
+    while (ray_var.xinter >= 0 && ray_var.xinter <= window->width && \
+         ray_var.yinter >= 0 && ray_var.yinter <= window->height)
+    {
+        if (ray->is_facing_left)
+            x_new = ray_var.xinter - 1;
+        else
+            x_new = ray_var.xinter;
+        y_new = ray_var.yinter;
+        if (window->map->v_map[(int)y_new / TILE_SIZE][(int)x_new / TILE_SIZE] 
+            == '1')
+        {
+            ray->wall_hit_x_ver = ray_var.xinter;
+            ray->wall_hit_y_ver = ray_var.yinter;
+            return (true);
+        }
+        else
+            (1) && (ray_var.xinter += ray_var.xstep, 
+                ray_var.yinter += ray_var.ystep);
+    }
+    return (false);
+}
+
+void init_ray(t_ray *ray, bool *find_hor, bool *find_ver, t_window *window)
 {
     ray->wall_hit_x = 0;
     ray->wall_hit_y = 0;
@@ -49,129 +85,37 @@ void init_ray(t_ray *ray)
         ray->is_facing_right = false;
     ray->is_facing_left = !ray->is_facing_right;
     ray->distance = 0;
+    *find_hor = horizontal_casting(ray, window);
+    *find_ver = verical_casting(ray, window);
 }
 
-double normalize_angle(double angle)
+void ray_cast(t_ray *ray, t_window *window)
 {
-    angle = fmod(angle, 2 * M_PI);
-    if (angle < 0)
-        angle = (2 * M_PI) + angle;
-    return angle;
-}
+    bool    find_h_wall;
+    bool    find_v_Wall;
+    double  horz_distance;
+    double  vert_distance;
 
-double distance_between_points(double X0, double Y0, double X, double Y)
-{
-    return sqrt((X - X0) * (X - X0) + (Y - Y0) * (Y - Y0));
-}
-
-void init_horz_cast(double *xstep, double *ystep, double *yintercept, t_ray *ray)
-{
-    *ystep = TILE_SIZE;
-    (void)*yintercept;
-    *ystep *= ray->is_facing_up ? -1 : 1;
-    *xstep = TILE_SIZE / tan(ray->angle);
-    *xstep *= (ray->is_facing_left && *xstep > 0) ? -1 : 1;
-    *xstep *= (ray->is_facing_right && *xstep < 0) ? -1 : 1;
-    
-}
-
-void init_vert_cast(double *xstep, double *ystep, double *xintercept, t_ray *ray)
-{
-    *xstep = TILE_SIZE;
-    (void)*xintercept;
-    *xstep *= ray->is_facing_left ? -1 : 1;
-    *ystep = TILE_SIZE * tan(ray->angle);
-    *ystep *= (ray->is_facing_up && *ystep > 0) ? -1 : 1;
-    *ystep *= (ray->is_facing_down && *ystep < 0) ? -1 : 1;
-    // if (ray->is_facing_left)
-    //     (*xintercept)--;
-}
-
-bool horizontal_casting(t_ray *ray, t_window *window)
-{
-    double yintercept;
-    double xintercept;
-    double xstep;
-    double ystep;
-
-    yintercept = floor(window->player.y / TILE_SIZE) * TILE_SIZE;
-    yintercept += ray->is_facing_down ? TILE_SIZE : 0;
-    xintercept = window->player.x + (yintercept - window->player.y) / tan(ray->angle);
-    double x_new = xintercept;
-    double y_new = yintercept;
-    init_horz_cast(&xstep, &ystep, &yintercept, ray);
-    while (xintercept >= 0 && xintercept <= window->width && yintercept >= 0 && yintercept <= window->height)
-    {
-         y_new = yintercept + ((ray->is_facing_up) ? -1 : 0);
-         x_new = xintercept;
-        if (window->map->v_map[(int)y_new / TILE_SIZE][(int)x_new / TILE_SIZE] == '1')
-        {
-            ray->wall_hit_x = xintercept;
-            ray->wall_hit_y = yintercept;
-            return (true);
-        }
-        else
-        {
-            xintercept += xstep;
-            yintercept += ystep;
-        }
-    }
-    return (false);
-}
-
-bool verical_casting(t_ray *ray, t_window *window)
-{
-    double xintercept;
-    double yintercept;
-    double ystep;
-    double xstep;
-
-    xintercept = floor(window->player.x / TILE_SIZE) * TILE_SIZE;
-    xintercept += ray->is_facing_right ? TILE_SIZE : 0;
-    yintercept = window->player.y + (xintercept - window->player.x) * tan(ray->angle);
-    double x_new;
-    double y_new;
-    init_vert_cast(&xstep, &ystep, &xintercept, ray);
-    while (xintercept >= 0 && xintercept <= window->width && yintercept >= 0 && yintercept <= window->height)
-    {
-        x_new = xintercept + ((ray->is_facing_left) ? -1 : 0);
-        y_new = yintercept;
-        if (window->map->v_map[(int)y_new / TILE_SIZE][(int)x_new / TILE_SIZE] == '1')
-        {
-            ray->wall_hit_x_ver = xintercept;
-            ray->wall_hit_y_ver = yintercept;
-            return (true);
-        }
-        else
-        {
-            xintercept += xstep;
-            yintercept += ystep;
-        }
-    }
-    return (false);
-}
-
-void ray_casting(t_ray *ray, t_window *window)
-{
-    bool findHorizontalwall;
-    bool findVerticalWallHit;
-    double horz_distance;
-    double vert_distance;
-
-    init_ray(ray);
-    findHorizontalwall = horizontal_casting(ray, window);
-    findVerticalWallHit = verical_casting(ray, window);
-    horz_distance = (findHorizontalwall) ? \
-        distance_between_points(window->player.x, window->player.y, ray->wall_hit_x, ray->wall_hit_y) : INT_MAX;
-    vert_distance = (findVerticalWallHit) ? \
-        distance_between_points(window->player.x, window->player.y,ray->wall_hit_x_ver, ray->wall_hit_y_ver): INT_MAX;
-    ray->wall_hit_x = (horz_distance <= vert_distance) ? ray->wall_hit_x : ray->wall_hit_x_ver;
-    ray->wall_hit_y = (horz_distance <= vert_distance) ? ray->wall_hit_y : ray->wall_hit_y_ver;
-    ray->distance = (horz_distance <= vert_distance) ? horz_distance : vert_distance;
+    init_ray(ray, &find_h_wall, &find_v_Wall, window);
+    if (find_h_wall)
+        horz_distance = calc_distance(window->player.x, \
+            window->player.y, ray->wall_hit_x, ray->wall_hit_y);
+    else
+        horz_distance = DBL_MAX;
+    if(find_v_Wall)
+       vert_distance = calc_distance(window->player.x, \
+        window->player.y,ray->wall_hit_x_ver, ray->wall_hit_y_ver);
+    else
+        vert_distance = DBL_MAX;
+    if (horz_distance >= vert_distance)
+        ray->wall_hit_x = ray->wall_hit_x_ver;
+    if (horz_distance >= vert_distance)
+        ray->wall_hit_y  = ray->wall_hit_y_ver;
+    if (horz_distance <= vert_distance)
+        ray->distance = horz_distance;
+    else
+        ray->distance = vert_distance;
     ray->was_hit_horz = (vert_distance > horz_distance);
-    DDA(ray->wall_hit_x,
-        ray->wall_hit_y,
-        window);
 }
 
 void rays_casting(t_window *window)
@@ -184,7 +128,10 @@ void rays_casting(t_window *window)
     while (i < WIDTH) // 30
     {
         window->ray_list[i].angle = normalize_angle(angle);
-        ray_casting(&window->ray_list[i], window);
+        ray_cast(&window->ray_list[i], window);
+        dda_algo(window->ray_list[i].wall_hit_x, \
+            window->ray_list[i].wall_hit_y, \
+            window->player.x + (PLAYER_SIZE / 2), window);
         i++;
         angle += FOV_ANGLE / WIDTH;
     }
