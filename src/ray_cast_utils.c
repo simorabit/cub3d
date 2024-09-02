@@ -14,7 +14,7 @@ void dda_algo(int X1, int Y1, double X, t_window *window)
     double  dy;
     int     steps;
     
-    Y = window->player.y + PLAYER_SIZE / 2;
+    Y = 30;
     dx = X1 - X;
     dy = Y1 - Y;
     steps = get_step(X1 - X, Y1 - Y);

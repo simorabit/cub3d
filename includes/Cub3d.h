@@ -6,7 +6,7 @@
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 08:11:00 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/08/31 11:38:25 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/02 11:57:29 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,23 +23,28 @@
 # include <string.h>
 #include <float.h>
 
-# define PLAYER_SPEED	12
-// # define HEIGHT  		1080 //(MAP_NUM_ROWS * TILE_SIZE)
-// # define WIDTH  		1920 //(MAP_NUM_COLS * TILE_SIZE)
-// # define HEIGHT  		448 //(MAP_NUM_ROWS * TILE_SIZE)
-// # define WIDTH  		1024 //(MAP_NUM_COLS * TILE_SIZE)
-# define HEIGHT  		900 //(MAP_NUM_ROWS * TILE_SIZE)
-# define WIDTH  		1600 //(MAP_NUM_COLS * TILE_SIZE)
+# define HEIGHT  			900 
+# define WIDTH  			1600 
+# define CENTER_CIRCLE 		110
+# define RADIUS 			100
+# define RADIUS_X2			(RADIUS * RADIUS)
+# define MINIMAP_WIDTH 		210
+# define MINIMAP_HEIGHT 	210
+# define PLAYER_SIZE     	10
+# define PLAYER_R			(PLAYER_SIZE / 2)
+# define PLAYER_PIX_CENTER	110
+# define PLAYER_SPEED		12
 
+//colors
 # define BLACK  0x000000FF
-# define White  0xFFFFFFFF
+# define WHITE  0xFFFFFFFF
 # define RED    0xFF0000FF
-# define GRAY   0xD3D3D3FF
+# define GRAY   0x36454FFF
 # define Maroon 0xFF800000
 # define Gold	0xFFEE82EE
 
+//Keys
 # define KEY_PRESS		2
-#define PLAYER_SIZE     15
 #define TILE_SIZE       32
 #define MAP_NUM_ROWS    14
 #define MAP_NUM_COLS    32
@@ -52,6 +57,14 @@ typedef struct s_data
 	char			*data;
 	struct s_data	*next;
 } t_data;
+
+typedef struct s_render_vars
+{
+	int mapX;
+	int	mapY;
+    int xOffset;
+	int	yOffset;
+}	t_render_vars;
 
 typedef struct s_color
 {
@@ -67,6 +80,7 @@ typedef struct s_ray_cast
     double xstep;
     double ystep;
 } t_ray_cast;
+
 typedef struct s_map
 {
 	char	*no;
@@ -115,11 +129,11 @@ typedef struct  s_player
 {
     double  	x;
     double  	y;
-    int		width;
-    int		height;
-    int     turn_direction;
-    int     walk_direction;
-	int     strafe_direction;
+    int			width;
+    int			height;
+    int     	turn_direction;
+    int     	walk_direction;
+	int     	strafe_direction;
     double  	rotation_angle;
     double  	walk_speed;
     double  	turn_speed;
@@ -150,26 +164,34 @@ enum e_direction
 	WEST
 };
 
-//functions
-void	init_window(t_window *window);
-void	listen_events(t_window *window);
-void    render(t_window *window);
-int	    close_handler(t_window *window);
-void	init_player(t_player *player, t_map *map);
-void    draw_floor_sky(t_window *window);
-void    draw_map(int x, int y, t_window *window);
-void	update_player(t_window *window);	
-void	rays_casting(t_window *window);
-double	get_wall_height(t_window *window, int i);
-void	draw_player(t_window *window);
-void	render_walls(t_window *window);
-void	draw_floor_sky(t_window *window);
-void	dda_algo(int X1, int Y1, double X, t_window *window);
-double	normalize_angle(double angle);
-double	calc_distance(double X0, double Y0, double X, double Y);
-int		get_step(double dx, double dy);
-void	init_vert_cast(t_ray_cast *ray_var, t_window *window, t_ray *ray);
-void	init_horz_cast(t_ray_cast *ray_cast, t_window *window, t_ray *ray);
+//initialization
+void		init_window(t_window *window);
+void		init_player(t_player *player, t_map *map);
+void		listen_events(t_window *window);
+void		init_texture(t_window *window);
+
+//render
+void    	render(t_window *window);
+
+//events
+void		update_player(t_window *window);	
+
+//raycasting && ray_cast_utils
+void		rays_casting(t_window *window);
+void		init_horz_cast(t_ray_cast *ray_cast, t_window *window, t_ray *ray);
+void		init_vert_cast(t_ray_cast *ray_var, t_window *window, t_ray *ray);
+void		dda_algo(int X1, int Y1, double X, t_window *window);
+int			get_step(double dx, double dy);
+double		normalize_angle(double angle);
+
+//draw_3d
+void		render_walls(t_window *window);
+
+//utils
+double		get_wall_height(t_window *window, int i);
+double		calc_distance(double X0, double Y0, double X, double Y);
+uint32_t	convert_color(t_color *color);
+
 //parsing
 void		map_init(t_map *map);
 void		check_read_map(char *filename, t_map *map);
@@ -179,6 +201,4 @@ t_data		*ft_lstnewmap(char *data);
 void		ft_lstadd_backmap(t_data **lst, t_data *new);
 void		ft_error(t_map *map, int flag);
 void		*safe_malloc(size_t size);
-uint32_t	convert_color(t_color *color);
-void		init_texture(t_window *window);
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_3d.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 08:17:51 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/08/30 16:37:39 by moel-fat         ###   ########.fr       */
+/*   Updated: 2024/09/02 14:12:08 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@
 //             if(window->ray_list[i].was_hit_horz)
 //                 mlx_put_pixel(window->img, round(i), round(y), GRAY);
 //             else
-//                 mlx_put_pixel(window->img, round(i), round(y), White);
+//                 mlx_put_pixel(window->img, round(i), round(y), WHITE);
 //             y++;
 //         }
 //         i++;
@@ -114,7 +114,6 @@ int get_wall_direction(t_ray *ray)
     }
 }
 
-
 double get_initial_x(t_ray *ray)
 {
     if (ray->was_hit_horz)
@@ -135,7 +134,7 @@ void render_wall_strip(t_window *window, int i, int direction, double wall_top_p
     texture_x = init_x * (window->texture[direction]->width / TILE_SIZE);
     init_y = wall_top_pixel;
     y = wall_top_pixel;
-    while (y <= wall_bottom_pixel)
+    while (y < wall_bottom_pixel)
     {
         if (i >= 0 && i < WIDTH && y >= 0 && y < HEIGHT)
         {
@@ -157,14 +156,12 @@ void render_walls(t_window *window)
     while (i < WIDTH)
     {
         calculate_correct_distance(window, i);
-        wall_strip_height = get_wall_height(window, i);
+        wall_strip_height = get_wall_height(window, i); // projection wall
         wall_top_pixel = calculate_wall_top_pixel(wall_strip_height);
         wall_bottom_pixel = calculate_wall_bottom_pixel(wall_strip_height);
         direction = get_wall_direction(&window->ray_list[i]);
-
         if (wall_strip_height > HEIGHT)
             wall_top_pixel -= (wall_strip_height - HEIGHT) / 2;
-
         render_wall_strip(window, i, direction, wall_top_pixel, wall_bottom_pixel, wall_strip_height);
         i++;
     }
