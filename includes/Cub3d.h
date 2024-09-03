@@ -6,7 +6,7 @@
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 08:11:00 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/02 11:57:29 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/03 13:21:20 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,13 +184,18 @@ void		dda_algo(int X1, int Y1, double X, t_window *window);
 int			get_step(double dx, double dy);
 double		normalize_angle(double angle);
 
-//draw_3d
+//draw_3d && utils
 void		render_walls(t_window *window);
+void		calculate_correct_distance(t_window *window, int i);
+double		calculate_wall_top_pixel(double wall_strip_height);
+double		calculate_wall_bottom_pixel(double wall_strip_height);
 
 //utils
 double		get_wall_height(t_window *window, int i);
 double		calc_distance(double X0, double Y0, double X, double Y);
 uint32_t	convert_color(t_color *color);
+uint32_t	get_pixel_color(mlx_texture_t *texture, uint32_t x, uint32_t y);
+uint32_t	ft_rgba(uint8_t r, uint8_t g, uint8_t b, uint8_t a);
 
 //parsing
 void		map_init(t_map *map);
