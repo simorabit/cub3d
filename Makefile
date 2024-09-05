@@ -17,7 +17,13 @@ CFILES = main.c\
 		 src/draw_3d.c\
 		 src/texture.c\
 		 src/ray_cast_utils.c\
-		 src/draw_3d_utils.c
+		 src/draw_3d_utils.c\
+		 src/parse_colors.c\
+		 src/parse_map.c\
+		 src/parse_map1.c\
+		 src/parse_player.c\
+		 src/parse_textures.c\
+		 src/parsing_utils.c\
 
 OBJ = $(patsubst %.c, %.o, $(CFILES))
 B_OBJ = $(patsubst %.c, %.o, $(BFILES))

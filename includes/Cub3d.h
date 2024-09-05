@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
+/*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 08:11:00 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/03 13:21:20 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/05 16:42:29 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,4 +206,20 @@ t_data		*ft_lstnewmap(char *data);
 void		ft_lstadd_backmap(t_data **lst, t_data *new);
 void		ft_error(t_map *map, int flag);
 void		*safe_malloc(size_t size);
+void		find_player(t_map *map);
+void		parse_map(t_map *map);
+void		free_map(t_map *map);
+char		*remove_new_line(char *str);
+void		get_rgb_value(char *rgb, t_map *map, char R);
+void		parse_map(t_map *map);
+bool		is_surrounded_by_walls(t_map *map);
+bool		check_if_map_is_valid(t_map *map);
+void		fill_map(t_map *map);
+void		remove_x(t_map *map);
+void		copy_map(t_map *map);
+char		*check_texture(char *str);
+bool		is_just_spaces(char *str);
+int			check_map_exists(char *file_name, t_map *map);
+void		parse_line(char *line, t_map *map, int *count);
+void		free_array(char **array);
 #endif
