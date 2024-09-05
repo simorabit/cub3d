@@ -6,7 +6,7 @@
 /*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 08:17:51 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/08/30 16:37:39 by moel-fat         ###   ########.fr       */
+/*   Updated: 2024/09/05 10:58:18 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,8 @@ void render_wall_strip(t_window *window, int i, int direction, double wall_top_p
     init_x = get_initial_x(&window->ray_list[i]);
     texture_x = init_x * (window->texture[direction]->width / TILE_SIZE);
     init_y = wall_top_pixel;
-    y = wall_top_pixel;
+    y = (int)round(wall_top_pixel);
+
     while (y <= wall_bottom_pixel)
     {
         if (i >= 0 && i < WIDTH && y >= 0 && y < HEIGHT)
