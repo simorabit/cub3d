@@ -1,7 +1,7 @@
-NO ./assets/flag.png
-SO ./assets/1337.png
+NO ./assets/wall4.png
+SO ./assets/wall2.png
 WE ./assets/wall3.png
-EA ./assets/wall4.png
+EA ./assets/wall1.png
 F 155, 118, 83
 C 135, 206, 235
 
