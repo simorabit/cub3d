@@ -16,8 +16,8 @@
 void init_player(t_player *player, t_map *map)
 {
     //TODO set the player view based on the map
-    player->x = (map->player_x * TILE_SIZE) + (TILE_SIZE / 2);
-    player->y = (map->player_y * TILE_SIZE) + (TILE_SIZE / 2);
+    player->x = (map->player_x * TILE_SIZE) + (PLAYER_SIZE / 2);
+    player->y = (map->player_y * TILE_SIZE) + (PLAYER_SIZE / 2);
     player->width = 10;
     player->height = 10;
     player->walk_direction = 0;

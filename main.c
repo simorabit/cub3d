@@ -12,7 +12,6 @@
 
 #include "includes/Cub3d.h"
 
-
 void    re_init_window(t_window *window)
 {
     mlx_delete_image(window->mlx_con, window->img);
@@ -22,13 +21,24 @@ void    re_init_window(t_window *window)
 	mlx_image_to_window(window->mlx_con ,window->img, 0, 0);
 }
 
+void handle_mouse_rotation(t_window *window)
+{
+    int x, y;
+    static int last_x = 0;
+
+    mlx_get_mouse_pos(window->mlx_con, &x, &y);
+    window->player.rotation_angle += (x - last_x) * 0.01;
+    last_x = x;
+}
+
 void    loop_func(void *param)
 {
     t_window *window;
 
     window = (t_window *)param;
     re_init_window(window);
-    update_player(window); // Update player position here instead of in listen_events for better performance
+    update_player(window);
+    handle_mouse_rotation(window);
     render(window);
 }
 

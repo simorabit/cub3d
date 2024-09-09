@@ -112,7 +112,7 @@ typedef struct s_image
 typedef struct  s_ray
 {
     double distance;
-    double angle;
+    double ray_angle;
     double wall_stripe_height;
     double wall_hit_x;
     double wall_hit_y;

@@ -26,8 +26,7 @@ void update_player(t_window *window)
             (sin(window->player.rotation_angle) * strafe_step);
     new_y = window->player.y + (sin(window->player.rotation_angle) * move_step) +
             (cos(window->player.rotation_angle) * strafe_step);
-    
-    if (new_x < WIDTH && new_y < HEIGHT && (window->map->v_map[((int)(new_y)) / TILE_SIZE][((int)(new_x)) 
+    if ((window->map->v_map[((int)(new_y)) / TILE_SIZE][((int)(new_x)) 
         / TILE_SIZE] != '1' && (window->map->v_map[((int)(new_y)) / TILE_SIZE][((int)(new_x)) / TILE_SIZE] != '1') &&
          (window->map->v_map[((int)(new_y)) / TILE_SIZE][((int)(new_x)) / TILE_SIZE] != '1')) &&
         (window->map->v_map[((int)(new_y)) / TILE_SIZE][((int)(new_x)) / TILE_SIZE] != '1'))
@@ -52,13 +51,14 @@ void player_direction(mlx_key_data_t keydata, int *key, int value)
     else
         *key = value;
 }
-void handel_mouse(mlx_key_data_t keydata,t_window *window)
-{
-    if (keydata.action == MLX_RELEASE)
-        mlx_set_cursor_mode(window->mlx_con, MLX_MOUSE_NORMAL);
-    else
-        mlx_set_cursor_mode(window->mlx_con, MLX_MOUSE_DISABLED);
-}
+
+// void handel_mouse(mlx_key_data_t keydata,t_window *window)
+// {
+//     if (keydata.action == MLX_RELEASE)
+//         mlx_set_cursor_mode(window->mlx_con, MLX_MOUSE_NORMAL);
+//     else
+//         mlx_set_cursor_mode(window->mlx_con, MLX_MOUSE_DISABLED);
+// }
 
 void handel_release_keys(t_window *window, mlx_key_data_t keydata)
 {

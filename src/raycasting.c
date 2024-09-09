@@ -24,11 +24,11 @@ bool horizontal_casting(t_ray *ray, t_window *window)
         && ray_var.yinter >= 0 && ray_var.yinter <= window->height)
     {
         if (ray->is_facing_up)
-            y_new = ray_var.yinter -1;
+            y_new = ray_var.yinter - 1;
         else
             y_new = ray_var.yinter;
         x_new = ray_var.xinter ;
-        if (window->map->v_map[(int)y_new / TILE_SIZE][(int)x_new / TILE_SIZE] 
+        if (window->map->v_map[(int)(y_new / TILE_SIZE)][(int)(x_new / TILE_SIZE)] 
             == '1')
         {
             ray->wall_hit_x = ray_var.xinter ;
@@ -56,7 +56,7 @@ bool verical_casting(t_ray *ray, t_window *window)
         else
             x_new = ray_var.xinter;
         y_new = ray_var.yinter;
-        if (window->map->v_map[(int)y_new / TILE_SIZE][(int)x_new / TILE_SIZE] 
+        if (window->map->v_map[(int)(y_new / TILE_SIZE)][(int)(x_new / TILE_SIZE)] 
             == '1')
         {
             ray->wall_hit_x_ver = ray_var.xinter;
@@ -74,12 +74,12 @@ void init_ray(t_ray *ray, bool *find_hor, bool *find_ver, t_window *window)
 {
     ray->wall_hit_x = 0;
     ray->wall_hit_y = 0;
-    if (ray->angle > 0 && ray->angle < M_PI)
+    if (ray->ray_angle > 0 && ray->ray_angle < M_PI)
         ray->is_facing_down = true;
     else
         ray->is_facing_down = false;
     ray->is_facing_up = !ray->is_facing_down;
-    if (ray->angle < 0.5 * M_PI || ray->angle > 1.5 * M_PI)
+    if (ray->ray_angle < 0.5 * M_PI || ray->ray_angle > 1.5 * M_PI)
         ray->is_facing_right = true;
     else
         ray->is_facing_right = false;
@@ -127,14 +127,14 @@ void rays_casting(t_window *window)
     angle = window->player.rotation_angle - (FOV_ANGLE / 2); // -30
     while (i < WIDTH) // 30
     {
-        window->ray_list[i].angle = normalize_angle(angle);
+        window->ray_list[i].ray_angle = normalize_angle(angle);
         ray_cast(&window->ray_list[i], window);
         // if (i == (WIDTH / 2))
         //     dda_algo(window->ray_list[i].wall_hit_x, \
         //         window->ray_list[i].wall_hit_y, \
         //         window->player.x + (PLAYER_SIZE / 2), window);
         i++;
-        angle += FOV_ANGLE /(float)WIDTH;
+        angle += FOV_ANGLE / WIDTH;
     }
 }
 

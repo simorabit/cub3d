@@ -2,7 +2,8 @@
 
 void calculate_correct_distance(t_window *window, int i)
 {
-    window->ray_list[i].distance *= cos(window->ray_list[i].angle - window->player.rotation_angle);
+    window->ray_list[i].distance *= cos(window->ray_list[i].ray_angle \
+        - window->player.rotation_angle);
 }
 
 double calculate_wall_top_pixel(double wall_strip_height)

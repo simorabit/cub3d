@@ -31,9 +31,9 @@ void dda_algo(int X1, int Y1, double X, t_window *window)
 
 double normalize_angle(double angle)
 {
-    angle = fmod(angle, 2 * M_PI);
     if (angle < 0)
         angle = (2 * M_PI) + angle;
+    angle = fmod(angle, 2 * M_PI);
     return angle;
 }
 
@@ -45,13 +45,13 @@ void init_horz_cast(t_ray_cast *ray_cast, t_window *window, t_ray *ray)
     else
         ray_cast->yinter += 0;
     ray_cast->xinter = window->player.x + \
-     (ray_cast->yinter - window->player.y) / tan(ray->angle);
+     (ray_cast->yinter - window->player.y) / tan(ray->ray_angle);
     ray_cast->ystep = TILE_SIZE;
     if (ray->is_facing_up)
         ray_cast->ystep *= -1;
     else
         ray_cast->ystep *= 1;
-    ray_cast->xstep = TILE_SIZE / tan(ray->angle);
+    ray_cast->xstep = TILE_SIZE / tan(ray->ray_angle);
     if (ray->is_facing_left && ray_cast->xstep > 0)
         ray_cast->xstep *= -1;
     else
@@ -70,13 +70,13 @@ void init_vert_cast(t_ray_cast *ray_var, t_window *window, t_ray *ray)
     else
         ray_var->xinter += 0;
     ray_var->yinter = window->player.y + \
-        (ray_var->xinter - window->player.x) * tan(ray->angle);
+        (ray_var->xinter - window->player.x) * tan(ray->ray_angle);
     ray_var->xstep = TILE_SIZE;
     if (ray->is_facing_left)
         ray_var->xstep *= -1;
     else
         ray_var->xstep *= 1;
-    ray_var->ystep = TILE_SIZE * tan(ray->angle);
+    ray_var->ystep = TILE_SIZE * tan(ray->ray_angle);
     if (ray->is_facing_up && ray_var->ystep > 0)
         ray_var->ystep *= -1;
     else
