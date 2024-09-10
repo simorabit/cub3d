@@ -4,7 +4,6 @@ CC = cc
 FLAGS = -Wall -Wextra -Werror -g -fsanitize=address,undefined,float-divide-by-zero
 RM = rm -rf
 NAME = cub3D
-# B_NAME = Cub3d_bonus
 
 CFILES = main.c\
 		 src/parsing.c\

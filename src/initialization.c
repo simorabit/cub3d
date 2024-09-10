@@ -6,7 +6,7 @@
 /*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 08:18:07 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/08/30 16:56:29 by moel-fat         ###   ########.fr       */
+/*   Updated: 2024/09/10 19:01:59 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,40 @@ void	init_window(t_window *window)
     window->ceiling_color = convert_color(&window->map->floor);
     window->floor_color = convert_color(&window->map->ceiling);
 }
+
+void init_sprint(t_window *window)
+{
+    int i;
+    window->sprite = malloc(sizeof(t_sprite));
+    if (!window->sprite)
+        ft_error(window->map, 6);
+
+    window->sprite->animation = malloc(sizeof(char *) * 9);
+    window->sprite->sword = malloc(sizeof(mlx_texture_t *) * 9);
+    window->sprite->sword_images = malloc(sizeof(mlx_image_t) * 9);
+
+    window->sprite->animation[0] = "assets/sword/sword0.png";
+    window->sprite->animation[1] = "assets/sword/sword1.png";
+    window->sprite->animation[2] = "assets/sword/sword2.png";
+    window->sprite->animation[3] = "assets/sword/sword3.png";
+    window->sprite->animation[4] = "assets/sword/sword4.png";
+    window->sprite->animation[5] = "assets/sword/sword5.png";
+    window->sprite->animation[6] = "assets/sword/sword6.png";
+    window->sprite->animation[7] = "assets/sword/sword7.png";
+    window->sprite->animation[8] = "assets/sword/sword8.png";
+    i = 0;
+    while (i < 9)
+    {
+        window->sprite->sword[i] = mlx_load_png(window->sprite->animation[i]);
+        if (!window->sprite->sword[i])
+            ft_error(window->map, 6);
+        window->sprite->sword_images[i] = mlx_texture_to_image(window->mlx_con, window->sprite->sword[i]);
+        if (!mlx_resize_image(window->sprite->sword_images[i], WIDTH, HEIGHT))
+            ft_error(window->map, 6);
+        i++;
+    }
+}
+
 
 void init_texture(t_window *window)
 {

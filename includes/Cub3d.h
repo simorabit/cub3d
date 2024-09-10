@@ -6,7 +6,7 @@
 /*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 08:11:00 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/05 16:42:29 by moel-fat         ###   ########.fr       */
+/*   Updated: 2024/09/08 15:11:44 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,14 @@ typedef struct  s_player
     double  	turn_speed;
 } t_player;
 
+typedef struct s_sprint
+{
+	char			**animation;
+	mlx_texture_t	**sword;
+	mlx_image_t		**sword_images;
+	bool 			enabled;
+} t_sprite;
+
 typedef struct s_window
 {
 	mlx_t        	*mlx_con;
@@ -152,6 +160,7 @@ typedef struct s_window
 	uint32_t		floor_color;
 	uint32_t		ceiling_color;
 	mlx_texture_t	**texture;
+	t_sprite		*sprite;
     t_player    	player;
     t_ray       	ray_list[WIDTH + 1];
 }	t_window;
@@ -169,6 +178,7 @@ void		init_window(t_window *window);
 void		init_player(t_player *player, t_map *map);
 void		listen_events(t_window *window);
 void		init_texture(t_window *window);
+void init_sprint(t_window *window);
 
 //render
 void    	render(t_window *window);
@@ -222,4 +232,5 @@ bool		is_just_spaces(char *str);
 int			check_map_exists(char *file_name, t_map *map);
 void		parse_line(char *line, t_map *map, int *count);
 void		free_array(char **array);
+
 #endif
