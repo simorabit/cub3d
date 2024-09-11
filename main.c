@@ -6,7 +6,7 @@
 /*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 08:17:40 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/11 10:22:46 by moel-fat         ###   ########.fr       */
+/*   Updated: 2024/09/11 10:30:05 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,25 @@ void ft_sprint(void *param)
 }
 
 
+void handle_mouse_rotation(t_window *window)
+{
+    int x, y;
+    static int last_x = 0;
+
+    mlx_get_mouse_pos(window->mlx_con, &x, &y);
+    window->player.rotation_angle += (x - last_x) * 0.01;
+    last_x = x;
+}
+
 void    loop_func(void *param)
 {
     t_window *window;
 
     window = (t_window *)param;
     update_player(window);
+    re_init_window(window);
+    update_player(window);
+    handle_mouse_rotation(window);
     render(window);
 }
 

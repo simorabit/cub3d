@@ -20,6 +20,7 @@
         "type_traits": "c",
         "vector": "c",
         "cub3d.h": "c",
-        "float.h": "c"
+        "float.h": "c",
+        "mlx42.h": "c"
     }
 }
