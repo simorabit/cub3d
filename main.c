@@ -6,35 +6,11 @@
 /*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 08:17:40 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/10 19:24:59 by moel-fat         ###   ########.fr       */
+/*   Updated: 2024/09/11 10:22:46 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/Cub3d.h"
-
-// void    re_init_window(t_window *window)
-// {
-//     mlx_delete_image(window->mlx_con, window->img);
-//     window->img = mlx_new_image(window->mlx_con, WIDTH, HEIGHT);
-//     if (!window->img)
-//         (write(2, "Error\n", 6), exit(1));
-// 	mlx_image_to_window(window->mlx_con ,window->img, 0, 0);
-// }
-
-
-// void update_animation(t_window *window)
-// {
-//     int i = 0;
-//     if (window->sprite->enabled)
-//     {
-//         while(i < 9)
-//         {
-//             mlx_image_to_window(window->mlx_con, window->sprite->sword_images[i], 0, 0);
-//             i++;
-//         }
-//         window->sprite->enabled = false;
-//     }
-// }
 
 void update_animation(t_window *window)
 {
@@ -81,7 +57,7 @@ void ft_sprint(void *param)
     if (mlx_is_key_down(window->mlx_con, MLX_KEY_SPACE) && !window->sprite->enabled)
     {
         window->sprite->enabled = true;
-        // update_animation(window);
+        update_animation(window);
     }
     update_animation(window);
 }
@@ -92,8 +68,7 @@ void    loop_func(void *param)
     t_window *window;
 
     window = (t_window *)param;
-    // re_init_window(window);// makayn lach re initw o katkhasar animation Í
-    update_player(window); // Update player position here instead of in listen_events for better performance
+    update_player(window);
     render(window);
 }
 
