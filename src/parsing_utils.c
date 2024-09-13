@@ -6,7 +6,7 @@
 /*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 16:22:48 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/05 16:37:28 by moel-fat         ###   ########.fr       */
+/*   Updated: 2024/09/13 09:34:44 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void free_array(char **array)
 {
 	int i = 0;
 	if (array == NULL)
-		return;
+		return ;
 	while (array[i] != NULL)
 	{
 		free(array[i]);

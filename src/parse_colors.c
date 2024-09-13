@@ -6,7 +6,7 @@
 /*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 16:25:18 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/05 16:26:05 by moel-fat         ###   ########.fr       */
+/*   Updated: 2024/09/13 09:28:35 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,46 +33,62 @@ bool is_all_number(char *str)
 	return (true);
 }
 
-void	get_rgb_value(char *rgb, t_map *map, char R)
+void count_RGB(char *rgb, t_map *map)
 {
-	char **tmp;
-	char *new_line;
 	int i = 0;
-	
+	int count = 0;
+
+	while (rgb[i] != '\0')
+	{
+		if (rgb[i] == ',')
+			count++;
+		i++;
+	}
+	if (count != 2)
+		ft_error(map, 7);
+}
+
+void	parse_rgb_values(char **tmp, t_color *color, t_map *map)
+{
+	if (is_all_number(tmp[0]) == false)
+		ft_error(map, 6);
+	color->r = ft_atoi(tmp[0]);
+	if (is_all_number(tmp[1]) == false)
+		ft_error(map, 6);
+	color->g = ft_atoi(tmp[1]);
+	if (is_all_number(tmp[2]) == false)
+		ft_error(map, 6);
+	color->b = ft_atoi(tmp[2]);
+
+	if (color->r < 0 || color->r > 255 || color->g < 0 || color->g > 255 || color->b < 0 || color->b > 255)
+		ft_error(map, 6);
+}
+
+char	**get_rgb_components(char *rgb, t_map *map)
+{
+	char *new_line;
+	char **tmp;
+	int i = 0;
+
 	new_line = remove_new_line(rgb);
+	count_RGB(new_line, map);
 	tmp = ft_split(new_line + 1, ',');
-	while(tmp[i] != NULL)
+	while (tmp[i] != NULL)
 		i++;
 	if (i != 3)
 		ft_error(map, 7);
-	if (R == 'F')
-	{
-		if(is_all_number(tmp[0]) == false)
-			ft_error(map, 6);
-		map->floor.r = ft_atoi(tmp[0]);
-		if(is_all_number(tmp[1]) == false)
-			ft_error(map, 6);
-		map->floor.g = ft_atoi(tmp[1]);
-		if(is_all_number(tmp[2]) == false)
-			ft_error(map, 6);
-		map->floor.b = ft_atoi(tmp[2]);
-		if (map->floor.r < 0 || map->floor.r > 255 || map->floor.g < 0 || map->floor.g > 255 || map->floor.b < 0 || map->floor.b > 255)
-			ft_error(map, 6);
-	}
-	else if (R == 'C')
-	{
-		if(is_all_number(tmp[0]) == false)
-			ft_error(map, 6);
-		map->ceiling.r = ft_atoi(tmp[0]);
-		if(is_all_number(tmp[1]) == false)
-			ft_error(map, 6);
-		map->ceiling.g = ft_atoi(tmp[1]);
-		if(is_all_number(tmp[2]) == false)
-			ft_error(map, 6);
-		map->ceiling.b = ft_atoi(tmp[2]);
-		if (map->ceiling.r < 0 || map->ceiling.r > 255 || map->ceiling.g < 0 || map->ceiling.g > 255 || map->ceiling.b < 0 || map->ceiling.b > 255)
-			ft_error(map, 6);
-	}
 	free(new_line);
+	return tmp;
+}
+
+void	get_rgb_value(char *rgb, t_map *map, char R)
+{
+	char **tmp;
+
+	tmp = get_rgb_components(rgb, map);
+	if (R == 'F')
+		parse_rgb_values(tmp, &map->floor, map);
+	else if (R == 'C')
+		parse_rgb_values(tmp, &map->ceiling, map);
 	free_array(tmp);
 }

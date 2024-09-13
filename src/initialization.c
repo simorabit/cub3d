@@ -6,7 +6,7 @@
 /*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 08:18:07 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/10 19:01:59 by moel-fat         ###   ########.fr       */
+/*   Updated: 2024/09/11 14:16:07 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 void init_player(t_player *player, t_map *map)
 {
-    //TODO set the player view based on the map
     player->x = (map->player_x * TILE_SIZE) + (TILE_SIZE / 2);
     player->y = (map->player_y * TILE_SIZE) + (TILE_SIZE / 2);
     player->width = 10;
@@ -37,7 +36,7 @@ void init_player(t_player *player, t_map *map)
 
 void	init_window(t_window *window)
 {
-	window->title = "CUB3D"; // Properly allocate and initialize window title
+	window->title = "CUB3D";
     if (!window->title)
     {
         perror("Error in allocation");
@@ -60,7 +59,20 @@ void	init_window(t_window *window)
     window->floor_color = convert_color(&window->map->ceiling);
 }
 
-void init_sprint(t_window *window)
+// void init_path_sprint(t_window *window)
+// {
+//     window->sprite->animation[0] = "assets/sword/sword0.png";
+//     window->sprite->animation[1] = "assets/sword/sword1.png";
+//     window->sprite->animation[2] = "assets/sword/sword2.png";
+//     window->sprite->animation[3] = "assets/sword/sword3.png";
+//     window->sprite->animation[4] = "assets/sword/sword4.png";
+//     window->sprite->animation[5] = "assets/sword/sword5.png";
+//     window->sprite->animation[6] = "assets/sword/sword6.png";
+//     window->sprite->animation[7] = "assets/sword/sword7.png";
+//     window->sprite->animation[8] = "assets/sword/sword8.png";
+// }
+
+void    init_sword(t_window *window)
 {
     int i;
     window->sprite = malloc(sizeof(t_sprite));
@@ -70,7 +82,8 @@ void init_sprint(t_window *window)
     window->sprite->animation = malloc(sizeof(char *) * 9);
     window->sprite->sword = malloc(sizeof(mlx_texture_t *) * 9);
     window->sprite->sword_images = malloc(sizeof(mlx_image_t) * 9);
-
+    if (!window->sprite->animation || !window->sprite->sword || !window->sprite->sword_images)
+        ft_error(window->map, 6);
     window->sprite->animation[0] = "assets/sword/sword0.png";
     window->sprite->animation[1] = "assets/sword/sword1.png";
     window->sprite->animation[2] = "assets/sword/sword2.png";
@@ -91,6 +104,73 @@ void init_sprint(t_window *window)
             ft_error(window->map, 6);
         i++;
     }
+}
+void init_pickaxe(t_window *window)
+{
+    int i;
+    window->sprite->pickaxe = malloc(sizeof(mlx_texture_t *) * 8);
+    window->sprite->pickaxe_images = malloc(sizeof(mlx_image_t) * 8);
+    if (!window->sprite->pickaxe || !window->sprite->pickaxe_images)
+        ft_error(window->map, 6);
+
+    // Define the file paths for pickaxe animation frames
+    const char *pickaxe_animation[8] = {
+        "assets/cpickaxe/1.png",
+        "assets/cpickaxe/2.png",
+        "assets/cpickaxe/3.png",
+        "assets/cpickaxe/4.png",
+        "assets/cpickaxe/5.png",
+        "assets/cpickaxe/6.png",
+        "assets/cpickaxe/7.png",
+        "assets/cpickaxe/8.png"
+    };
+
+    for (i = 0; i < 8; i++)
+    {
+        window->sprite->pickaxe[i] = mlx_load_png(pickaxe_animation[i]);
+        if (!window->sprite->pickaxe[i])
+            ft_error(window->map, 6);
+        window->sprite->pickaxe_images[i] = mlx_texture_to_image(window->mlx_con, window->sprite->pickaxe[i]);
+        if (!mlx_resize_image(window->sprite->pickaxe_images[i], WIDTH, HEIGHT))
+            ft_error(window->map, 6);
+    }
+}
+
+void init_axe(t_window *window)
+{
+    int i;
+    window->sprite->axe = malloc(sizeof(mlx_texture_t *) * 6);
+    window->sprite->axe_images = malloc(sizeof(mlx_image_t) * 6);
+    if (!window->sprite->axe || !window->sprite->axe_images)
+        ft_error(window->map, 6);
+
+    // Define the file paths for axe animation frames
+    const char *axe_animation[6] = {
+        "assets/caxe/1.png",
+        "assets/caxe/2.png",
+        "assets/caxe/3.png",
+        "assets/caxe/4.png",
+        "assets/caxe/5.png",
+        "assets/caxe/6.png"
+    };
+
+    for (i = 0; i < 6; i++)
+    {
+        window->sprite->axe[i] = mlx_load_png(axe_animation[i]);
+        if (!window->sprite->axe[i])
+            ft_error(window->map, 6);
+        window->sprite->axe_images[i] = mlx_texture_to_image(window->mlx_con, window->sprite->axe[i]);
+        if (!mlx_resize_image(window->sprite->axe_images[i], WIDTH, HEIGHT))
+            ft_error(window->map, 6);
+    }
+}
+
+void init_sprint(t_window *window)
+{
+    init_sword(window);
+    init_pickaxe(window);
+    init_axe(window);
+    window->sprite->enabled = false;
 }
 
 

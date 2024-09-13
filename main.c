@@ -6,7 +6,7 @@
 /*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 08:17:40 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/11 10:31:53 by moel-fat         ###   ########.fr       */
+/*   Updated: 2024/09/11 13:15:28 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ void update_animation(t_window *window)
                 current_img_ptr = NULL;
             }
         }
+        if (frame_count > 10000)
+            frame_count = 0;
         frame_count++;
     }
 }

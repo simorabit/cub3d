@@ -6,7 +6,7 @@
 /*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 16:19:14 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/05 16:33:48 by moel-fat         ###   ########.fr       */
+/*   Updated: 2024/09/11 11:10:28 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ bool is_surrounded_by_walls(t_map *map)
         while (j < map->width)
 		{
             c = map->v_map[i][j];
-            if (c != '1' && c != '0' && c != 'x' && c != 'N' && c != 'S' && c != 'E' && c != 'W')
+            if (c != '1' && c != '0' && c != 'x' && c != 'N' && c != 'S' && c != 'E' && c != 'W' && c != 'D')
                 return false;
 			j++;
         }
@@ -62,16 +62,12 @@ bool check_if_map_is_valid(t_map *map)
         {
             if (map->v_map[i][j] == '0')
             {
-                // Check top neighbor
                 if (i > 0 && map->v_map[i - 1][j] == 'x')
                     return false;
-                // Check bottom neighbor
                 if (i < map->height - 1 && map->v_map[i + 1][j] == 'x')
                     return false;
-                // Check left neighbor
                 if (j > 0 && map->v_map[i][j - 1] == 'x')
                     return false;
-                // Check right neighbor
                 if ((j < map->width) - 1 && map->v_map[i][j + 1] == 'x')
                     return false;
             }
