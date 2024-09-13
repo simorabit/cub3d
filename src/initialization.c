@@ -6,7 +6,7 @@
 /*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 08:18:07 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/11 14:16:07 by moel-fat         ###   ########.fr       */
+/*   Updated: 2024/09/13 12:07:31 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,49 +59,41 @@ void	init_window(t_window *window)
     window->floor_color = convert_color(&window->map->ceiling);
 }
 
-// void init_path_sprint(t_window *window)
-// {
-//     window->sprite->animation[0] = "assets/sword/sword0.png";
-//     window->sprite->animation[1] = "assets/sword/sword1.png";
-//     window->sprite->animation[2] = "assets/sword/sword2.png";
-//     window->sprite->animation[3] = "assets/sword/sword3.png";
-//     window->sprite->animation[4] = "assets/sword/sword4.png";
-//     window->sprite->animation[5] = "assets/sword/sword5.png";
-//     window->sprite->animation[6] = "assets/sword/sword6.png";
-//     window->sprite->animation[7] = "assets/sword/sword7.png";
-//     window->sprite->animation[8] = "assets/sword/sword8.png";
-// }
-
-void    init_sword(t_window *window)
+void init_sword(t_window *window)
 {
     int i;
+
     window->sprite = malloc(sizeof(t_sprite));
     if (!window->sprite)
-        ft_error(window->map, 6);
+        ft_error(window->map, 9);
 
-    window->sprite->animation = malloc(sizeof(char *) * 9);
-    window->sprite->sword = malloc(sizeof(mlx_texture_t *) * 9);
-    window->sprite->sword_images = malloc(sizeof(mlx_image_t) * 9);
+    window->sprite->animation = malloc(sizeof(char *) * 6);
+    window->sprite->sword = malloc(sizeof(mlx_texture_t *) * 6);
+    window->sprite->sword_images = malloc(sizeof(mlx_image_t) * 6);
+
     if (!window->sprite->animation || !window->sprite->sword || !window->sprite->sword_images)
-        ft_error(window->map, 6);
-    window->sprite->animation[0] = "assets/sword/sword0.png";
-    window->sprite->animation[1] = "assets/sword/sword1.png";
-    window->sprite->animation[2] = "assets/sword/sword2.png";
-    window->sprite->animation[3] = "assets/sword/sword3.png";
-    window->sprite->animation[4] = "assets/sword/sword4.png";
-    window->sprite->animation[5] = "assets/sword/sword5.png";
-    window->sprite->animation[6] = "assets/sword/sword6.png";
-    window->sprite->animation[7] = "assets/sword/sword7.png";
-    window->sprite->animation[8] = "assets/sword/sword8.png";
+        ft_error(window->map, 9);
+
+    const char *sword_paths[6] = {
+    "assets/csword/1.png",
+    "assets/csword/2.png",
+    "assets/csword/3.png",
+    "assets/csword/4.png",
+    "assets/csword/5.png",
+    "assets/csword/6.png"
+    };
+
     i = 0;
-    while (i < 9)
+    while (i < 6)
     {
-        window->sprite->sword[i] = mlx_load_png(window->sprite->animation[i]);
+        window->sprite->sword[i] = mlx_load_png(sword_paths[i]);
         if (!window->sprite->sword[i])
-            ft_error(window->map, 6);
+            ft_error(window->map, 10);
+
         window->sprite->sword_images[i] = mlx_texture_to_image(window->mlx_con, window->sprite->sword[i]);
-        if (!mlx_resize_image(window->sprite->sword_images[i], WIDTH, HEIGHT))
-            ft_error(window->map, 6);
+        if (!window->sprite->sword_images[i] || !mlx_resize_image(window->sprite->sword_images[i], WIDTH, HEIGHT))
+            ft_error(window->map, 10);
+
         i++;
     }
 }

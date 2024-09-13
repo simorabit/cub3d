@@ -6,7 +6,7 @@
 /*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 08:11:00 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/13 09:46:23 by moel-fat         ###   ########.fr       */
+/*   Updated: 2024/09/13 14:26:13 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,9 @@ typedef struct s_sprint
 	char 			**axe_path;
 	mlx_texture_t	**axe;
 	mlx_image_t		**axe_images;
+	mlx_image_t		**current_animation_images;
+	int				whatison;
+	int num_frames;
 	bool 			enabled;
 } t_sprite;
 
@@ -165,7 +168,8 @@ typedef struct s_window
 	char        	*title;
 	int				width;
 	int				height;
-	int 			ray_index;
+	int 			ray_index;//just for norm
+	int				direction;//just for norm
 	uint32_t		floor_color;
 	uint32_t		ceiling_color;
 	mlx_texture_t	**texture;
