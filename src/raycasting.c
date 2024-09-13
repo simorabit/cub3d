@@ -6,7 +6,7 @@
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 08:18:19 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/02 12:55:33 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/13 11:26:51 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,10 +129,6 @@ void rays_casting(t_window *window)
     {
         window->ray_list[i].ray_angle = normalize_angle(angle);
         ray_cast(&window->ray_list[i], window);
-        // if (i == (WIDTH / 2))
-        //     dda_algo(window->ray_list[i].wall_hit_x, \
-        //         window->ray_list[i].wall_hit_y, \
-        //         window->player.x + (PLAYER_SIZE / 2), window);
         i++;
         angle += FOV_ANGLE / WIDTH;
     }

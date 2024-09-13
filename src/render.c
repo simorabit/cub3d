@@ -6,7 +6,7 @@
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 08:18:28 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/02 12:17:14 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/13 11:25:52 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void draw_floor_ceiling(t_window *window)
                 mlx_put_pixel(window->img, x, y, window->floor_color);
             else
                 mlx_put_pixel(window->img, x, y, window->ceiling_color);
-            // mlx_put_pixel(window->img, x, y, RED); //TODO split the screen in half for floor and ceiling collors
             x++;
         }
         y++;

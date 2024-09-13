@@ -6,7 +6,7 @@
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 08:18:00 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/03 13:23:05 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/13 11:51:24 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void player_direction(mlx_key_data_t keydata, int *key, int value)
     else
         *key = value;
 }
-
 // void handel_mouse(mlx_key_data_t keydata,t_window *window)
 // {
 //     if (keydata.action == MLX_RELEASE)
@@ -78,8 +77,6 @@ void my_keyhook(mlx_key_data_t keydata, void *param)
         close_handler(window);
     if (keydata.key == MLX_KEY_W)
         player_direction(keydata, &window->player.walk_direction, 1); // Move forward
-    // else if (keydata.key == MLX_KEY_E)
-    //     handel_mouse(keydata, window);
     else if (keydata.key == MLX_KEY_S)
         player_direction(keydata, &window->player.walk_direction, -1); // Move backward
     else if (keydata.key == MLX_KEY_A)
