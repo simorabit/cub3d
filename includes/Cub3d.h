@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
+/*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 08:11:00 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/03 13:21:20 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/13 09:46:23 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,22 @@ typedef struct  s_player
     double  	turn_speed;
 } t_player;
 
+typedef struct s_sprint
+{
+	char			**animation;
+	mlx_texture_t	**sword;
+	mlx_image_t		**sword_images;
+	//****//
+	char 			**pickaxe_path;
+	mlx_texture_t	**pickaxe;
+	mlx_image_t		**pickaxe_images;
+	//****//
+	char 			**axe_path;
+	mlx_texture_t	**axe;
+	mlx_image_t		**axe_images;
+	bool 			enabled;
+} t_sprite;
+
 typedef struct s_window
 {
 	mlx_t        	*mlx_con;
@@ -149,9 +165,11 @@ typedef struct s_window
 	char        	*title;
 	int				width;
 	int				height;
+	int 			ray_index;
 	uint32_t		floor_color;
 	uint32_t		ceiling_color;
 	mlx_texture_t	**texture;
+	t_sprite		*sprite;
     t_player    	player;
     t_ray       	ray_list[WIDTH + 1];
 }	t_window;
@@ -169,6 +187,7 @@ void		init_window(t_window *window);
 void		init_player(t_player *player, t_map *map);
 void		listen_events(t_window *window);
 void		init_texture(t_window *window);
+void init_sprint(t_window *window);
 
 //render
 void    	render(t_window *window);
@@ -206,4 +225,21 @@ t_data		*ft_lstnewmap(char *data);
 void		ft_lstadd_backmap(t_data **lst, t_data *new);
 void		ft_error(t_map *map, int flag);
 void		*safe_malloc(size_t size);
+void		find_player(t_map *map);
+void		parse_map(t_map *map);
+void		free_map(t_map *map);
+char		*remove_new_line(char *str);
+void		get_rgb_value(char *rgb, t_map *map, char R);
+void		parse_map(t_map *map);
+bool		is_surrounded_by_walls(t_map *map);
+bool		check_if_map_is_valid(t_map *map);
+void		fill_map(t_map *map);
+void		remove_x(t_map *map);
+void		copy_map(t_map *map);
+char		*check_texture(char *str);
+bool		is_just_spaces(char *str);
+int			check_map_exists(char *file_name, t_map *map);
+void		parse_line(char *line, t_map *map, int *count);
+void		free_array(char **array);
+
 #endif
