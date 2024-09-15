@@ -6,7 +6,7 @@
 /*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 16:22:48 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/14 15:39:04 by moel-fat         ###   ########.fr       */
+/*   Updated: 2024/09/15 12:59:24 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void free_map(t_map *map)
     free(map->so);
     free(map->we);
     free(map->ea);
-    
     free(map);
 }
 
