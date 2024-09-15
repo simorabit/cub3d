@@ -6,38 +6,11 @@
 /*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 16:22:48 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/13 09:34:44 by moel-fat         ###   ########.fr       */
+/*   Updated: 2024/09/14 15:39:04 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Cub3d.h"
-
-void	ft_error(t_map *map, int flag)
-{
-	if (flag == 1 )
-		ft_putstr_fd("Error\nNeed The Map path as second arg and no more", 2);
-	else if (flag == 2)
-		ft_putstr_fd("Error\nNo Map Exists OR Invalid File Extension", 2);
-	else if (flag == 3)
-		ft_putstr_fd("Error\nMap is not closed by walls or have extra elemnet", 2);
-	else if (flag == 4)
-		ft_putstr_fd("Error\nunwanted elemnet in the file", 2);
-	else if (flag == 5)
-		ft_putstr_fd("Error\nfound empty line in inside the map", 2);
-	else if (flag == 6)
-		ft_putstr_fd("Error\nInvalid RGB value must be between 0 and 255 with no spaces", 2);
-	else if (flag == 7)
-		ft_putstr_fd("Error\nInvalid arguments for RGB format", 2);
-	else if (flag == 8)
-		ft_putstr_fd("Error\nplayer not found or wrong dericetion", 2);
-	else if (flag == 9)
-		ft_putstr_fd("Error\nmalloc fail\n", 2);
-	else if (flag == 10)
-		ft_putstr_fd("Error\nInvalid Texture Path or permition \n", 2);
-	if(map != NULL)
-		free_map(map);//TODO update to free everything after;
-	exit(EXIT_FAILURE);
-}
 
 void free_array(char **array)
 {
@@ -76,6 +49,35 @@ void free_map(t_map *map)
     free(map->ea);
     
     free(map);
+}
+
+void	ft_error(t_map *map, int flag)
+{
+	if (flag == 1 )
+		ft_putstr_fd("Error\nNeed The Map path as second arg and no more", 2);
+	else if (flag == 2)
+		ft_putstr_fd("Error\nNo Map Exists OR Invalid File Extension", 2);
+	else if (flag == 3)
+		ft_putstr_fd("Error\nMap is not closed by walls or have extra elemnet", 2);
+	else if (flag == 4)
+		ft_putstr_fd("Error\nunwanted elemnet in the file", 2);
+	else if (flag == 5)
+		ft_putstr_fd("Error\nfound empty line in inside the map", 2);
+	else if (flag == 6)
+		ft_putstr_fd("Error\nInvalid RGB value must be between 0 and 255 with no spaces", 2);
+	else if (flag == 7)
+		ft_putstr_fd("Error\nInvalid arguments for RGB format", 2);
+	else if (flag == 8)
+		ft_putstr_fd("Error\nplayer not found or wrong dericetion", 2);
+	else if (flag == 9)
+		ft_putstr_fd("Error\nmalloc fail\n", 2);
+	else if (flag == 10)
+		ft_putstr_fd("Error\nInvalid Texture Path or permition \n", 2);
+	else if (flag == 11)
+		ft_putstr_fd("Error\nColors are missing or missmatch\n", 2);
+	if(map != NULL)
+		free_map(map);//TODO update to free everything after;
+	exit(EXIT_FAILURE);
 }
 
 void	*safe_malloc(size_t size)

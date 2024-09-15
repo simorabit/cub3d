@@ -6,7 +6,7 @@
 /*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 08:17:40 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/13 14:46:03 by moel-fat         ###   ########.fr       */
+/*   Updated: 2024/09/14 11:27:38 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,31 +51,37 @@
 //     }
 // }
 
-void re_load_images(t_window *window, int animation_type) {
+void re_load_images(t_window *window, int animation_type)
+{
     int i = 0;
     mlx_image_t **images;
     mlx_texture_t **textures;
     int num_frames;
 
-    // Choose the correct animation based on the animation type
-    if (animation_type == 1) {
+    if (animation_type == 1)
+    {
         images = window->sprite->sword_images;
         textures = window->sprite->sword;
-        num_frames = 6;  // Number of sword frames
-    } else if (animation_type == 2) {
+        num_frames = 6;
+    }
+    else if (animation_type == 2)
+    {
         images = window->sprite->pickaxe_images;
         textures = window->sprite->pickaxe;
-        num_frames = 8;  // Number of pickaxe frames
-    } else if (animation_type == 3) {
+        num_frames = 8;
+    }
+    else if (animation_type == 3)
+    {
         images = window->sprite->axe_images;
         textures = window->sprite->axe;
-        num_frames = 6;  // Number of axe frames
-    } else {
-        return; // Invalid animation type
+        num_frames = 6;
     }
+    else
+        return ;
 
     // Reload images from textures
-    while (i < num_frames) {
+    while (i < num_frames)
+    {
         images[i] = mlx_texture_to_image(window->mlx_con, textures[i]);
         if (!mlx_resize_image(images[i], WIDTH, HEIGHT))
             ft_error(window->map, 6);
@@ -84,92 +90,65 @@ void re_load_images(t_window *window, int animation_type) {
 }
 
 
-void update_animation(t_window *window, mlx_image_t **images, int num_frames) {
+void update_animation(t_window *window, mlx_image_t **images, int num_frames)
+{
     static int current_image = 0;
     static int frame_count = 0;
     static void *current_img_ptr = NULL;
 
-    if (window->sprite->enabled) {
-        if (frame_count % 2 == 0) {
-            // Delete the previous image if it exists
-            if (current_img_ptr != NULL) {
+    if (window->sprite->enabled)
+    {
+        if (frame_count % 2 == 0)
+        {
+            if (current_img_ptr != NULL)
+            {
                 mlx_delete_image(window->mlx_con, current_img_ptr);
                 current_img_ptr = NULL;
             }
-
-            // Show the current image frame
             current_img_ptr = images[current_image];
             mlx_image_to_window(window->mlx_con, current_img_ptr, 0, 0);
-
             current_image++;
-            if (current_image >= num_frames) {
-                current_image = 0;  // Reset to the first frame
-                window->sprite->enabled = false;  // Disable animation once finished
-                re_load_images(window, window->sprite->whatison);  // Reload images for the current animation
+            if (current_image >= num_frames)
+            {
+                current_image = 0;
+                window->sprite->enabled = false;
+                re_load_images(window, window->sprite->whatison);
             }
         }
-
-        // Limit frame count to avoid overflow
         if (frame_count > 10000)
             frame_count = 0;
         frame_count++;
     }
 }
 
-
-// void handle_animation_key(t_window *window)
-// {
-//     if (mlx_is_key_down(window->mlx_con, MLX_KEY_1) && !window->sprite->enabled) {
-//         // Sword animation on key 1
-//         window->sprite->enabled = true;
-//         update_animation(window, window->sprite->sword_images, 6);
-//     }
-//     else if (mlx_is_key_down(window->mlx_con, MLX_KEY_2) && !window->sprite->enabled) {
-//         // Pickaxe animation on key 2
-//         window->sprite->enabled = true;
-//         update_animation(window, window->sprite->pickaxe_images, 8);
-//     }
-//     else if (mlx_is_key_down(window->mlx_con, MLX_KEY_3) && !window->sprite->enabled) {
-//         // Axe animation on key 3
-//         window->sprite->enabled = true;
-//         update_animation(window, window->sprite->axe_images, 6);
-//     }
-// }
-
-
 void ft_sprint(void *param)
 {
     t_window *window;
+
     window = (t_window *)param;
-    // Trigger the correct animation based on key press
-    if (mlx_is_key_down(window->mlx_con, MLX_KEY_1) && !window->sprite->enabled) {
-        printf("1\n");
-        // Sword animation on key 1
+    if (mlx_is_key_down(window->mlx_con, MLX_KEY_1) && !window->sprite->enabled)
+    {
         window->sprite->enabled = true;
         window->sprite->current_animation_images = window->sprite->sword_images;
         window->sprite->num_frames = 6;
         window->sprite->whatison = 1;
     }
-    else if (mlx_is_key_down(window->mlx_con, MLX_KEY_2) && !window->sprite->enabled) {
-        printf("2\n");
-        // Pickaxe animation on key 2
+    else if (mlx_is_key_down(window->mlx_con, MLX_KEY_2) && !window->sprite->enabled)
+    {
         window->sprite->enabled = true;
         window->sprite->current_animation_images = window->sprite->pickaxe_images;
         window->sprite->num_frames = 8;
         window->sprite->whatison = 2;
     }
-    else if (mlx_is_key_down(window->mlx_con, MLX_KEY_3) && !window->sprite->enabled) {
-        printf("3\n");
-        // Axe animation on key 3
+    else if (mlx_is_key_down(window->mlx_con, MLX_KEY_3) && !window->sprite->enabled)
+    {
         window->sprite->enabled = true;
         window->sprite->current_animation_images = window->sprite->axe_images;
         window->sprite->num_frames = 6;
         window->sprite->whatison = 3;
     }
-    // Always update the animation in every frame
-    if (window->sprite->enabled) {
+    if (window->sprite->enabled)
         update_animation(window, window->sprite->current_animation_images, window->sprite->num_frames);
-    }
 }
 
 
@@ -207,6 +186,16 @@ static void display_window(t_window *window)
     mlx_loop(window->mlx_con);
 }
 
+void print_map(t_map *map)
+{
+    int i = 0;
+    while (map->v_map[i] != NULL)
+    {
+        printf("%s\n", map->v_map[i]);
+        i++;
+    }
+}
+
 int main(int argc, char *argv[])
 {
     t_window window;
@@ -217,6 +206,7 @@ int main(int argc, char *argv[])
     map = safe_malloc(sizeof (t_map));
     map_init(map);
     check_read_map(argv[1], map);
+    print_map(map);
     window.map = map;
     display_window(&window);
     return 0;

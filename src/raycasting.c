@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
+/*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 08:18:19 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/02 12:55:33 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/14 11:55:51 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ bool horizontal_casting(t_ray *ray, t_window *window)
         else
             y_new = ray_var.yinter;
         x_new = ray_var.xinter ;
-        if (window->map->v_map[(int)y_new / TILE_SIZE][(int)x_new / TILE_SIZE] 
+        if (window->map->v_map[(int)y_new / TILE_SIZE][(int)x_new / TILE_SIZE]
             == '1')
         {
             ray->wall_hit_x = ray_var.xinter ;
