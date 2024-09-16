@@ -6,7 +6,7 @@
 /*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 16:18:08 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/05 16:18:16 by moel-fat         ###   ########.fr       */
+/*   Updated: 2024/09/16 14:33:55 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void find_player(t_map *map)
 				check_deriction(map, map->v_map[y][x]);
 				map->player_x = x;
 				map->player_y = y;
-				return ;
+				map->player_count++;
 			}
 			x++;
 		}
@@ -48,4 +48,6 @@ void find_player(t_map *map)
 	}
 	if (map->player_x == -1 || map->player_y == -1 || map->player_dir == -1)
 		ft_error(map, 8);
+	if(map->player_count != 1)
+		ft_print_error(map, "There should be only one player", -1);
 }

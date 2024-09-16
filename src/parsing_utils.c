@@ -6,7 +6,7 @@
 /*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 16:22:48 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/15 12:59:24 by moel-fat         ###   ########.fr       */
+/*   Updated: 2024/09/16 13:30:34 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,14 @@ void	ft_error(t_map *map, int flag)
 	if(map != NULL)
 		free_map(map);//TODO update to free everything after;
 	exit(EXIT_FAILURE);
+}
+
+void ft_print_error(t_map *map, char *str, int flag)
+{
+	ft_putstr_fd("Error\n", 2);
+	if (str != NULL && flag == -1)
+		ft_putstr_fd(str, 2);
+	ft_error(map, flag);
 }
 
 void	*safe_malloc(size_t size)

@@ -23,6 +23,8 @@ CFILES = main.c\
 		 src/parse_player.c\
 		 src/parse_textures.c\
 		 src/parsing_utils.c\
+		 src/animation.c\
+		 src/init_sprint.c\
 
 OBJ = $(patsubst %.c, %.o, $(CFILES))
 B_OBJ = $(patsubst %.c, %.o, $(BFILES))
