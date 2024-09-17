@@ -6,7 +6,7 @@
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 08:11:00 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/17 17:07:14 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/17 17:42:09 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ typedef struct s_map
 	int 	player_dir;
 	int		player_x;
 	int		player_y;
+	int		player_count;
 	int		map_fd;
 	t_data	*data;
 }t_map;
@@ -142,20 +143,22 @@ typedef struct  s_player
 
 typedef struct s_sprint
 {
-	char			**animation;
 	mlx_texture_t	**sword;
 	mlx_image_t		**sword_images;
-	//****//
-	char 			**pickaxe_path;
+
 	mlx_texture_t	**pickaxe;
 	mlx_image_t		**pickaxe_images;
-	//****//
-	char 			**axe_path;
+
 	mlx_texture_t	**axe;
 	mlx_image_t		**axe_images;
+	
+	mlx_texture_t	*Hand;
+	mlx_image_t		*Hand_image;
+
 	mlx_image_t		**current_animation_images;
 	int				whatison;
-	int num_frames;
+	int				num_frames;
+	bool 			hand_on;
 	bool 			enabled;
 } t_sprite;
 
@@ -194,7 +197,8 @@ void		init_window(t_window *window);
 void		init_player(t_player *player, t_map *map);
 void		listen_events(t_window *window);
 void		init_texture(t_window *window);
-void init_sprint(t_window *window);
+void		init_sprint(t_window *window);
+void		ft_sprint(void *param);
 
 //render
 void    	render(t_window *window);
@@ -248,5 +252,7 @@ bool		is_just_spaces(char *str);
 int			check_map_exists(char *file_name, t_map *map);
 void		parse_line(char *line, t_map *map, int *count);
 void		free_array(char **array);
+void		ft_print_error(t_map *map, char *str, int flag);
+void		check_doors(t_map *map);
 
 #endif

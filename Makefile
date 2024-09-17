@@ -1,7 +1,7 @@
 .PHONY: all clean fclean re
 
 CC = cc
-FLAGS = #-Wall -Wextra -Werror -o3 -g -fsanitize=address,undefined,float-divide-by-zero
+FLAGS = -Wall -Wextra -Werror -o3 #-g -fsanitize=address,undefined,float-divide-by-zero 
 RM = rm -rf
 NAME = cub3D
 
@@ -23,6 +23,8 @@ CFILES = main.c\
 		 src/parse_player.c\
 		 src/parse_textures.c\
 		 src/parsing_utils.c\
+		 src/animation.c\
+		 src/init_sprint.c\
 
 OBJ = $(patsubst %.c, %.o, $(CFILES))
 B_OBJ = $(patsubst %.c, %.o, $(BFILES))

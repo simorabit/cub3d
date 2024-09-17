@@ -6,7 +6,7 @@
 /*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 08:12:50 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/14 15:27:36 by moel-fat         ###   ########.fr       */
+/*   Updated: 2024/09/17 10:39:02 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void map_init(t_map *map)
 	map->width = 0;
 	map->map_fd = 0;
 	map->data = NULL;
+	map->player_count = 0;
 }
 
 void parse_map(t_map *map)
@@ -55,6 +56,7 @@ void parse_map(t_map *map)
 		ft_error(map, 3);
 	remove_x(map);
 	find_player(map);
+	check_doors(map);
 }
 
 
