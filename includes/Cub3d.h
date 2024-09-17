@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 08:11:00 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/13 09:46:23 by moel-fat         ###   ########.fr       */
+/*   Updated: 2024/09/17 16:51:21 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@
 
 //Keys
 # define KEY_PRESS		2
-#define TILE_SIZE       32
+#define TILE_SIZE       64
 #define MAP_NUM_ROWS    14
 #define MAP_NUM_COLS    32
 #define PI              3.14159265
@@ -116,6 +116,7 @@ typedef struct  s_ray
     double wall_stripe_height;
     double wall_hit_x;
     double wall_hit_y;
+	bool	is_door;
     bool    is_facing_up;
     bool    is_facing_down;
     bool    is_facing_right;
@@ -152,6 +153,9 @@ typedef struct s_sprint
 	char 			**axe_path;
 	mlx_texture_t	**axe;
 	mlx_image_t		**axe_images;
+	mlx_image_t		**current_animation_images;
+	int				whatison;
+	int num_frames;
 	bool 			enabled;
 } t_sprite;
 
@@ -165,11 +169,13 @@ typedef struct s_window
 	char        	*title;
 	int				width;
 	int				height;
-	int 			ray_index;
+	int 			ray_index;//just for norm
+	int				direction;//just for norm
 	uint32_t		floor_color;
 	uint32_t		ceiling_color;
 	mlx_texture_t	**texture;
 	t_sprite		*sprite;
+	bool			is_door;
     t_player    	player;
     t_ray       	ray_list[WIDTH + 1];
 }	t_window;
@@ -179,7 +185,8 @@ enum e_direction
 	NORTH,
 	SOUTH,
 	EAST,
-	WEST
+	WEST,
+	DOOR
 };
 
 //initialization

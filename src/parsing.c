@@ -6,13 +6,34 @@
 /*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 08:12:50 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/05 16:38:56 by moel-fat         ###   ########.fr       */
+/*   Updated: 2024/09/14 15:27:36 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Cub3d.h"
 
-
+void map_init(t_map *map)
+{
+	map->no = NULL;
+	map->so = NULL;
+	map->we = NULL;
+	map->ea = NULL;
+	map->v_map = NULL;
+	map->floor.r = -1;
+	map->floor.g = -1;
+	map->floor.b = -1;
+	map->ceiling.r = -1;
+	map->ceiling.g = -1;
+	map->ceiling.b = -1;
+	map->player_dir = -1;
+	map->player_x = -1;
+	map->player_y = -1;
+	map->map = NULL;
+	map->height = 0;
+	map->width = 0;
+	map->map_fd = 0;
+	map->data = NULL;
+}
 
 void parse_map(t_map *map)
 {
@@ -22,6 +43,10 @@ void parse_map(t_map *map)
 	map->ea = check_texture(map->ea);
 	if (map->so == NULL || map->no == NULL || map->we == NULL || map->ea == NULL)
 		ft_error(map, -1);
+	if (map->floor.r == -1 || map->floor.g == -1 || map->floor.b == -1)
+		ft_error(map, 11);
+	if (map->ceiling.r == -1 || map->ceiling.g == -1 || map->ceiling.b == -1)
+		ft_error(map, 11);
 	copy_map(map);
 	fill_map(map);
 	if (is_surrounded_by_walls(map) == false)
@@ -58,25 +83,3 @@ void check_read_map(char *filename, t_map *map)
 	store_map(map);
 }
 
-void map_init(t_map *map)
-{
-	map->no = NULL;
-	map->so = NULL;
-	map->we = NULL;
-	map->ea = NULL;
-	map->v_map = NULL;
-	map->floor.r = -1;
-	map->floor.g = -1;
-	map->floor.b = -1;
-	map->ceiling.r = -1;
-	map->ceiling.g = -1;
-	map->ceiling.b = -1;
-	map->player_dir = -1;
-	map->player_x = -1;
-	map->player_y = -1;
-	map->map = NULL;
-	map->height = 0;
-	map->width = 0;
-	map->map_fd = 0;
-	map->data = NULL;
-}

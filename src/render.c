@@ -6,7 +6,7 @@
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 08:18:28 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/13 11:25:52 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/16 14:34:38 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ void render_minimap(t_window *window, t_render_vars *re_vars, int x, int y)
         re_vars->mapY < window->map->height &&
         re_vars->mapX < window->map->width)
     {
-        if (window->map->v_map[re_vars->mapY][re_vars->mapX] == '1')
+        if (window->map->v_map[re_vars->mapY][(re_vars->mapX)] == '1' || 
+        window->map->v_map[re_vars->mapY][(re_vars->mapX)] == 'D')
             mlx_put_pixel(window->img, x, y, BLACK);
         else
             mlx_put_pixel(window->img, x, y, 0xFFFFFFFF);

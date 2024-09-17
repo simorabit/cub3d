@@ -1,7 +1,7 @@
 .PHONY: all clean fclean re
 
 CC = cc
-FLAGS = -Wall -Wextra -Werror -g -fsanitize=address,undefined,float-divide-by-zero
+FLAGS = -Wall -Wextra -Werror -o3  #-g -fsanitize=address,undefined,float-divide-by-zero
 RM = rm -rf
 NAME = cub3D
 
@@ -35,9 +35,10 @@ lib:
 $(OBJ) : %.o: %.c includes/Cub3d.h
 	@$(CC) $(FLAGS) -c $< -o $@
 
-$(NAME) : libft/libft.a $(OBJ) 
-	@$(CC) $(FLAGS) $(OBJ) ./MLX42/build/libmlx42.a -lglfw -L/Users/$(USER)/.brew/opt/glfw/lib -pthread -lm libft/libft.a -o $(NAME)
+$(NAME) : libft/libft.a $(OBJ)
+	@$(CC) $(FLAGS) $(OBJ) ./MLX42/build/libmlx42.a -lglfw -L$(HOME)/homebrew/opt/glfw/lib -pthread -lm libft/libft.a -o $(NAME)
 	@echo making ... Done.
+
 
 clean:
 	@$(RM) $(OBJ) $(B_OBJ)
