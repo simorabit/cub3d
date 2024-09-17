@@ -6,7 +6,7 @@
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 16:34:45 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/15 11:32:55 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/17 17:02:59 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void copy_map(t_map *map)
 		tmp = remove_new_line(ft_strdup(current->data));
 		if(is_just_spaces(tmp) == true)
 		{
+			map->map[i] = NULL;
 			free(tmp);
 			map->map[i] = NULL;
 			ft_error(map, 5);

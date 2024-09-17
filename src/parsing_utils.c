@@ -6,7 +6,7 @@
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 16:22:48 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/15 11:31:44 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/17 17:03:23 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void free_map(t_map *map)
     free(map->so);
     free(map->we);
     free(map->ea);
-    
     free(map);
 }
 
