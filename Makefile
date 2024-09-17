@@ -38,7 +38,7 @@ $(OBJ) : %.o: %.c includes/Cub3d.h
 	@$(CC) $(FLAGS) -c $< -o $@
 
 $(NAME) : libft/libft.a $(OBJ)
-	@$(CC) $(FLAGS) $(OBJ) ./MLX42/build/libmlx42.a -lglfw -L$(HOME)/homebrew/opt/glfw/lib -pthread -lm libft/libft.a -o $(NAME)
+	@$(CC) $(FLAGS) $(OBJ) ./MLX42/build/libmlx42.a -lglfw -L/Users/$(USER)/.brew/opt/glfw/lib -pthread -lm libft/libft.a -o $(NAME)
 	@echo making ... Done.
 
 
