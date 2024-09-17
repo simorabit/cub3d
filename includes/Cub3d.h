@@ -6,7 +6,7 @@
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 08:11:00 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/17 16:51:21 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/17 17:07:14 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@
 
 //Keys
 # define KEY_PRESS		2
-#define TILE_SIZE       64
+#define TILE_SIZE       32
 #define MAP_NUM_ROWS    14
 #define MAP_NUM_COLS    32
 #define PI              3.14159265

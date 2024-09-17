@@ -6,7 +6,7 @@
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 08:17:40 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/17 17:02:33 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/17 17:25:56 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,19 +169,16 @@ void handle_mouse_rotation(t_window *window)
 {
     int x, y;
     static int last_x = -1;
-    int delta_x = 0;
-
+    
     mlx_get_mouse_pos(window->mlx_con, &x, &y);
-    if (last_x == -1)
-    {
-        window->player.rotation_angle = 0;
+    if (last_x == -1) 
         last_x = x;
-        delta_x = x - last_x;
-    }
+    int delta_x = x - last_x;
     window->player.rotation_angle += delta_x * 0.01;
     mlx_set_mouse_pos(window->mlx_con, WIDTH / 2, HEIGHT / 2);
     last_x = WIDTH / 2;
 }
+
 
 void    loop_func(void *param)
 {
