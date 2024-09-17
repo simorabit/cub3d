@@ -6,7 +6,7 @@
 /*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 12:40:59 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/16 13:10:09 by moel-fat         ###   ########.fr       */
+/*   Updated: 2024/09/17 14:12:29 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,9 @@ void init_sword(t_window *window)
 {
     int i;
 
-    window->sprite = malloc(sizeof(t_sprite));
-    if (!window->sprite)
-        ft_error(window->map, 9);
-
-    window->sprite->sword = malloc(sizeof(mlx_texture_t *) * 6);
-    window->sprite->sword_images = malloc(sizeof(mlx_image_t) * 6);
-
-    if (!window->sprite->sword || !window->sprite->sword_images)
-        ft_error(window->map, 9);
-
+    window->sprite = safe_malloc(sizeof(t_sprite));
+    window->sprite->sword = safe_malloc(sizeof(mlx_texture_t *) * 6);
+    window->sprite->sword_images = safe_malloc(sizeof(mlx_image_t) * 6);
     const char *sword_paths[6] = {
     "assets/csword/1.png",
     "assets/csword/2.png",
@@ -34,7 +27,6 @@ void init_sword(t_window *window)
     "assets/csword/5.png",
     "assets/csword/6.png"
     };
-
     i = 0;
     while (i < 6)
     {
@@ -52,11 +44,8 @@ void init_pickaxe(t_window *window)
 {
     int i;
 
-    window->sprite->pickaxe = malloc(sizeof(mlx_texture_t *) * 8);
-    window->sprite->pickaxe_images = malloc(sizeof(mlx_image_t) * 8);
-    if (!window->sprite->pickaxe || !window->sprite->pickaxe_images)
-        ft_error(window->map, 6);
-
+    window->sprite->pickaxe = safe_malloc(sizeof(mlx_texture_t *) * 8);
+    window->sprite->pickaxe_images = safe_malloc(sizeof(mlx_image_t) * 8);
     const char *pickaxe_animation[8] = {
         "assets/cpickaxe/1.png",
         "assets/cpickaxe/2.png",
@@ -82,10 +71,8 @@ void init_axe(t_window *window)
 {
     int i;
 
-    window->sprite->axe = malloc(sizeof(mlx_texture_t *) * 6);
-    window->sprite->axe_images = malloc(sizeof(mlx_image_t) * 6);
-    if (!window->sprite->axe || !window->sprite->axe_images)
-        ft_error(window->map, 6);
+    window->sprite->axe = safe_malloc(sizeof(mlx_texture_t *) * 6);
+    window->sprite->axe_images = safe_malloc(sizeof(mlx_image_t) * 6);
     const char *axe_animation[6] = {
         "assets/caxe/1.png",
         "assets/caxe/2.png",
@@ -107,9 +94,13 @@ void init_axe(t_window *window)
 
 void init_hand(t_window *window)
 {
+    window->sprite->Hand = safe_malloc(sizeof(mlx_texture_t));
+    window->sprite->Hand_image = safe_malloc(sizeof(mlx_image_t));
     window->sprite->Hand = mlx_load_png("assets/hand.png");
+    if (!window->sprite->Hand)
+        ft_error(window->map, 6);
     window->sprite->Hand_image = mlx_texture_to_image(window->mlx_con, window->sprite->Hand);
-    if (!window->sprite->Hand || !window->sprite->Hand_image)
+    if (!window->sprite->Hand_image)
         ft_error(window->map, 6);
     if(!mlx_resize_image(window->sprite->Hand_image, WIDTH, HEIGHT))
         ft_error(window->map, 6);
@@ -117,9 +108,10 @@ void init_hand(t_window *window)
 
 void init_sprint(t_window *window)
 {
-    // init_hand(window);
     init_sword(window);
     init_pickaxe(window);
     init_axe(window);
+    init_hand(window);
     window->sprite->enabled = false;
+    window->sprite->hand_on = false;
 }

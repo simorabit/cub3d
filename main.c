@@ -6,7 +6,7 @@
 /*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 08:17:40 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/16 13:25:37 by moel-fat         ###   ########.fr       */
+/*   Updated: 2024/09/17 11:47:10 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ int main(int argc, char *argv[])
     map = safe_malloc(sizeof (t_map));
     map_init(map);
     check_read_map(argv[1], map);
-    // print_map(map);
-    // window.map = map;
-    // display_window(&window);
+    print_map(map);
+    window.map = map;
+    display_window(&window);
     return 0;
 }

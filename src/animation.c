@@ -6,7 +6,7 @@
 /*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 10:07:20 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/16 11:22:16 by moel-fat         ###   ########.fr       */
+/*   Updated: 2024/09/17 14:20:49 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ void re_load_images(t_window *window, int animation_type)
     }
     else
         return ;
-
-    // Reload images from textures
     while (i < num_frames)
     {
         images[i] = mlx_texture_to_image(window->mlx_con, textures[i]);
@@ -89,11 +87,23 @@ void    select_weapon(t_window *window, int frames, int weapen)
         window->sprite->whatison = weapen;
 }
 
+void    display_hand(t_window *window)
+{
+    if (window->sprite->hand_on == false)
+    {
+        window->sprite->current_animation_images = &window->sprite->Hand_image;
+        window->sprite->num_frames = 1;
+        window->sprite->enabled = true;
+        window->sprite->hand_on = true;
+    }
+}
+
 void ft_sprint(void *param)
 {
     t_window *window;
 
     window = (t_window *)param;
+    display_hand(window);
     if (mlx_is_key_down(window->mlx_con, MLX_KEY_1) && !window->sprite->enabled)
     {
         window->sprite->current_animation_images = window->sprite->sword_images;
