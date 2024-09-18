@@ -6,7 +6,7 @@
 /*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 13:32:47 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/08/08 18:45:30 by moel-fat         ###   ########.fr       */
+/*   Updated: 2024/09/18 11:29:00 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ int	ft_lstsizemap(t_data *lst)
 
 t_data	*ft_lstlastmap(t_data *lst)
 {
-    if (!lst)
-        return (NULL);
+	if (!lst)
+		return (NULL);
 	while (lst && lst->next != NULL)
 		lst = lst->next;
 	return (lst);

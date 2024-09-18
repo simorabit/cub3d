@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
+/*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 16:34:45 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/17 17:02:59 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/18 10:33:27 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Cub3d.h"
 
-void remove_x(t_map *map)
+void	remove_x(t_map *map)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (i < map->height)
@@ -31,19 +31,12 @@ void remove_x(t_map *map)
 	}
 }
 
-void copy_map(t_map *map)
+void	copy_map_data(t_map *map, t_data *current)
 {
-	t_data *current;
-	int i = 0;
-	char *tmp;
-	
-	current = map->data;
-	while (current != NULL && is_just_spaces(current->data) == true)
-	{
-		map->height--;
-		current = current->next;
-	}
-	map->map = safe_malloc(sizeof(char *) * (map->height + 1));
+	int		i;
+	char	*tmp;
+
+	i = 0;
 	while (current != NULL)
 	{
 		if (current->data[0] == '\n')
@@ -52,11 +45,10 @@ void copy_map(t_map *map)
 			ft_error(map, 5);
 		}
 		tmp = remove_new_line(ft_strdup(current->data));
-		if(is_just_spaces(tmp) == true)
+		if (is_just_spaces(tmp) == true)
 		{
 			map->map[i] = NULL;
 			free(tmp);
-			map->map[i] = NULL;
 			ft_error(map, 5);
 		}
 		map->map[i] = ft_strdup(tmp);
@@ -65,6 +57,20 @@ void copy_map(t_map *map)
 		current = current->next;
 	}
 	map->map[i] = NULL;
+}
+
+void	copy_map(t_map *map)
+{
+	t_data	*current;
+
+	current = map->data;
+	while (current != NULL && is_just_spaces(current->data) == true)
+	{
+		map->height--;
+		current = current->next;
+	}
+	map->map = safe_malloc(sizeof(char *) * (map->height + 1));
+	copy_map_data(map, current);
 }
 
 int	check_map_exists(char *file_name, t_map *map)
@@ -83,8 +89,8 @@ int	check_map_exists(char *file_name, t_map *map)
 
 void	parse_line(char *line, t_map *map, int *count)
 {
-	char *tmp;
-	
+	char	*tmp;
+
 	tmp = ft_strtrim(line, " ");
 	if (ft_strncmp(tmp, "NO ", 3) == 0 && map->no == NULL)
 		map->no = ft_strdup(tmp);
@@ -104,9 +110,6 @@ void	parse_line(char *line, t_map *map, int *count)
 		ft_lstadd_backmap(&map->data, ft_lstnewmap(ft_strdup(line)));
 	}
 	else if (tmp[0] != '\n')
-	{
-		free(tmp);
-		ft_error(map, 4);
-	}
+		(free(tmp), ft_error(map, 4));
 	free(tmp);
 }

@@ -6,7 +6,7 @@
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 08:17:40 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/18 13:57:40 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/18 16:31:04 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ int main(int argc, char *argv[])
     map = safe_malloc(sizeof (t_map));
     map_init(map);
     check_read_map(argv[1], map);
+    print_map(map);
     window.map = map;
     display_window(&window);
     return 0;

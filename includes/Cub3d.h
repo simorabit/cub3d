@@ -6,7 +6,7 @@
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 08:11:00 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/18 12:21:18 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/18 16:30:22 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 # include <string.h>
 #include <float.h>
 
-# define HEIGHT  			900 
-# define WIDTH  			1600 
+# define HEIGHT  			900
+# define WIDTH  			1600
 # define CENTER_CIRCLE 		110
 # define RADIUS 			100
 # define RADIUS_X2			(RADIUS * RADIUS)
@@ -144,20 +144,21 @@ typedef struct  s_player
 typedef struct s_sprint
 {
 	mlx_texture_t	**sword;
-	mlx_image_t		**sword_images;
+	mlx_image_t		**sword_i;
 
 	mlx_texture_t	**pickaxe;
-	mlx_image_t		**pickaxe_images;
+	mlx_image_t		**pickaxe_i;
 
 	mlx_texture_t	**axe;
 	mlx_image_t		**axe_images;
-	
+
 	mlx_texture_t	*Hand;
 	mlx_image_t		*Hand_image;
 
 	mlx_image_t		**current_animation_images;
 	int				whatison;
 	int				num_frames;
+	bool			num_frames_set;
 	bool 			hand_on;
 	bool 			enabled;
 } t_sprite;
@@ -260,5 +261,7 @@ void		parse_line(char *line, t_map *map, int *count);
 void		free_array(char **array);
 void		ft_print_error(t_map *map, char *str, int flag);
 void		check_doors(t_map *map);
+void		display_hand(t_window *window);
+void		select_weapon(t_window *window, int frames, int weapen);
 
 #endif
