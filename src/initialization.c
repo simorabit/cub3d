@@ -6,7 +6,7 @@
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 08:18:07 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/17 17:41:53 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/18 13:40:58 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	init_window(t_window *window)
 	mlx_image_to_window(window->mlx_con ,window->img, 0, 0);
     window->ceiling_color = convert_color(&window->map->floor);
     window->floor_color = convert_color(&window->map->ceiling);
+    window->is_mouse_on = true;
 }
 
 void init_texture(t_window *window)

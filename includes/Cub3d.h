@@ -6,7 +6,7 @@
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 08:11:00 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/17 17:42:09 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/18 12:21:18 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 # define PLAYER_SIZE     	10
 # define PLAYER_R			(PLAYER_SIZE / 2)
 # define PLAYER_PIX_CENTER	110
-# define PLAYER_SPEED		12
+# define PLAYER_SPEED		20
 
 //colors
 # define BLACK  0x000000FF
@@ -42,7 +42,7 @@
 # define GRAY   0x36454FFF
 # define Maroon 0xFF800000
 # define Gold	0xFFEE82EE
-
+#define BROWN 	0x964B00FF
 //Keys
 # define KEY_PRESS		2
 #define TILE_SIZE       32
@@ -179,6 +179,7 @@ typedef struct s_window
 	mlx_texture_t	**texture;
 	t_sprite		*sprite;
 	bool			is_door;
+	bool			is_mouse_on;
     t_player    	player;
     t_ray       	ray_list[WIDTH + 1];
 }	t_window;
@@ -195,7 +196,6 @@ enum e_direction
 //initialization
 void		init_window(t_window *window);
 void		init_player(t_player *player, t_map *map);
-void		listen_events(t_window *window);
 void		init_texture(t_window *window);
 void		init_sprint(t_window *window);
 void		ft_sprint(void *param);
@@ -205,6 +205,7 @@ void    	render(t_window *window);
 
 //events
 void		update_player(t_window *window);	
+void		my_keyhook(mlx_key_data_t keydata, void *param);
 
 //raycasting && ray_cast_utils
 void		rays_casting(t_window *window);
@@ -213,6 +214,7 @@ void		init_vert_cast(t_ray_cast *ray_var, t_window *window, t_ray *ray);
 void		dda_algo(int X1, int Y1, double X, t_window *window);
 int			get_step(double dx, double dy);
 double		normalize_angle(double angle);
+void		detect_door(t_ray *ray, t_window *window);
 
 //draw_3d && utils
 void		render_walls(t_window *window);
@@ -227,6 +229,10 @@ uint32_t	convert_color(t_color *color);
 uint32_t	get_pixel_color(mlx_texture_t *texture, uint32_t x, uint32_t y);
 uint32_t	ft_rgba(uint8_t r, uint8_t g, uint8_t b, uint8_t a);
 
+//utils_func
+bool check_hits(t_window *window, int x_new, int y_new);
+bool ray_protection(t_ray_cast ray_var, t_window *window);
+void handle_mouse_rotation(t_window *window);
 //parsing
 void		map_init(t_map *map);
 void		check_read_map(char *filename, t_map *map);

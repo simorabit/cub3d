@@ -7,26 +7,20 @@ int get_step(double dx, double dy)
     else
         return fabs(dy);
 }
-void dda_algo(int X1, int Y1, double X, t_window *window)
+
+void detect_door(t_ray *ray, t_window *window)
 {
-    double  Y;
-    double  dx;
-    double  dy;
-    int     steps;
-    
-    Y = 30;
-    dx = X1 - X;
-    dy = Y1 - Y;
-    steps = get_step(X1 - X, Y1 - Y);
-    dx /= steps;
-    dy /= steps;
-    while (steps-- >= 0)
-    {
-        mlx_put_pixel(window->img, SCALE_FACTOR * round(X), \
-            SCALE_FACTOR * round(Y), 0xffff00ff);
-        X += dx;
-        Y += dy;
-    }
+    int x_new;
+    int y_new;
+
+    x_new = ray->wall_hit_x;
+    y_new = ray->wall_hit_y;
+    if (ray->is_facing_left && !ray->was_hit_horz)
+        x_new--;
+    if (ray->is_facing_up && ray->was_hit_horz)
+        y_new--;
+    if (window->map->v_map[(int)y_new / TILE_SIZE][(int)x_new / TILE_SIZE] == 'D')
+        ray->is_door = true;
 }
 
 double normalize_angle(double angle)
@@ -44,8 +38,8 @@ void init_horz_cast(t_ray_cast *ray_cast, t_window *window, t_ray *ray)
         ray_cast->yinter += TILE_SIZE;
     else
         ray_cast->yinter += 0;
-    ray_cast->xinter = window->player.x + \
-     (ray_cast->yinter - window->player.y) / tan(ray->ray_angle);
+    ray_cast->xinter = window->player.x +
+                       (ray_cast->yinter - window->player.y) / tan(ray->ray_angle);
     ray_cast->ystep = TILE_SIZE;
     if (ray->is_facing_up)
         ray_cast->ystep *= -1;
@@ -59,7 +53,7 @@ void init_horz_cast(t_ray_cast *ray_cast, t_window *window, t_ray *ray)
     if (ray->is_facing_right && ray_cast->xstep < 0)
         ray_cast->xstep *= -1;
     else
-        ray_cast->xstep *= 1;    
+        ray_cast->xstep *= 1;
 }
 
 void init_vert_cast(t_ray_cast *ray_var, t_window *window, t_ray *ray)
@@ -69,8 +63,8 @@ void init_vert_cast(t_ray_cast *ray_var, t_window *window, t_ray *ray)
         ray_var->xinter += TILE_SIZE;
     else
         ray_var->xinter += 0;
-    ray_var->yinter = window->player.y + \
-        (ray_var->xinter - window->player.x) * tan(ray->ray_angle);
+    ray_var->yinter = window->player.y +
+                      (ray_var->xinter - window->player.x) * tan(ray->ray_angle);
     ray_var->xstep = TILE_SIZE;
     if (ray->is_facing_left)
         ray_var->xstep *= -1;
@@ -81,7 +75,7 @@ void init_vert_cast(t_ray_cast *ray_var, t_window *window, t_ray *ray)
         ray_var->ystep *= -1;
     else
         ray_var->ystep *= 1;
-    if(ray->is_facing_down && ray_var->ystep < 0)
+    if (ray->is_facing_down && ray_var->ystep < 0)
         ray_var->ystep *= -1;
     else
         ray_var->ystep *= 1;

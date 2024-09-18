@@ -6,7 +6,7 @@
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 08:17:40 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/17 17:44:15 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/18 13:57:40 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,37 @@
 
 void handle_mouse_rotation(t_window *window)
 {
-    int x, y;
-    static int last_x = -1;
+    int x;
+    int y;
+    int delta_x;
     
     mlx_get_mouse_pos(window->mlx_con, &x, &y);
-    if (last_x == -1) 
-        last_x = x;
-    int delta_x = x - last_x;
-    window->player.rotation_angle += delta_x * 0.01;
+    delta_x = (x - WIDTH / 2) / 8;
+    window->player.rotation_angle += delta_x * 0.03;
     mlx_set_mouse_pos(window->mlx_con, WIDTH / 2, HEIGHT / 2);
-    last_x = WIDTH / 2;
 }
 
-
+// void handle_mouse_rotation(t_window *window)
+// {
+//     int x, y;
+//     static int last_x = 0;
+//     mlx_get_mouse_pos(window->mlx_con, &x, &y);
+//     window->player.rotation_angle += (x - last_x) * 0.01;
+//     last_x = x;
+// }
 void    loop_func(void *param)
 {
     t_window *window;
 
     window = (t_window *)param;
     update_player(window);
-    handle_mouse_rotation(window);
-    mlx_set_cursor_mode(window->mlx_con, MLX_MOUSE_HIDDEN);
+    if(window->is_mouse_on)
+    {
+        mlx_set_cursor_mode(window->mlx_con, MLX_MOUSE_HIDDEN);
+        handle_mouse_rotation(window);
+    }
+    else
+        mlx_set_cursor_mode(window->mlx_con, MLX_MOUSE_NORMAL);
     render(window);
 }
 
@@ -46,9 +56,10 @@ static void display_window(t_window *window)
     init_texture(window);
     init_sprint(window);
     window->sprite->enabled = false;
+    mlx_set_mouse_pos(window->mlx_con, WIDTH / 2, HEIGHT / 2);
     mlx_loop_hook(window->mlx_con, loop_func, window);
     mlx_loop_hook(window->mlx_con, ft_sprint, window);
-    listen_events(window);
+    mlx_key_hook(window->mlx_con, my_keyhook, window);
     mlx_loop(window->mlx_con);
 }
 
@@ -72,7 +83,6 @@ int main(int argc, char *argv[])
     map = safe_malloc(sizeof (t_map));
     map_init(map);
     check_read_map(argv[1], map);
-    // print_map(map);
     window.map = map;
     display_window(&window);
     return 0;

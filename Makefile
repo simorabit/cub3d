@@ -25,6 +25,9 @@ CFILES = main.c\
 		 src/parsing_utils.c\
 		 src/animation.c\
 		 src/init_sprint.c\
+		 src/update_player.c\
+		 src/utils_func.c\
+		 
 
 OBJ = $(patsubst %.c, %.o, $(CFILES))
 B_OBJ = $(patsubst %.c, %.o, $(BFILES))

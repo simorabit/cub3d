@@ -6,51 +6,11 @@
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 08:18:00 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/17 16:07:06 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/18 12:37:18 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Cub3d.h"
-
-bool is_hit_wall(t_window *window, double new_x, double new_y)
-{
-    // if(window->player.y < new_y)
-    //     new_y +=  PLAYER_SIZE / 2;
-    // else
-    //     new_y -=  PLAYER_SIZE / 2;
-    // if(window->player.x < new_x)
-    //     new_x +=  PLAYER_SIZE / 2;
-    // else
-    //     new_x -=  PLAYER_SIZE / 2;
-     if ((window->map->v_map[(int)new_y / TILE_SIZE][(int)(new_x) / TILE_SIZE] != '1') &&
-         (window->map->v_map[(int)(new_y + PLAYER_SIZE) / TILE_SIZE][(int)(new_x + PLAYER_SIZE) / TILE_SIZE] != 'D'))
-            return false;
-    else
-            return true;
-}
-
-void update_player(t_window *window)
-{
-    int move_step;
-    int strafe_step;
-    double new_x;
-    double new_y;
-
-    window->player.rotation_angle += (window->player.turn_direction * window->player.turn_speed);
-    move_step = window->player.walk_direction * window->player.walk_speed;
-    strafe_step = window->player.strafe_direction * window->player.walk_speed;
-    new_x = window->player.x + (cos(window->player.rotation_angle) * move_step) -
-            (sin(window->player.rotation_angle) * strafe_step);
-
-    new_y = window->player.y + (sin(window->player.rotation_angle) * move_step) +
-            (cos(window->player.rotation_angle) * strafe_step);
-
-    if(!is_hit_wall(window, new_x, new_y))
-    {
-        window->player.y = (new_y);
-        window->player.x = (new_x);
-    }
-}
 
 int close_handler(t_window *window)
 {
@@ -67,22 +27,47 @@ void player_direction(mlx_key_data_t keydata, int *key, int value)
     else
         *key = value;
 }
-// void handel_mouse(mlx_key_data_t keydata,t_window *window)
-// {
-//     if (keydata.action == MLX_RELEASE)
-//         mlx_set_cursor_mode(window->mlx_con, MLX_MOUSE_NORMAL);
-//     else
-//         mlx_set_cursor_mode(window->mlx_con, MLX_MOUSE_DISABLED);
-// }
 
-void handel_release_keys(t_window *window, mlx_key_data_t keydata)
+void open_door(t_window *window)
 {
-    if (keydata.key == MLX_KEY_W || keydata.key == MLX_KEY_S)
-        window->player.walk_direction = 0;
-    if (keydata.key == MLX_KEY_A || keydata.key == MLX_KEY_D)
-        window->player.strafe_direction = 0;
-    if (keydata.key == MLX_KEY_RIGHT || keydata.key == MLX_KEY_LEFT)
-        window->player.turn_direction = 0;
+    int new_x;
+    int new_y;
+    int i;
+
+    i = 0;
+    while (i < 100)
+    {
+        new_x = window->player.x + (cos(window->player.rotation_angle) * i);
+        new_y = window->player.y + (sin(window->player.rotation_angle) * i);
+        if (new_x > 0 && new_y > 0 && new_x < window->width && new_y < window->height \
+            && window->map->v_map[new_y / TILE_SIZE][new_x / TILE_SIZE] == 'D')
+        {
+            window->map->v_map[new_y / TILE_SIZE][new_x / TILE_SIZE] = 'C';
+            break ;
+        }
+        i++;
+    }
+}
+
+void close_door(t_window *window)
+{
+    int new_x;
+    int new_y;
+    int i;
+
+    i = TILE_SIZE + 1;
+    while (i < 100)
+    {
+        new_x = window->player.x + (cos(window->player.rotation_angle + 3) * i);
+        new_y = window->player.y + (sin(window->player.rotation_angle + 3) * i);
+        if (new_x > 0 && new_y > 0 && new_x < window->width && new_y < window->height \
+            && window->map->v_map[new_y / TILE_SIZE][new_x / TILE_SIZE] == 'C')
+        {
+            window->map->v_map[new_y / TILE_SIZE][new_x / TILE_SIZE] = 'D';
+            break ;
+        }
+        i++;
+    }
 }
 
 void my_keyhook(mlx_key_data_t keydata, void *param)
@@ -91,7 +76,15 @@ void my_keyhook(mlx_key_data_t keydata, void *param)
     
     if (keydata.key == MLX_KEY_ESCAPE)
         close_handler(window);
-    if (keydata.key == MLX_KEY_W)
+    if (keydata.key == MLX_KEY_O)
+        open_door(window);
+    else if (keydata.key == MLX_KEY_C)
+        close_door(window);
+    else if(keydata.key == MLX_KEY_M)
+        window->is_mouse_on = false;
+    else if(keydata.key == MLX_KEY_N)
+        window->is_mouse_on = true;
+    else if (keydata.key == MLX_KEY_W)
         player_direction(keydata, &window->player.walk_direction, 1); // Move forward
     else if (keydata.key == MLX_KEY_S)
         player_direction(keydata, &window->player.walk_direction, -1); // Move backward
@@ -103,11 +96,4 @@ void my_keyhook(mlx_key_data_t keydata, void *param)
         player_direction(keydata, &window->player.turn_direction, 1); // Turn right
     else if (keydata.key == MLX_KEY_LEFT)
         player_direction(keydata, &window->player.turn_direction, -1); // Turn left
-    if (keydata.action == MLX_RELEASE)
-        handel_release_keys(window, keydata);
-}
-
-void listen_events(t_window *window)
-{
-    mlx_key_hook(window->mlx_con, my_keyhook, window);
 }

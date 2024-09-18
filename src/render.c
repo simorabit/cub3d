@@ -6,19 +6,18 @@
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 08:18:28 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/16 14:34:38 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/18 11:46:03 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Cub3d.h"
 
-void draw_floor_ceiling(t_window *window)
+void    draw_floor_ceiling(t_window *window)
 {
     int x;
     int y;
 
     y = 0;
-
     while (y < HEIGHT)
     {
         x = 0;
@@ -34,11 +33,11 @@ void draw_floor_ceiling(t_window *window)
     }
 }
 
-void draw_player(t_window *window)
+void    draw_player(t_window *window)
 {
     int x;
     int y;
-    
+
     y = MINIMAP_WIDTH / 2;
     while (y < (MINIMAP_WIDTH / 2) + PLAYER_SIZE)
     {
@@ -48,22 +47,23 @@ void draw_player(t_window *window)
             if ((x - PLAYER_PIX_CENTER) * (x - PLAYER_PIX_CENTER) + \
                 (y - PLAYER_PIX_CENTER) * (y - PLAYER_PIX_CENTER) < \
                     PLAYER_R * PLAYER_R)
-                mlx_put_pixel(window->img, x, y, RED);
+                        mlx_put_pixel(window->img, x, y, RED);
             x++;
         }
         y++;
     }
 }
 
-void render_minimap(t_window *window, t_render_vars *re_vars, int x, int y)
+void    render_minimap(t_window *window, t_render_vars *re_vars, int x, int y)
 {
-    if (re_vars->mapY >= 0 && re_vars->mapX >= 0 &&
-        re_vars->mapY < window->map->height &&
-        re_vars->mapX < window->map->width)
+    if (re_vars->mapY >= 0 && re_vars->mapX >= 0 && \
+        re_vars->mapY < window->map->height && \
+            re_vars->mapX < window->map->width)
     {
-        if (window->map->v_map[re_vars->mapY][(re_vars->mapX)] == '1' || 
-        window->map->v_map[re_vars->mapY][(re_vars->mapX)] == 'D')
+        if (window->map->v_map[re_vars->mapY][(re_vars->mapX)] == '1')
             mlx_put_pixel(window->img, x, y, BLACK);
+        else if(window->map->v_map[re_vars->mapY][(re_vars->mapX)] == 'D')
+            mlx_put_pixel(window->img, x, y, BROWN);
         else
             mlx_put_pixel(window->img, x, y, 0xFFFFFFFF);
     }
