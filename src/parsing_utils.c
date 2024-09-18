@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
+/*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 16:22:48 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/17 17:42:01 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/18 10:07:51 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	ft_error(t_map *map, int flag)
 	else if (flag == 11)
 		ft_putstr_fd("Error\nColors are missing or missmatch\n", 2);
 	if(map != NULL)
-		free_map(map);//TODO update to free everything after;
+		free_map(map);
 	exit(EXIT_FAILURE);
 }
 

@@ -6,19 +6,20 @@
 /*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 16:25:18 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/13 09:28:35 by moel-fat         ###   ########.fr       */
+/*   Updated: 2024/09/18 11:27:32 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Cub3d.h"
 
-bool is_all_number(char *str)
+bool	is_all_number(char *str)
 {
 	int	i;
-	if(!str)
+
+	if (!str)
 		return (false);
 	i = 0;
-	while(str[i] == ' ')
+	while (str[i] == ' ')
 		i++;
 	while (str[i])
 	{
@@ -33,11 +34,13 @@ bool is_all_number(char *str)
 	return (true);
 }
 
-void count_RGB(char *rgb, t_map *map)
+void	count_rgb(char *rgb, t_map *map)
 {
-	int i = 0;
-	int count = 0;
+	int	i;
+	int	count;
 
+	i = 0;
+	count = 0;
 	while (rgb[i] != '\0')
 	{
 		if (rgb[i] == ',')
@@ -59,31 +62,32 @@ void	parse_rgb_values(char **tmp, t_color *color, t_map *map)
 	if (is_all_number(tmp[2]) == false)
 		ft_error(map, 6);
 	color->b = ft_atoi(tmp[2]);
-
-	if (color->r < 0 || color->r > 255 || color->g < 0 || color->g > 255 || color->b < 0 || color->b > 255)
+	if (color->r < 0 || color->r > 255 || color->g < 0 || color->g > 255
+		|| color->b < 0 || color->b > 255)
 		ft_error(map, 6);
 }
 
 char	**get_rgb_components(char *rgb, t_map *map)
 {
-	char *new_line;
-	char **tmp;
-	int i = 0;
+	char	*new_line;
+	char	**tmp;
+	int		i;
 
+	i = 0;
 	new_line = remove_new_line(rgb);
-	count_RGB(new_line, map);
+	count_rgb(new_line, map);
 	tmp = ft_split(new_line + 1, ',');
 	while (tmp[i] != NULL)
 		i++;
 	if (i != 3)
 		ft_error(map, 7);
 	free(new_line);
-	return tmp;
+	return (tmp);
 }
 
 void	get_rgb_value(char *rgb, t_map *map, char R)
 {
-	char **tmp;
+	char	**tmp;
 
 	tmp = get_rgb_components(rgb, map);
 	if (R == 'F')
