@@ -6,7 +6,7 @@
 /*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 08:12:50 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/18 10:00:42 by moel-fat         ###   ########.fr       */
+/*   Updated: 2024/09/19 15:49:09 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,16 @@ void	store_map(t_map *map)
 {
 	char	*line;
 	int		count;
+	bool	map_started;
 
 	count = 0;
+	map_started = false;
 	while (1)
 	{
 		line = get_next_line(map->map_fd);
 		if (line == NULL)
 			break ;
-		parse_line(line, map, &count);
+		parse_line(line, map, &count, &map_started);
 		free(line);
 	}
 	close(map->map_fd);

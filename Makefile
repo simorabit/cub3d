@@ -1,7 +1,7 @@
 .PHONY: all clean fclean re
 
 CC = cc
-FLAGS = #-Wall -Wextra -Werror -o3 #-g -fsanitize=address,undefined,float-divide-by-zero
+FLAGS = -Wall -Wextra -Werror -o3 #-g -fsanitize=address,undefined,float-divide-by-zero
 RM = rm -rf
 NAME = cub3D
 
@@ -28,7 +28,7 @@ CFILES = main.c\
 		 src/init_sprint.c\
 		 src/update_player.c\
 		 src/utils_func.c\
-		 
+
 
 OBJ = $(patsubst %.c, %.o, $(CFILES))
 B_OBJ = $(patsubst %.c, %.o, $(BFILES))
