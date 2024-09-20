@@ -6,7 +6,7 @@
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 08:18:28 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/19 11:14:42 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/20 09:32:26 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,17 +71,16 @@ void	render_minimap(t_window *window, t_render_vars *re_vars, int x, int y)
 		mlx_put_pixel(window->img, x, y, BLACK);
 }
 
-void	render(t_window *window)
+void	minimap(t_window *window)
 {
 	int				x;
 	int				y;
 	t_render_vars	re_vars;
 
-	draw_floor_ceiling(window);
-	rays_casting(window);
-	render_walls(window);
-	re_vars.xOffset = floor(((window->player.x / TILE_SIZE) * 16)) - CENTER_CIRCLE;
-	re_vars.yOffset = floor(((window->player.y / TILE_SIZE) * 16)) - CENTER_CIRCLE;
+	re_vars.xOffset = floor(((window->player.x / TILE_SIZE) * 16)) \
+		- CENTER_CIRCLE;
+	re_vars.yOffset = floor(((window->player.y / TILE_SIZE) * 16)) \
+		- CENTER_CIRCLE;
 	y = 10;
 	while (y < MINIMAP_WIDTH)
 	{
@@ -97,5 +96,13 @@ void	render(t_window *window)
 		}
 		y++;
 	}
+}
+
+void	render(t_window *window)
+{
+	draw_floor_ceiling(window);
+	rays_casting(window);
+	render_walls(window);
+	minimap(window);
 	draw_player(window);
 }
