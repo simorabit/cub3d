@@ -6,7 +6,7 @@
 /*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 16:19:14 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/18 11:21:28 by moel-fat         ###   ########.fr       */
+/*   Updated: 2024/09/19 16:54:33 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,15 @@ bool	check_if_map_is_valid(t_map *map)
 	int	i;
 	int	j;
 
-	i = 0;
-	while (i < map->height)
+	i = -1;
+	while (++i < map->height)
 	{
-		j = 0;
-		while (j < map->width)
+		j = -1;
+		while (++j < map->width)
 		{
-			if (map->v_map[i][j] == '0')
+			if (map->v_map[i][j] == '0' || map->v_map[i][j] == 'E' ||
+				map->v_map[i][j] == 'N' || map->v_map[i][j] == 'W' ||
+				map->v_map[i][j] == 'S')
 			{
 				if (i > 0 && map->v_map[i - 1][j] == 'x')
 					return (false);
@@ -31,12 +33,10 @@ bool	check_if_map_is_valid(t_map *map)
 					return (false);
 				if (j > 0 && map->v_map[i][j - 1] == 'x')
 					return (false);
-				if ((j < map->width) - 1 && map->v_map[i][j + 1] == 'x')
+				if (j < (map->width - 1) && map->v_map[i][j + 1] == 'x')
 					return (false);
 			}
-			j++;
 		}
-		i++;
 	}
 	return (true);
 }

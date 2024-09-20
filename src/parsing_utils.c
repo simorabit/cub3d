@@ -6,7 +6,7 @@
 /*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 16:22:48 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/18 10:07:51 by moel-fat         ###   ########.fr       */
+/*   Updated: 2024/09/19 16:14:39 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void free_map(t_map *map)
 {
     t_data *current;
     t_data *next;
-    
+
     if (map == NULL)
         return;
     current = map->data;
@@ -58,13 +58,13 @@ void	ft_error(t_map *map, int flag)
 	else if (flag == 2)
 		ft_putstr_fd("Error\nNo Map Exists OR Invalid File Extension", 2);
 	else if (flag == 3)
-		ft_putstr_fd("Error\nMap is not closed by walls or have extra elemnet", 2);
+		ft_putstr_fd("Error\nNot closed by walls or have extra elemnet", 2);
 	else if (flag == 4)
-		ft_putstr_fd("Error\nunwanted elemnet in the file", 2);
+		ft_putstr_fd("Error\nunwanted elemnet in the file or duplicate", 2);
 	else if (flag == 5)
-		ft_putstr_fd("Error\nfound empty line in inside the map", 2);
+		ft_putstr_fd("Error\nfound emptyline or unwanted element in map", 2);
 	else if (flag == 6)
-		ft_putstr_fd("Error\nInvalid RGB value must be between 0 and 255 with no spaces", 2);
+		ft_putstr_fd("Error\nInvalid RGB between 0 and 255 with no spaces", 2);
 	else if (flag == 7)
 		ft_putstr_fd("Error\nInvalid arguments for RGB format", 2);
 	else if (flag == 8)

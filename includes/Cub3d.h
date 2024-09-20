@@ -6,7 +6,7 @@
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 08:11:00 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/19 11:03:56 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/20 09:25:36 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,7 +206,7 @@ void		ft_sprint(void *param);
 void    	render(t_window *window);
 
 //events
-void		update_player(t_window *window);	
+void		update_player(t_window *window);
 void		my_keyhook(mlx_key_data_t keydata, void *param);
 
 //raycasting && ray_cast_utils
@@ -258,7 +258,8 @@ void		copy_map(t_map *map);
 char		*check_texture(char *str);
 bool		is_just_spaces(char *str);
 int			check_map_exists(char *file_name, t_map *map);
-void		parse_line(char *line, t_map *map, int *count);
+// void		parse_line(char *line, t_map *map, int *count);
+void		parse_line(char *line, t_map *map, int *count, bool *map_started);
 void		free_array(char **array);
 void		ft_print_error(t_map *map, char *str, int flag);
 void		check_doors(t_map *map);
