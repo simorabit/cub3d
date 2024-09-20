@@ -6,7 +6,7 @@
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 18:27:05 by mal-mora          #+#    #+#             */
-/*   Updated: 2024/09/20 14:48:18 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/20 16:31:06 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 bool	check_hits(t_window *window, int x_new, int y_new, int is_hits)
 {
 	if (is_hits)
-		return ((window->map->v_map[(int)y_new / TILE_SIZE][(int)x_new / \
-			TILE_SIZE] == '1' || window->map->v_map[(int)(y_new / \
-				TILE_SIZE)][(int)x_new / TILE_SIZE] == 'D'));
+		return ((window->map->v_map[y_new / TILE_SIZE][x_new  / \
+			TILE_SIZE] == '1' || window->map->v_map[(y_new / \
+				TILE_SIZE)][x_new / TILE_SIZE] == 'D'));
 	else 
-		return (window->map->v_map[(int)y_new / TILE_SIZE][(int)(x_new) / \
-			TILE_SIZE] != '1') && (window->map->v_map[(int)(y_new) / \
-				TILE_SIZE][(int)(x_new) / TILE_SIZE] != 'D');
+		return (window->map->v_map[y_new / TILE_SIZE][(x_new) / \
+			TILE_SIZE] != '1') && (window->map->v_map[(y_new) / \
+				TILE_SIZE][(x_new) / TILE_SIZE] != 'D');
 	return false;
 }
 

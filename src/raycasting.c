@@ -6,17 +6,17 @@
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 08:18:19 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/20 15:04:06 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/20 16:44:36 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Cub3d.h"
 
-bool	horizontal_casting(t_ray *ray, t_window *window)
+bool horizontal_casting(t_ray *ray, t_window *window)
 {
-	t_ray_cast	ray_var;
-	double		x_new;
-	double		y_new;
+	t_ray_cast ray_var;
+	double x_new;
+	double y_new;
 
 	init_horz_cast(&ray_var, window, ray);
 	while (ray_protection(ray_var, window))
@@ -35,17 +35,17 @@ bool	horizontal_casting(t_ray *ray, t_window *window)
 			return (true);
 		}
 		else
-			(1) && (ray_var.xinter += ray_var.xstep, \
-				ray_var.yinter += ray_var.ystep);
+			(1) && (ray_var.xinter += ray_var.xstep,
+					ray_var.yinter += ray_var.ystep);
 	}
 	return (false);
 }
 
-bool	verical_casting(t_ray *ray, t_window *window)
+bool verical_casting(t_ray *ray, t_window *window)
 {
-	t_ray_cast	ray_var;
-	double		x_new;
-	double		y_new;
+	t_ray_cast ray_var;
+	double x_new;
+	double y_new;
 
 	init_vert_cast(&ray_var, window, ray);
 	while (ray_protection(ray_var, window))
@@ -64,13 +64,13 @@ bool	verical_casting(t_ray *ray, t_window *window)
 			return (true);
 		}
 		else
-			(1) && (ray_var.xinter += ray_var.xstep, \
-				ray_var.yinter += ray_var.ystep);
+			(1) && (ray_var.xinter += ray_var.xstep,
+					ray_var.yinter += ray_var.ystep);
 	}
 	return (false);
 }
 
-void	init_ray(t_ray *ray, bool *find_hor, bool *find_ver, t_window *window)
+void init_ray(t_ray *ray, bool *find_hor, bool *find_ver, t_window *window)
 {
 	ray->wall_hit_x = 0;
 	ray->wall_hit_y = 0;
@@ -86,34 +86,26 @@ void	init_ray(t_ray *ray, bool *find_hor, bool *find_ver, t_window *window)
 		ray->is_facing_right = false;
 	ray->is_facing_left = !ray->is_facing_right;
 	ray->distance = 0;
-	if(ray->is_facing_down)
-		window->player.y += (PLAYER_SIZE);
-	if(ray->is_facing_up)
-		window->player.y -= (PLAYER_SIZE);
-	if(ray->is_facing_left)
-		window->player.x -= (PLAYER_SIZE);
-	if(ray->is_facing_right)
-		window->player.x += (PLAYER_SIZE);
 	*find_hor = horizontal_casting(ray, window);
 	*find_ver = verical_casting(ray, window);
 }
 
-void	ray_cast(t_ray *ray, t_window *window)
+void ray_cast(t_ray *ray, t_window *window)
 {
-	bool	find_h_wall;
-	bool	find_v_wall;
-	double	horz_distance;
-	double	vert_distance;
+	bool find_h_wall;
+	bool find_v_wall;
+	double horz_distance;
+	double vert_distance;
 
 	init_ray(ray, &find_h_wall, &find_v_wall, window);
 	horz_distance = DBL_MAX;
 	vert_distance = DBL_MAX;
 	if (find_h_wall)
-		horz_distance = calc_distance(window->player.x, window->player.y, \
-			ray->wall_hit_x, ray->wall_hit_y);
+		horz_distance = calc_distance(window->player.x, window->player.y,
+									  ray->wall_hit_x, ray->wall_hit_y);
 	if (find_v_wall)
-		vert_distance = calc_distance(window->player.x, window->player.y, \
-			ray->wall_hit_x_ver, ray->wall_hit_y_ver);
+		vert_distance = calc_distance(window->player.x, window->player.y,
+									  ray->wall_hit_x_ver, ray->wall_hit_y_ver);
 	if (horz_distance >= vert_distance)
 		ray->wall_hit_x = ray->wall_hit_x_ver;
 	if (horz_distance >= vert_distance)
@@ -126,10 +118,10 @@ void	ray_cast(t_ray *ray, t_window *window)
 	detect_door(ray, window);
 }
 
-void	rays_casting(t_window *window)
+void rays_casting(t_window *window)
 {
-	double	angle;
-	int		i;
+	double angle;
+	int i;
 
 	i = 0;
 	angle = (window->player.rotation_angle) - (FOV_ANGLE / 2);
