@@ -6,7 +6,7 @@
 /*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 08:11:00 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/19 15:27:53 by moel-fat         ###   ########.fr       */
+/*   Updated: 2024/09/20 16:09:43 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -264,5 +264,6 @@ void		ft_print_error(t_map *map, char *str, int flag);
 void		check_doors(t_map *map);
 void		display_hand(t_window *window);
 void		select_weapon(t_window *window, int frames, int weapen);
+void		is_not_empty(char **line, t_map *map);
 
 #endif

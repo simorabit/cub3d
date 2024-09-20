@@ -6,7 +6,7 @@
 /*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 16:25:18 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/18 11:27:32 by moel-fat         ###   ########.fr       */
+/*   Updated: 2024/09/20 15:43:19 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ char	**get_rgb_components(char *rgb, t_map *map)
 	new_line = remove_new_line(rgb);
 	count_rgb(new_line, map);
 	tmp = ft_split(new_line + 1, ',');
+	is_not_empty(tmp, map);
 	while (tmp[i] != NULL)
 		i++;
 	if (i != 3)

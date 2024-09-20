@@ -23,6 +23,7 @@ CFILES = main.c\
 		 src/parse_player.c\
 		 src/parse_textures.c\
 		 src/parsing_utils.c\
+		 src/parsing_utils1.c\
 		 src/animation.c\
 		 src/animation_utils.c\
 		 src/init_sprint.c\
