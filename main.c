@@ -6,7 +6,7 @@
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 08:17:40 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/18 16:31:04 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/20 09:14:43 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,14 @@ void handle_mouse_rotation(t_window *window)
     window->player.rotation_angle += delta_x * 0.03;
     mlx_set_mouse_pos(window->mlx_con, WIDTH / 2, HEIGHT / 2);
 }
-
+// void    re_init_window(t_window *window)
+// {
+//     mlx_delete_image(window->mlx_con, window->img);
+//     window->img = mlx_new_image(window->mlx_con, WIDTH, HEIGHT);
+//     if (!window->img)
+//         (write(2, "Error\n", 6), exit(1));
+// 	mlx_image_to_window(window->mlx_con ,window->img, 0, 0);
+// }
 // void handle_mouse_rotation(t_window *window)
 // {
 //     int x, y;
@@ -83,7 +90,6 @@ int main(int argc, char *argv[])
     map = safe_malloc(sizeof (t_map));
     map_init(map);
     check_read_map(argv[1], map);
-    print_map(map);
     window.map = map;
     display_window(&window);
     return 0;

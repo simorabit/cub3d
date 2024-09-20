@@ -6,7 +6,7 @@
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 08:18:19 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/18 11:41:46 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/18 18:13:50 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ bool	horizontal_casting(t_ray *ray, t_window *window)
 		x_new = ray_var.xinter;
 		if (y_new >= window->height || x_new >= window->width)
 			return (false);
-		if (check_hits(window, x_new, y_new))
+		if (check_hits(window, x_new, y_new, 1))
 		{
 			ray->wall_hit_x = ray_var.xinter;
 			ray->wall_hit_y = ray_var.yinter;
@@ -57,7 +57,7 @@ bool	verical_casting(t_ray *ray, t_window *window)
 		y_new = ray_var.yinter;
 		if (y_new >= window->height || x_new >= window->width)
 			return (false);
-		if (check_hits(window, x_new, y_new))
+		if (check_hits(window, x_new, y_new, 1))
 		{
 			ray->wall_hit_x_ver = ray_var.xinter;
 			ray->wall_hit_y_ver = ray_var.yinter;
