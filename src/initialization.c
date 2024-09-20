@@ -6,7 +6,7 @@
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 08:18:07 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/19 09:57:07 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/20 15:01:54 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	init_player(t_player *player, t_map *map)
 {
-	player->x = (map->player_x * TILE_SIZE) + (PLAYER_SIZE / 2);
-	player->y = (map->player_y * TILE_SIZE) + (PLAYER_SIZE / 2);
+	player->x = (map->player_x * TILE_SIZE);
+	player->y = (map->player_y * TILE_SIZE);
 	player->width = 10;
 	player->height = 10;
 	player->walk_direction = 0;
@@ -35,7 +35,7 @@ void	init_player(t_player *player, t_map *map)
 
 void	init_window(t_window *window)
 {
-	window->title = "CUB3D";
+	window->title = ft_strdup("CUB3D");
 	if (!window->title)
 	{
 		perror("Error in allocation");
@@ -60,7 +60,7 @@ void	init_window(t_window *window)
 
 void	init_texture(t_window *window)
 {
-	window->texture = malloc(sizeof(mlx_texture_t *) * 6);
+	window->texture = safe_malloc(sizeof(mlx_texture_t *) * 6);
 	window->texture[NORTH] = mlx_load_png(window->map->no);
 	window->texture[SOUTH] = mlx_load_png(window->map->so);
 	window->texture[EAST] = mlx_load_png(window->map->ea);

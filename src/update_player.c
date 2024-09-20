@@ -6,7 +6,7 @@
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 10:16:24 by mal-mora          #+#    #+#             */
-/*   Updated: 2024/09/18 18:25:49 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/20 14:34:04 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 bool	is_hit_wall(t_window *window, double new_x, double new_y)
 {
-	if (window->player.y < new_y)
-		new_y += PLAYER_SIZE / 2;
-	else
-		new_y -= PLAYER_SIZE / 2;
-	if (window->player.x < new_x)
-		new_x += PLAYER_SIZE / 2;
-	else
-		new_x -= PLAYER_SIZE / 2;
+	// if (window->player.y < new_y)
+	// 	new_y += PLAYER_SIZE / 3;
+	// else
+	// 	new_y -= PLAYER_SIZE / 3;
+	// if (window->player.x < new_x)
+	// 	new_x += PLAYER_SIZE / 3;
+	// else
+	// 	new_x -= PLAYER_SIZE / 3;
 	if (check_hits(window, new_x, new_y, 0))
 		return (false);
 	else
@@ -51,3 +51,4 @@ void	update_player(t_window *window)
 		window->player.x = new_x;
 	}
 }
+

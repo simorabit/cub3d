@@ -6,7 +6,7 @@
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 08:18:19 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/18 18:13:50 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/20 15:04:06 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,14 @@ void	init_ray(t_ray *ray, bool *find_hor, bool *find_ver, t_window *window)
 		ray->is_facing_right = false;
 	ray->is_facing_left = !ray->is_facing_right;
 	ray->distance = 0;
+	if(ray->is_facing_down)
+		window->player.y += (PLAYER_SIZE);
+	if(ray->is_facing_up)
+		window->player.y -= (PLAYER_SIZE);
+	if(ray->is_facing_left)
+		window->player.x -= (PLAYER_SIZE);
+	if(ray->is_facing_right)
+		window->player.x += (PLAYER_SIZE);
 	*find_hor = horizontal_casting(ray, window);
 	*find_ver = verical_casting(ray, window);
 }
@@ -124,7 +132,7 @@ void	rays_casting(t_window *window)
 	int		i;
 
 	i = 0;
-	angle = window->player.rotation_angle - (FOV_ANGLE / 2);
+	angle = (window->player.rotation_angle) - (FOV_ANGLE / 2);
 	while (i < WIDTH)
 	{
 		window->ray_list[i].ray_angle = normalize_angle(angle);

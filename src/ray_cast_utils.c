@@ -6,7 +6,7 @@
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 18:04:05 by mal-mora          #+#    #+#             */
-/*   Updated: 2024/09/18 18:09:15 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/20 15:08:31 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,9 @@ void	detect_door(t_ray *ray, t_window *window)
 		x_new--;
 	if (ray->is_facing_up && ray->was_hit_horz)
 		y_new--;
-	if (window->map->v_map[(int)y_new / TILE_SIZE][(int)x_new / \
+	printf("%f ", x_new, x_new / TILE_SIZE);
+	if (y_new > 0 && x_new > 0 && x_new < WIDTH && y_new < HEIGHT && \
+		window->map->v_map[(int)y_new / TILE_SIZE][(int)x_new / \
 		TILE_SIZE] == 'D')
 		ray->is_door = true;
 }
