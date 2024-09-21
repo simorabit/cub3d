@@ -6,30 +6,11 @@
 /*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 16:34:45 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/20 16:09:25 by moel-fat         ###   ########.fr       */
+/*   Updated: 2024/09/21 09:04:37 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Cub3d.h"
-
-void	remove_x(t_map *map)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < map->height)
-	{
-		j = 0;
-		while (j < map->width)
-		{
-			if (map->v_map[i][j] == 'x')
-				map->v_map[i][j] = '0';
-			j++;
-		}
-		i++;
-	}
-}
 
 void	copy_map_data(t_map *map, t_data *current)
 {
@@ -87,66 +68,44 @@ int	check_map_exists(char *file_name, t_map *map)
 	return (fd);
 }
 
-// void	parse_line(char *line, t_map *map, int *count)
-// {
-// 	char	*tmp;
+void	parse_line_helper(char *line, t_map *map, bool *map_started, char *tmp)
+{
+	if (ft_strncmp(tmp, "NO ", 3) == 0 && map->no == NULL)
+		map->no = ft_strdup(tmp);
+	else if (ft_strncmp(tmp, "SO ", 3) == 0 && map->so == NULL)
+		map->so = ft_strdup(tmp);
+	else if (ft_strncmp(tmp, "WE ", 3) == 0 && map->we == NULL)
+		map->we = ft_strdup(tmp);
+	else if (ft_strncmp(tmp, "EA ", 3) == 0 && map->ea == NULL)
+		map->ea = ft_strdup(tmp);
+	else if (ft_strncmp(tmp, "F ", 2) == 0 && map->floor.r == -1)
+		get_rgb_value(ft_strdup(tmp), map, 'F');
+	else if (ft_strncmp(tmp, "C ", 2) == 0 && map->ceiling.r == -1)
+		get_rgb_value(ft_strdup(tmp), map, 'C');
+	else if (ft_strncmp(tmp, "1", 1) == 0)
+	{
+		*map_started = true;
+		map->count_lines++;
+		ft_lstadd_backmap(&map->data, ft_lstnewmap(ft_strdup(line)));
+	}
+	else if (tmp[0] != '\n')
+		ft_error(map, 4);
+}
 
-// 	tmp = ft_strtrim(line, " ");
-// 	if (ft_strncmp(tmp, "NO ", 3) == 0 && map->no == NULL)
-// 		map->no = ft_strdup(tmp);
-// 	else if (ft_strncmp(tmp, "SO ", 3) == 0 && map->so == NULL)
-// 		map->so = ft_strdup(tmp);
-// 	else if (ft_strncmp(tmp, "WE ", 3) == 0 && map->we == NULL)
-// 		map->we = ft_strdup(tmp);
-// 	else if (ft_strncmp(tmp, "EA ", 3) == 0 && map->ea == NULL)
-// 		map->ea = ft_strdup(tmp);
-// 	else if (ft_strncmp(tmp, "F ", 2) == 0 && map->floor.r == -1)
-// 		get_rgb_value(ft_strdup(tmp), map, 'F');
-// 	else if (ft_strncmp(tmp, "C ", 2) == 0 && map->ceiling.r == -1)
-// 		get_rgb_value(ft_strdup(tmp), map, 'C');
-// 	else if (ft_strncmp(tmp, "1", 1) == 0 || tmp[0] == '\n')
-// 	{
-// 		(*count)++;
-// 		ft_lstadd_backmap(&map->data, ft_lstnewmap(ft_strdup(line)));
-// 	}
-// 	else if (tmp[0] != '\n')
-// 		(free(tmp), ft_error(map, 4));
-// 	free(tmp);
-// }
-
-void	parse_line(char *line, t_map *map, int *count, bool *map_started)
+void	parse_line(char *line, t_map *map, bool *map_started)
 {
 	char	*tmp;
 
 	tmp = ft_strtrim(line, " ");
 	if (!(*map_started))
 	{
-		if (ft_strncmp(tmp, "NO ", 3) == 0 && map->no == NULL)
-			map->no = ft_strdup(tmp);
-		else if (ft_strncmp(tmp, "SO ", 3) == 0 && map->so == NULL)
-			map->so = ft_strdup(tmp);
-		else if (ft_strncmp(tmp, "WE ", 3) == 0 && map->we == NULL)
-			map->we = ft_strdup(tmp);
-		else if (ft_strncmp(tmp, "EA ", 3) == 0 && map->ea == NULL)
-			map->ea = ft_strdup(tmp);
-		else if (ft_strncmp(tmp, "F ", 2) == 0 && map->floor.r == -1)
-			get_rgb_value(ft_strdup(tmp), map, 'F');
-		else if (ft_strncmp(tmp, "C ", 2) == 0 && map->ceiling.r == -1)
-			get_rgb_value(ft_strdup(tmp), map, 'C');
-		else if (ft_strncmp(tmp, "1", 1) == 0)
-		{
-			*map_started = true;
-			(*count)++;
-			ft_lstadd_backmap(&map->data, ft_lstnewmap(ft_strdup(line)));
-		}
-		else if (tmp[0] != '\n')
-			ft_error(map, 4);
+		parse_line_helper(line, map, map_started, tmp);
 	}
 	else
 	{
 		if (ft_strncmp(tmp, "1", 1) == 0 || tmp[0] == '\n')
 		{
-			(*count)++;
+			map->count_lines++;
 			ft_lstadd_backmap(&map->data, ft_lstnewmap(ft_strdup(line)));
 		}
 		else if (tmp[0] != '\n')

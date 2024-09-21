@@ -6,7 +6,7 @@
 /*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 15:47:09 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/20 15:53:36 by moel-fat         ###   ########.fr       */
+/*   Updated: 2024/09/21 09:03:24 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,27 @@ void	is_not_empty(char **line, t_map *map)
 	i = 0;
 	while (line[i] != NULL)
 	{
-		printf("%s\n", line[i]);
 		if (is_just_spaces(line[i]) == true)
 			ft_print_error(map, "Empty RGB value", -1);
+		i++;
+	}
+}
+
+void	remove_x(t_map *map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < map->height)
+	{
+		j = 0;
+		while (j < map->width)
+		{
+			if (map->v_map[i][j] == 'x')
+				map->v_map[i][j] = '0';
+			j++;
+		}
 		i++;
 	}
 }

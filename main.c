@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
+/*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 08:17:40 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/18 16:31:04 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/21 09:17:04 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void handle_mouse_rotation(t_window *window)
     int x;
     int y;
     int delta_x;
-    
+
     mlx_get_mouse_pos(window->mlx_con, &x, &y);
     delta_x = (x - WIDTH / 2) / 8;
     window->player.rotation_angle += delta_x * 0.03;
@@ -83,7 +83,7 @@ int main(int argc, char *argv[])
     map = safe_malloc(sizeof (t_map));
     map_init(map);
     check_read_map(argv[1], map);
-    print_map(map);
+    // print_map(map);
     window.map = map;
     display_window(&window);
     return 0;

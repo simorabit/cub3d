@@ -6,7 +6,7 @@
 /*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 08:12:50 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/19 15:49:09 by moel-fat         ###   ########.fr       */
+/*   Updated: 2024/09/21 08:57:12 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	map_init(t_map *map)
 	map->map_fd = 0;
 	map->data = NULL;
 	map->player_count = 0;
+	map->count_lines = 0;
 }
 
 void	parse_map(t_map *map)
@@ -73,11 +74,11 @@ void	store_map(t_map *map)
 		line = get_next_line(map->map_fd);
 		if (line == NULL)
 			break ;
-		parse_line(line, map, &count, &map_started);
+		parse_line(line, map, &map_started);
 		free(line);
 	}
 	close(map->map_fd);
-	map->height = count;
+	map->height = map->count_lines;
 	parse_map(map);
 }
 
