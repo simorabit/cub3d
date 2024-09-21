@@ -6,11 +6,11 @@
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 08:18:19 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/21 09:26:49 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/21 12:07:35 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/Cub3d.h"
+#include "../includes/cub3d.h"
 
 bool	horizontal_casting(t_ray *ray, t_window *window)
 {
@@ -98,8 +98,8 @@ void	ray_cast(t_ray *ray, t_window *window)
 	double	vert_distance;
 
 	init_ray(ray, &find_h_wall, &find_v_wall, window);
-	horz_distance = DBL_MAX;
-	vert_distance = DBL_MAX;
+	horz_distance = INT_MAX;
+	vert_distance = INT_MAX;
 	if (find_h_wall)
 		horz_distance = calc_distance(window->player.x, window->player.y, \
 			ray->wall_hit_x, ray->wall_hit_y);
@@ -124,12 +124,12 @@ void	rays_casting(t_window *window)
 	int		i;
 
 	i = 0;
-	angle = (window->player.rotation_angle) - (FOV_ANGLE / 2);
+	angle = (window->player.rotation_angle) - (window->fov_angle / 2);
 	while (i < WIDTH)
 	{
 		window->ray_list[i].ray_angle = normalize_angle(angle);
 		ray_cast(&window->ray_list[i], window);
 		i++;
-		angle += FOV_ANGLE / WIDTH;
+		angle += window->fov_angle / WIDTH;
 	}
 }

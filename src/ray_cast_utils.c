@@ -6,11 +6,11 @@
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 18:04:05 by mal-mora          #+#    #+#             */
-/*   Updated: 2024/09/20 16:03:07 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/21 09:55:45 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/Cub3d.h"
+#include "../includes/cub3d.h"
 
 int	get_step(double dx, double dy)
 {

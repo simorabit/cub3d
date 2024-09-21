@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   list_making.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 13:32:47 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/18 11:29:00 by moel-fat         ###   ########.fr       */
+/*   Updated: 2024/09/21 09:55:45 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/Cub3d.h"
+#include "../includes/cub3d.h"
 
 int	ft_lstsizemap(t_data *lst)
 {

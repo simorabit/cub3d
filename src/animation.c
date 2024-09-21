@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   animation.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 10:07:20 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/18 15:56:56 by moel-fat         ###   ########.fr       */
+/*   Updated: 2024/09/21 09:55:45 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/Cub3d.h"
+#include "../includes/cub3d.h"
 
 void	re_load_images2(t_window *window, mlx_texture_t **textures
 	, mlx_image_t **images, int num_frames)

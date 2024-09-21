@@ -6,11 +6,11 @@
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 18:29:24 by mal-mora          #+#    #+#             */
-/*   Updated: 2024/09/18 18:37:45 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/21 09:55:45 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/Cub3d.h"
+#include "../includes/cub3d.h"
 
 void	calculate_correct_distance(t_window *window, int i)
 {

@@ -6,11 +6,11 @@
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 08:18:28 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/21 09:28:09 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/21 10:31:30 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/Cub3d.h"
+#include "../includes/cub3d.h"
 
 void	draw_floor_ceiling(t_window *window)
 {
@@ -46,7 +46,7 @@ void	draw_player(t_window *window)
 		{
 			if ((x - PLAYER_PIX_CENTER) * (x - PLAYER_PIX_CENTER) + \
 				(y - PLAYER_PIX_CENTER) * (y - PLAYER_PIX_CENTER) < \
-					PLAYER_R * PLAYER_R)
+					(PLAYER_SIZE / 2) * (PLAYER_SIZE / 2))
 				mlx_put_pixel(window->img, x, y, RED);
 			x++;
 		}
@@ -56,13 +56,13 @@ void	draw_player(t_window *window)
 
 void	render_minimap(t_window *window, t_render_vars *re_vars, int x, int y)
 {
-	if (re_vars->mapY >= 0 && re_vars->mapX >= 0 && \
-		re_vars->mapY < window->map->height && \
-			re_vars->mapX < window->map->width)
+	if (re_vars->map_y >= 0 && re_vars->map_x >= 0 && \
+		re_vars->map_y < window->map->height && \
+			re_vars->map_x < window->map->width)
 	{
-		if (window->map->v_map[re_vars->mapY][(re_vars->mapX)] == '1')
+		if (window->map->v_map[re_vars->map_y][(re_vars->map_x)] == '1')
 			mlx_put_pixel(window->img, x, y, BLACK);
-		else if (window->map->v_map[re_vars->mapY][(re_vars->mapX)] == 'D')
+		else if (window->map->v_map[re_vars->map_y][(re_vars->map_x)] == 'D')
 			mlx_put_pixel(window->img, x, y, BROWN);
 		else
 			mlx_put_pixel(window->img, x, y, 0xFFFFFFFF);
@@ -77,9 +77,9 @@ void	minimap(t_window *window)
 	int				y;
 	t_render_vars	re_vars;
 
-	re_vars.xOffset = floor(((window->player.x / TILE_SIZE) * 16)) \
+	re_vars.x_offset = floor(((window->player.x / TILE_SIZE) * 16)) \
 		- CENTER_CIRCLE;
-	re_vars.yOffset = floor(((window->player.y / TILE_SIZE) * 16)) \
+	re_vars.y_offset = floor(((window->player.y / TILE_SIZE) * 16)) \
 		- CENTER_CIRCLE;
 	y = 10;
 	while (y < MINIMAP_WIDTH)
@@ -87,10 +87,10 @@ void	minimap(t_window *window)
 		x = 10;
 		while (x < MINIMAP_HEIGHT)
 		{
-			re_vars.mapX = (x + re_vars.xOffset) / 16;
-			re_vars.mapY = (y + re_vars.yOffset) / 16;
+			re_vars.map_x = (x + re_vars.x_offset) / 16;
+			re_vars.map_y = (y + re_vars.y_offset) / 16;
 			if ((x - CENTER_CIRCLE) * (x - CENTER_CIRCLE) + \
-				(y - CENTER_CIRCLE) * (y - CENTER_CIRCLE) < RADIUS_X2)
+				(y - CENTER_CIRCLE) * (y - CENTER_CIRCLE) < RADIUS * RADIUS)
 				render_minimap(window, &re_vars, x, y);
 			x++;
 		}

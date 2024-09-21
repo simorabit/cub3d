@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 08:11:00 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/21 09:45:17 by moel-fat         ###   ########.fr       */
+/*   Updated: 2024/09/21 12:07:13 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,56 +14,49 @@
 # define CUB3D_H
 # include <stdio.h>
 # include <unistd.h>
-# include <fcntl.h>
 # include <math.h>
 # include "../MLX42/include/MLX42/MLX42.h"
 # include <stdbool.h>
 # include "../libft/libft.h"
 # include <stdlib.h>
 # include <string.h>
-#include <float.h>
 
 # define HEIGHT  			900
 # define WIDTH  			1600
 # define CENTER_CIRCLE 		110
 # define RADIUS 			100
-# define RADIUS_X2			(RADIUS * RADIUS)
 # define MINIMAP_WIDTH 		210
 # define MINIMAP_HEIGHT 	210
 # define PLAYER_SIZE     	9
-# define PLAYER_R			(PLAYER_SIZE / 2)
 # define PLAYER_PIX_CENTER	110
 # define PLAYER_SPEED		40
 
 //colors
-# define BLACK  0x000000FF
-# define WHITE  0xFFFFFFFF
-# define RED    0xFF0000FF
-# define GRAY   0x36454FFF
-# define Maroon 0xFF800000
-# define Gold	0xFFEE82EE
-#define BROWN 	0x964B00FF
+# define BLACK	0x000000FF
+# define WHITE	0xFFFFFFFF
+# define RED	0xFF0000FF
+# define GRAY	0x36454FFF
+# define BROWN	0x964B00FF
+
 //Keys
-# define KEY_PRESS		2
-#define TILE_SIZE       32
-#define MAP_NUM_ROWS    14
-#define MAP_NUM_COLS    32
-#define PI              3.14159265
-#define FOV_ANGLE       (60 * (PI / 180))
-#define SCALE_FACTOR    0.2
+# define KEY_PRESS			2
+# define TILE_SIZE			32
+# define MAP_NUM_ROWS		14
+# define MAP_NUM_COLS		32
+# define SCALE_FACTOR		0.2
 
 typedef struct s_data
 {
 	char			*data;
 	struct s_data	*next;
-} t_data;
+}	t_data;
 
 typedef struct s_render_vars
 {
-	int mapX;
-	int	mapY;
-    int xOffset;
-	int	yOffset;
+	int	map_x;
+	int	map_y;
+	int	x_offset;
+	int	y_offset;
 }	t_render_vars;
 
 typedef struct s_color
@@ -71,15 +64,15 @@ typedef struct s_color
 	int		r;
 	int		g;
 	int		b;
-}t_color;
+}	t_color;
 
 typedef struct s_ray_cast
 {
-	double yinter;
-    double xinter;
-    double xstep;
-    double ystep;
-} t_ray_cast;
+	double	yinter;
+	double	xinter;
+	double	xstep;
+	double	ystep;
+}	t_ray_cast;
 
 typedef struct s_map
 {
@@ -87,20 +80,20 @@ typedef struct s_map
 	char	*so;
 	char	*we;
 	char	*ea;
-	t_color floor;
-	t_color ceiling;
+	t_color	floor;
+	t_color	ceiling;
 	char	**map;
-	char 	**v_map;
+	char	**v_map;
 	int		height;
 	int		width;
-	int 	player_dir;
+	int		player_dir;
 	int		player_x;
 	int		player_y;
 	int		player_count;
 	int		map_fd;
 	int		count_lines;
 	t_data	*data;
-}t_map;
+}	t_map;
 
 typedef struct s_image
 {
@@ -111,71 +104,67 @@ typedef struct s_image
 	int		endian;
 }	t_image;
 
-typedef struct  s_ray
+typedef struct s_ray
 {
-    double distance;
-    double ray_angle;
-    double wall_stripe_height;
-    double wall_hit_x;
-    double wall_hit_y;
+	double	distance;
+	double	ray_angle;
+	double	wall_stripe_height;
+	double	wall_hit_x;
+	double	wall_hit_y;
 	bool	is_door;
-    bool    is_facing_up;
-    bool    is_facing_down;
-    bool    is_facing_right;
-    bool    is_facing_left;
-    bool    was_hit_horz;
+	bool	is_facing_up;
+	bool	is_facing_down;
+	bool	is_facing_right;
+	bool	is_facing_left;
+	bool	was_hit_horz;
 	double	wall_hit_x_ver;
 	double	wall_hit_y_ver;
-} t_ray;
+}	t_ray;
 
-typedef struct  s_player
+typedef struct s_player
 {
-    double  	x;
-    double  	y;
-    int			width;
-    int			height;
-    int     	turn_direction;
-    int     	walk_direction;
-	int     	strafe_direction;
-    double  	rotation_angle;
-    double  	walk_speed;
-    double  	turn_speed;
-} t_player;
+	double		x;
+	double		y;
+	int			width;
+	int			height;
+	int			turn_direction;
+	int			walk_direction;
+	int			strafe_direction;
+	double		rotation_angle;
+	double		walk_speed;
+	double		turn_speed;
+}	t_player;
 
 typedef struct s_sprint
 {
 	mlx_texture_t	**sword;
 	mlx_image_t		**sword_i;
-
 	mlx_texture_t	**pickaxe;
 	mlx_image_t		**pickaxe_i;
-
 	mlx_texture_t	**axe;
 	mlx_image_t		**axe_images;
-
-	mlx_texture_t	*Hand;
-	mlx_image_t		*Hand_image;
-
+	mlx_texture_t	*hand;
+	mlx_image_t		*hand_image;
 	mlx_image_t		**current_animation_images;
 	int				whatison;
 	int				num_frames;
 	bool			num_frames_set;
-	bool 			hand_on;
-	bool 			enabled;
-} t_sprite;
+	bool			hand_on;
+	bool			enabled;
+}	t_sprite;
 
 typedef struct s_window
 {
-	mlx_t        	*mlx_con;
-	void        	*mlx_window;
-	mlx_image_t     *img;
-    t_map			*map;
+	mlx_t			*mlx_con;
+	void			*mlx_window;
+	mlx_image_t		*img;
+	t_map			*map;
 	char			**my_map;
-	char        	*title;
+	char			*title;
 	int				width;
 	int				height;
-	int 			ray_index;//just for norm
-	int				direction;//just for norm
+	int				ray_index;
+	int				direction;
 	uint32_t		floor_color;
 	uint32_t		ceiling_color;
 	mlx_texture_t	**texture;
@@ -183,8 +172,9 @@ typedef struct s_window
 	bool			is_door;
 	bool			is_key_press;
 	bool			is_mouse_on;
-    t_player    	player;
-    t_ray       	ray_list[WIDTH + 1];
+	t_player		player;
+	double			fov_angle;
+	t_ray			ray_list[WIDTH + 1];
 }	t_window;
 
 enum e_direction
@@ -204,7 +194,7 @@ void		init_sprint(t_window *window);
 void		ft_sprint(void *param);
 
 //render
-void    	render(t_window *window);
+void		render(t_window *window);
 
 //events
 void		update_player(t_window *window);
@@ -233,9 +223,9 @@ uint32_t	get_pixel_color(mlx_texture_t *texture, uint32_t x, uint32_t y);
 uint32_t	ft_rgba(uint8_t r, uint8_t g, uint8_t b, uint8_t a);
 
 //utils_func
-bool check_hits(t_window *window, int x_new, int y_new, int is_hits);
-bool ray_protection(t_ray_cast ray_var, t_window *window);
-void handle_mouse_rotation(t_window *window);
+bool		check_hits(t_window *window, int x_new, int y_new, int is_hits);
+bool		ray_protection(t_ray_cast ray_var, t_window *window);
+void		handle_mouse_rotation(t_window *window);
 //parsing
 void		map_init(t_map *map);
 void		check_read_map(char *filename, t_map *map);

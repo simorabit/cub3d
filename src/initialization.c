@@ -6,11 +6,11 @@
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 08:18:07 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/21 09:40:48 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/21 13:29:35 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/Cub3d.h"
+#include "../includes/cub3d.h"
 
 void	init_player(t_player *player, t_map *map)
 {
@@ -22,7 +22,7 @@ void	init_player(t_player *player, t_map *map)
 	player->turn_direction = 0;
 	player->strafe_direction = 0;
 	player->walk_speed = 6;
-	player->turn_speed = 4 * (M_PI / 180);
+	player->turn_speed = 5 * (M_PI / 180);
 	if (map->player_dir == NORTH)
 		player->rotation_angle = 3 * (M_PI / 2);
 	else if (map->player_dir == EAST)
@@ -55,12 +55,13 @@ void	init_window(t_window *window)
 	mlx_image_to_window(window->mlx_con, window->img, 0, 0);
 	window->ceiling_color = convert_color(&window->map->floor);
 	window->floor_color = convert_color(&window->map->ceiling);
-	window->is_mouse_on = true;
+	window->is_mouse_on = false;
+	window->fov_angle = (60 * (M_PI / 180));
 }
 
 void	init_texture(t_window *window)
 {
-	window->texture = malloc(sizeof(mlx_texture_t *) * 6);
+	window->texture = safe_malloc(sizeof(mlx_texture_t *) * 6);
 	window->texture[NORTH] = mlx_load_png(window->map->no);
 	window->texture[SOUTH] = mlx_load_png(window->map->so);
 	window->texture[EAST] = mlx_load_png(window->map->ea);

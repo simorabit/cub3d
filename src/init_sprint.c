@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init_sprint.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 12:40:59 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/18 13:44:16 by moel-fat         ###   ########.fr       */
+/*   Updated: 2024/09/21 11:32:00 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/Cub3d.h"
+#include "../includes/cub3d.h"
 
 void	init_sword(t_window *window)
 {
@@ -91,16 +91,14 @@ void	init_axe(t_window *window)
 
 void	init_hand(t_window *window)
 {
-	window->sprite->Hand = safe_malloc(sizeof(mlx_texture_t));
-	window->sprite->Hand_image = safe_malloc(sizeof(mlx_image_t));
-	window->sprite->Hand = mlx_load_png("assets/hand.png");
-	if (!window->sprite->Hand)
+	window->sprite->hand = mlx_load_png("assets/hand.png");
+	if (!window->sprite->hand)
 		ft_error(window->map, 6);
-	window->sprite->Hand_image = mlx_texture_to_image(window->mlx_con,
-			window->sprite->Hand);
-	if (!window->sprite->Hand_image)
+	window->sprite->hand_image = mlx_texture_to_image(window->mlx_con,
+			window->sprite->hand);
+	if (!window->sprite->hand_image)
 		ft_error(window->map, 6);
-	if (!mlx_resize_image(window->sprite->Hand_image, WIDTH, HEIGHT))
+	if (!mlx_resize_image(window->sprite->hand_image, WIDTH, HEIGHT))
 		ft_error(window->map, 6);
 }
 
