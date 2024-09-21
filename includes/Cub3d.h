@@ -6,7 +6,7 @@
 /*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 08:11:00 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/21 08:56:03 by moel-fat         ###   ########.fr       */
+/*   Updated: 2024/09/21 09:45:17 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@
 # define RADIUS_X2			(RADIUS * RADIUS)
 # define MINIMAP_WIDTH 		210
 # define MINIMAP_HEIGHT 	210
-# define PLAYER_SIZE     	10
+# define PLAYER_SIZE     	9
 # define PLAYER_R			(PLAYER_SIZE / 2)
 # define PLAYER_PIX_CENTER	110
-# define PLAYER_SPEED		20
+# define PLAYER_SPEED		40
 
 //colors
 # define BLACK  0x000000FF
@@ -181,6 +181,7 @@ typedef struct s_window
 	mlx_texture_t	**texture;
 	t_sprite		*sprite;
 	bool			is_door;
+	bool			is_key_press;
 	bool			is_mouse_on;
     t_player    	player;
     t_ray       	ray_list[WIDTH + 1];
@@ -232,7 +233,7 @@ uint32_t	get_pixel_color(mlx_texture_t *texture, uint32_t x, uint32_t y);
 uint32_t	ft_rgba(uint8_t r, uint8_t g, uint8_t b, uint8_t a);
 
 //utils_func
-bool check_hits(t_window *window, int x_new, int y_new);
+bool check_hits(t_window *window, int x_new, int y_new, int is_hits);
 bool ray_protection(t_ray_cast ray_var, t_window *window);
 void handle_mouse_rotation(t_window *window);
 //parsing

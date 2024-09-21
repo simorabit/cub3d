@@ -6,7 +6,7 @@
 /*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 08:17:40 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/21 09:17:04 by moel-fat         ###   ########.fr       */
+/*   Updated: 2024/09/21 09:44:04 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,12 @@ void handle_mouse_rotation(t_window *window)
 
     mlx_get_mouse_pos(window->mlx_con, &x, &y);
     delta_x = (x - WIDTH / 2) / 8;
-    window->player.rotation_angle += delta_x * 0.03;
+    window->player.rotation_angle += delta_x * 0.01;
+    if (window->player.rotation_angle < 0)
+        window->player.rotation_angle = 0;
     mlx_set_mouse_pos(window->mlx_con, WIDTH / 2, HEIGHT / 2);
 }
 
-// void handle_mouse_rotation(t_window *window)
-// {
-//     int x, y;
-//     static int last_x = 0;
-//     mlx_get_mouse_pos(window->mlx_con, &x, &y);
-//     window->player.rotation_angle += (x - last_x) * 0.01;
-//     last_x = x;
-// }
 void    loop_func(void *param)
 {
     t_window *window;
@@ -41,8 +35,8 @@ void    loop_func(void *param)
     update_player(window);
     if(window->is_mouse_on)
     {
-        mlx_set_cursor_mode(window->mlx_con, MLX_MOUSE_HIDDEN);
         handle_mouse_rotation(window);
+        mlx_set_cursor_mode(window->mlx_con, MLX_MOUSE_HIDDEN);
     }
     else
         mlx_set_cursor_mode(window->mlx_con, MLX_MOUSE_NORMAL);
