@@ -6,7 +6,7 @@
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 08:18:07 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/20 17:52:12 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/21 09:40:48 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,5 @@ void	init_texture(t_window *window)
 	if (!window->texture[NORTH] || !window->texture[SOUTH] || \
 		!window->texture[EAST] || !window->texture[WEST] || \
 			!window->texture[DOOR])
-			ft_print_error(window->map, "check the png file pls", -1);
+		ft_print_error(window->map, "check the png file pls", -1);
 }
