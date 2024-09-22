@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ray_cast_utils.c                                   :+:      :+:    :+:   */
+/*   ray_cast_utils_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 18:04:05 by mal-mora          #+#    #+#             */
-/*   Updated: 2024/09/22 11:07:17 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/22 12:37:39 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../includes/cub3d_bonus.h"
 
 int	get_step(double dx, double dy)
 {
@@ -18,6 +18,23 @@ int	get_step(double dx, double dy)
 		return (fabs(dx));
 	else
 		return (fabs(dy));
+}
+
+void	detect_door(t_ray *ray, t_window *window)
+{
+	int	x_new;
+	int	y_new;
+
+	x_new = ray->wall_hit_x;
+	y_new = ray->wall_hit_y;
+	if (ray->is_facing_left && !ray->was_hit_horz)
+		x_new--;
+	if (ray->is_facing_up && ray->was_hit_horz)
+		y_new--;
+	if (y_new > 0 && x_new > 0 && x_new < WIDTH && y_new < HEIGHT && \
+		window->map->v_map[(int)y_new / TILE_SIZE][(int)x_new / \
+		TILE_SIZE] == 'D')
+		ray->is_door = true;
 }
 
 double	normalize_angle(double angle)

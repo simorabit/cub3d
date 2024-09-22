@@ -6,14 +6,16 @@
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 08:17:51 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/22 11:05:32 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/22 10:39:31 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../includes/cub3d_bonus.h"
 
 int	get_wall_direction(t_ray *ray)
 {
+	if (ray->is_door)
+		return (DOOR);
 	if (ray->was_hit_horz)
 	{
 		if (ray->is_facing_up)

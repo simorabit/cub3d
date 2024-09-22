@@ -6,11 +6,11 @@
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 12:40:59 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/21 11:32:00 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/22 10:39:31 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../includes/cub3d_bonus.h"
 
 void	init_sword(t_window *window)
 {

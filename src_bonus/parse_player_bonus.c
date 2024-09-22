@@ -6,11 +6,40 @@
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 16:18:08 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/22 13:27:36 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/22 10:39:31 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../includes/cub3d_bonus.h"
+
+void	check_doors(t_map *map)
+{
+	int	x;
+	int	y;
+	int	h;
+	int	v;
+
+	y = 1;
+	while (map->v_map[y] != NULL)
+	{
+		x = 1;
+		while (map->v_map[y][x] != '\0')
+		{
+			if (map->v_map[y][x] == 'D')
+			{
+				h = (map->v_map[y][x + 1] == '1'
+						&& map->v_map[y][x - 1] == '1');
+				v = (map->v_map[y + 1] != NULL && map->v_map[y - 1] != NULL
+						&& map->v_map[y + 1][x] == '1'
+						&& map->v_map[y - 1][x] == '1');
+				if (!h && !v)
+					ft_print_error(map, "Doors not surrounded by walls", -1);
+			}
+			x++;
+		}
+		y++;
+	}
+}
 
 void	check_deriction(t_map *map, char c)
 {

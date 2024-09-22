@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   update_player.c                                    :+:      :+:    :+:   */
+/*   update_player_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 10:16:24 by mal-mora          #+#    #+#             */
-/*   Updated: 2024/09/22 13:44:29 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/22 12:45:24 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../includes/cub3d_bonus.h"
 
 bool	is_hit_wall(t_window *window, double new_x, double new_y)
 {

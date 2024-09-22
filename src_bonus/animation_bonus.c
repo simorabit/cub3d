@@ -6,11 +6,11 @@
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 10:07:20 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/21 09:55:45 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/22 10:39:31 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../includes/cub3d_bonus.h"
 
 void	re_load_images2(t_window *window, mlx_texture_t **textures
 	, mlx_image_t **images, int num_frames)

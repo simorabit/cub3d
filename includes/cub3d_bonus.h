@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 08:11:00 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/22 14:10:51 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/22 13:25:31 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef CUB3D_BONUS_H
+# define CUB3D_BONUS_H
 # include <stdio.h>
 # include <unistd.h>
 # include <math.h>
@@ -23,7 +23,12 @@
 
 # define HEIGHT  			900
 # define WIDTH  			1600
+# define CENTER_CIRCLE 		110
+# define RADIUS 			100
+# define MINIMAP_WIDTH 		210
+# define MINIMAP_HEIGHT 	210
 # define PLAYER_SIZE     	9
+# define PLAYER_PIX_CENTER	110
 # define PLAYER_SPEED		40
 
 //colors
@@ -106,6 +111,7 @@ typedef struct s_ray
 	double	wall_stripe_height;
 	double	wall_hit_x;
 	double	wall_hit_y;
+	bool	is_door;
 	bool	is_facing_up;
 	bool	is_facing_down;
 	bool	is_facing_right;
@@ -129,6 +135,24 @@ typedef struct s_player
 	double		turn_speed;
 }	t_player;
 
+typedef struct s_sprint
+{
+	mlx_texture_t	**sword;
+	mlx_image_t		**sword_i;
+	mlx_texture_t	**pickaxe;
+	mlx_image_t		**pickaxe_i;
+	mlx_texture_t	**axe;
+	mlx_image_t		**axe_images;
+	mlx_texture_t	*hand;
+	mlx_image_t		*hand_image;
+	mlx_image_t		**current_animation_images;
+	int				whatison;
+	int				num_frames;
+	bool			num_frames_set;
+	bool			hand_on;
+	bool			enabled;
+}	t_sprite;
+
 typedef struct s_window
 {
 	mlx_t			*mlx_con;
@@ -144,7 +168,10 @@ typedef struct s_window
 	uint32_t		floor_color;
 	uint32_t		ceiling_color;
 	mlx_texture_t	**texture;
+	t_sprite		*sprite;
+	bool			is_door;
 	bool			is_key_press;
+	bool			is_mouse_on;
 	t_player		player;
 	double			fov_angle;
 	t_ray			ray_list[WIDTH + 1];
@@ -156,12 +183,15 @@ enum e_direction
 	SOUTH,
 	EAST,
 	WEST,
+	DOOR
 };
 
 //initialization
 void		init_window(t_window *window);
 void		init_player(t_player *player, t_map *map);
 void		init_texture(t_window *window);
+void		init_sprint(t_window *window);
+void		ft_sprint(void *param);
 
 //render
 void		render(t_window *window);
@@ -195,6 +225,7 @@ uint32_t	ft_rgba(uint8_t r, uint8_t g, uint8_t b, uint8_t a);
 //utils_func
 bool		check_hits(t_window *window, int x_new, int y_new, int is_hits);
 bool		ray_protection(t_ray_cast ray_var, t_window *window);
+void		handle_mouse_rotation(t_window *window);
 //parsing
 void		map_init(t_map *map);
 void		check_read_map(char *filename, t_map *map);
@@ -218,10 +249,10 @@ void		copy_map(t_map *map);
 char		*check_texture(char *str);
 bool		is_just_spaces(char *str);
 int			check_map_exists(char *file_name, t_map *map);
-// void		parse_line(char *line, t_map *map, int *count);
 void		parse_line(char *line, t_map *map, bool *map_started);
 void		free_array(char **array);
 void		ft_print_error(t_map *map, char *str, int flag);
+void		check_doors(t_map *map);
 void		display_hand(t_window *window);
 void		select_weapon(t_window *window, int frames, int weapen);
 void		is_not_empty(char **line, t_map *map);

@@ -1,11 +1,24 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/09/22 14:13:48 by mal-mora          #+#    #+#              #
+#    Updated: 2024/09/22 14:13:52 by mal-mora         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 .PHONY: all clean fclean re
 
 CC = cc
-FLAGS = #-Wall -Wextra -Werror -o3 #-g -fsanitize=address,undefined,float-divide-by-zero
+FLAGS = -Wall -Wextra -Werror -o3
 RM = rm -rf
 NAME = cub3D
+B_NAME = cub3D_bonus
 
-CFILES = main.c\
+CFILES = cub3d.c\
 		 src/parsing.c\
 		 src/list_making.c\
 		 src/initialization.c\
@@ -24,11 +37,33 @@ CFILES = main.c\
 		 src/parse_textures.c\
 		 src/parsing_utils.c\
 		 src/parsing_utils1.c\
-		 src/animation.c\
-		 src/animation_utils.c\
-		 src/init_sprint.c\
 		 src/update_player.c\
-		 src/utils_func.c\
+		 src/utils_func.c
+
+BFILES = cub3d_bonus.c\
+		 src_bonus/parsing_bonus.c\
+		 src_bonus/list_making_bonus.c\
+		 src_bonus/initialization_bonus.c\
+		 src_bonus/events_bonus.c\
+		 src_bonus/utils_bonus.c \
+		 src_bonus/raycasting_bonus.c\
+		 src_bonus/render_bonus.c\
+		 src_bonus/draw_3d_bonus.c\
+		 src_bonus/ray_cast_utils_bonus.c\
+		 src_bonus/draw_3d_utils_bonus.c\
+		 src_bonus/parse_colors_bonus.c\
+		 src_bonus/parse_map_bonus.c\
+		 src_bonus/parse_map1_bonus.c\
+		 src_bonus/parse_map2_bonus.c\
+		 src_bonus/parse_player_bonus.c\
+		 src_bonus/parse_textures_bonus.c\
+		 src_bonus/parsing_utils_bonus.c\
+		 src_bonus/parsing_utils1_bonus.c\
+		 src_bonus/animation_bonus.c\
+		 src_bonus/animation_utils_bonus.c\
+		 src_bonus/init_sprint_bonus.c\
+		 src_bonus/update_player_bonus.c\
+		 src_bonus/utils_func_bonus.c\
 
 
 OBJ = $(patsubst %.c, %.o, $(CFILES))
@@ -44,8 +79,16 @@ $(OBJ) : %.o: %.c includes/cub3d.h
 
 $(NAME) : libft/libft.a $(OBJ)
 	@$(CC) $(FLAGS) $(OBJ) ./MLX42/build/libmlx42.a -lglfw -L/Users/$(USER)/.brew/opt/glfw/lib -pthread -lm libft/libft.a -o $(NAME)
-	@echo making ... Done.
+	@echo making mandatory... Done.
 
+bonus: lib $(B_NAME)
+
+$(B_OBJ) : %.o: %.c includes/cub3D_bonus.h
+	@$(CC) $(FLAGS) -c $< -o $@
+
+$(B_NAME) : libft/libft.a $(B_OBJ)
+	@$(CC) $(FLAGS) $(B_OBJ) ./MLX42/build/libmlx42.a -lglfw -L/Users/$(USER)/.brew/opt/glfw/lib -pthread -lm libft/libft.a -o $(B_NAME)
+	@echo making bonus ... Done.
 
 clean:
 	@$(RM) $(OBJ) $(B_OBJ)

@@ -6,11 +6,11 @@
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 08:18:07 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/22 14:01:31 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/22 10:39:31 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../includes/cub3d_bonus.h"
 
 void	init_player(t_player *player, t_map *map)
 {
@@ -55,18 +55,21 @@ void	init_window(t_window *window)
 	mlx_image_to_window(window->mlx_con, window->img, 0, 0);
 	window->ceiling_color = convert_color(&window->map->floor);
 	window->floor_color = convert_color(&window->map->ceiling);
+	window->is_mouse_on = false;
 	window->fov_angle = (60 * (M_PI / 180));
 }
 
 void	init_texture(t_window *window)
 {
-	window->texture = safe_malloc(sizeof(mlx_texture_t *) * 5);
+	window->texture = safe_malloc(sizeof(mlx_texture_t *) * 6);
 	window->texture[NORTH] = mlx_load_png(window->map->no);
 	window->texture[SOUTH] = mlx_load_png(window->map->so);
 	window->texture[EAST] = mlx_load_png(window->map->ea);
 	window->texture[WEST] = mlx_load_png(window->map->we);
-	window->texture[4] = NULL;
+	window->texture[DOOR] = mlx_load_png("./assets/door2.png");
+	window->texture[5] = NULL;
 	if (!window->texture[NORTH] || !window->texture[SOUTH] || \
-		!window->texture[EAST] || !window->texture[WEST])
+		!window->texture[EAST] || !window->texture[WEST] || \
+			!window->texture[DOOR])
 		ft_print_error(window->map, "check the png file pls", -1);
 }

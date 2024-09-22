@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   cub3d_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/09 08:17:40 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/21 16:29:15 by mal-mora         ###   ########.fr       */
+/*   Created: 2024/09/22 14:05:10 by mal-mora          #+#    #+#             */
+/*   Updated: 2024/09/22 14:07:36 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/cub3d.h"
+#include "includes/cub3d_bonus.h"
 
 void	handle_mouse_rotation(t_window *window)
 {
@@ -21,8 +21,6 @@ void	handle_mouse_rotation(t_window *window)
 	mlx_get_mouse_pos(window->mlx_con, &x, &y);
 	delta_x = (x - WIDTH / 2) / 8;
 	window->player.rotation_angle += delta_x * 0.01;
-	if (window->player.rotation_angle < 0)
-		window->player.rotation_angle = 0;
 	mlx_set_mouse_pos(window->mlx_con, WIDTH / 2, HEIGHT / 2);
 }
 

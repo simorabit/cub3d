@@ -6,11 +6,11 @@
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 08:12:50 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/22 13:27:53 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/22 10:39:31 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../includes/cub3d_bonus.h"
 
 void	map_init(t_map *map)
 {
@@ -58,6 +58,7 @@ void	parse_map(t_map *map)
 		ft_error(map, 3);
 	remove_x(map);
 	find_player(map);
+	check_doors(map);
 }
 
 void	store_map(t_map *map)

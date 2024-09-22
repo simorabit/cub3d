@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycasting.c                                       :+:      :+:    :+:   */
+/*   raycasting_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 08:18:19 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/22 14:09:58 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/22 14:10:24 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../includes/cub3d_bonus.h"
 
 bool	horizontal_casting(t_ray *ray, t_window *window)
 {
@@ -74,6 +74,7 @@ void	init_ray(t_ray *ray, bool *find_hor, bool *find_ver, t_window *window)
 {
 	ray->wall_hit_x = 0;
 	ray->wall_hit_y = 0;
+	ray->is_door = false;
 	if (ray->ray_angle > 0 && ray->ray_angle < M_PI)
 		ray->is_facing_down = true;
 	else
@@ -114,6 +115,7 @@ void	ray_cast(t_ray *ray, t_window *window)
 	else
 		ray->distance = vert_distance;
 	ray->was_hit_horz = (vert_distance > horz_distance);
+	detect_door(ray, window);
 }
 
 void	rays_casting(t_window *window)

@@ -6,11 +6,11 @@
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 10:48:10 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/22 11:04:50 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/22 10:39:31 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../includes/cub3d_bonus.h"
 
 bool	check_top_bottom_walls(t_map *map)
 {
@@ -60,7 +60,7 @@ bool	check_valid_map_characters(t_map *map)
 		{
 			c = map->v_map[i][j];
 			if (c != '1' && c != '0' && c != 'x' && c != 'N' && c != 'S'
-				&& c != 'E' && c != 'W')
+				&& c != 'E' && c != 'W' && c != 'D')
 				return (false);
 			j++;
 		}
