@@ -39,7 +39,7 @@ all: lib $(NAME)
 lib:
 	@make -C libft
 
-$(OBJ) : %.o: %.c includes/Cub3d.h
+$(OBJ) : %.o: %.c includes/cub3d.h
 	@$(CC) $(FLAGS) -c $< -o $@
 
 $(NAME) : libft/libft.a $(OBJ)

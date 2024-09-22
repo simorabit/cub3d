@@ -6,7 +6,7 @@
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 08:17:40 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/21 11:44:48 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/21 16:29:15 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	handle_mouse_rotation(t_window *window)
 	mlx_set_mouse_pos(window->mlx_con, WIDTH / 2, HEIGHT / 2);
 }
 
-void	loop_func(void *param)
+static void	loop_func(void *param)
 {
 	t_window	*window;
 

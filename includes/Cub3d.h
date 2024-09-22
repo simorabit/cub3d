@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cub3d.h                                            :+:      :+:    :+:   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 08:11:00 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/21 12:07:13 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/21 14:14:55 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 # include <stdlib.h>
 # include <string.h>
 
-# define HEIGHT  			900
-# define WIDTH  			1600
+# define HEIGHT  			1080
+# define WIDTH  			1920
 # define CENTER_CIRCLE 		110
 # define RADIUS 			100
 # define MINIMAP_WIDTH 		210

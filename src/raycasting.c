@@ -6,7 +6,7 @@
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 08:18:19 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/21 12:07:35 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/21 17:15:26 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ bool	verical_casting(t_ray *ray, t_window *window)
 	return (false);
 }
 
-void	init_ray(t_ray *ray, bool *find_hor, bool *find_ver, t_window *window)
+void	init_ray(t_ray *ray, t_window *window)
 {
 	ray->wall_hit_x = 0;
 	ray->wall_hit_y = 0;
@@ -86,18 +86,11 @@ void	init_ray(t_ray *ray, bool *find_hor, bool *find_ver, t_window *window)
 		ray->is_facing_right = false;
 	ray->is_facing_left = !ray->is_facing_right;
 	ray->distance = 0;
-	*find_hor = horizontal_casting(ray, window);
-	*find_ver = verical_casting(ray, window);
 }
-
-void	ray_cast(t_ray *ray, t_window *window)
+void select_min_inters(bool find_h_wall, bool find_v_wall, t_window *window, t_ray *ray)
 {
-	bool	find_h_wall;
-	bool	find_v_wall;
 	double	horz_distance;
 	double	vert_distance;
-
-	init_ray(ray, &find_h_wall, &find_v_wall, window);
 	horz_distance = INT_MAX;
 	vert_distance = INT_MAX;
 	if (find_h_wall)
@@ -115,6 +108,16 @@ void	ray_cast(t_ray *ray, t_window *window)
 	else
 		ray->distance = vert_distance;
 	ray->was_hit_horz = (vert_distance > horz_distance);
+}
+void	ray_cast(t_ray *ray, t_window *window)
+{
+	bool	find_h_wall;
+	bool	find_v_wall;
+
+	init_ray(ray, window);
+	find_h_wall = horizontal_casting(ray, window);
+	find_v_wall = verical_casting(ray, window);
+	select_min_inters(find_h_wall, find_v_wall, window, ray);
 	detect_door(ray, window);
 }
 
