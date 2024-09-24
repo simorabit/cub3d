@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+         #
+#    By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/22 14:13:48 by mal-mora          #+#    #+#              #
-#    Updated: 2024/09/22 14:13:52 by mal-mora         ###   ########.fr        #
+#    Updated: 2024/09/22 15:51:31 by moel-fat         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,7 +78,7 @@ $(OBJ) : %.o: %.c includes/cub3d.h
 	@$(CC) $(FLAGS) -c $< -o $@
 
 $(NAME) : libft/libft.a $(OBJ)
-	@$(CC) $(FLAGS) $(OBJ) ./MLX42/build/libmlx42.a -lglfw -L/Users/$(USER)/.brew/opt/glfw/lib -pthread -lm libft/libft.a -o $(NAME)
+	@$(CC) $(FLAGS) $(OBJ) ./.MLX/libmlx42.a -lglfw -L/Users/$(USER)/.brew/opt/glfw/lib -pthread -lm libft/libft.a -o $(NAME)
 	@echo making mandatory... Done.
 
 bonus: lib $(B_NAME)
@@ -87,7 +87,7 @@ $(B_OBJ) : %.o: %.c includes/cub3D_bonus.h
 	@$(CC) $(FLAGS) -c $< -o $@
 
 $(B_NAME) : libft/libft.a $(B_OBJ)
-	@$(CC) $(FLAGS) $(B_OBJ) ./MLX42/build/libmlx42.a -lglfw -L/Users/$(USER)/.brew/opt/glfw/lib -pthread -lm libft/libft.a -o $(B_NAME)
+	@$(CC) $(FLAGS) $(B_OBJ) ./.MLX/libmlx42.a -lglfw -L/Users/$(USER)/.brew/opt/glfw/lib -pthread -lm libft/libft.a -o $(B_NAME)
 	@echo making bonus ... Done.
 
 clean:
