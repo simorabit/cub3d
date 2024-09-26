@@ -6,14 +6,14 @@
 #    By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/22 14:13:48 by mal-mora          #+#    #+#              #
-#    Updated: 2024/09/26 11:30:32 by moel-fat         ###   ########.fr        #
+#    Updated: 2024/09/26 14:53:34 by moel-fat         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 .PHONY: all clean fclean re
 
 CC = cc
-FLAGS = #-Wall -Wextra -Werror -o3
+FLAGS = -Wall -Wextra -Werror -o3
 RM = rm -rf
 NAME = cub3D
 B_NAME = cub3D_bonus

@@ -6,7 +6,7 @@
 /*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 10:51:05 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/26 11:55:50 by moel-fat         ###   ########.fr       */
+/*   Updated: 2024/09/26 14:54:58 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,7 @@ static void	free_sprite(t_window *window)
 			mlx_delete_image(window->mlx_con, window->sprite->sword_i[i]);
 			i++;
 		}
-		free(window->sprite->sword);
-		free(window->sprite->sword_i);
+		(free(window->sprite->sword), free(window->sprite->sword_i));
 	}
 	i = 0;
 	if (window->sprite->pickaxe)
@@ -72,6 +71,7 @@ static void	free_sprite(t_window *window)
 		}
 		(free(window->sprite->pickaxe), free(window->sprite->pickaxe_i));
 	}
+	free_sprint2(window);
 }
 
 static void	free_texture(t_window *window)
