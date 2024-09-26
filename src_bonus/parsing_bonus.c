@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   parsing_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
+/*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 08:12:50 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/22 10:39:31 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/26 14:48:42 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	map_init(t_map *map)
 	map->map_fd = 0;
 	map->data = NULL;
 	map->player_count = 0;
-	map->count_lines = 0;
 }
 
 void	parse_map(t_map *map)
@@ -78,7 +77,6 @@ void	store_map(t_map *map)
 		free(line);
 	}
 	close(map->map_fd);
-	map->height = map->count_lines;
 	parse_map(map);
 }
 

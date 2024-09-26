@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_map1.c                                       :+:      :+:    :+:   */
+/*   parse_map1_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
+/*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 16:34:45 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/22 10:39:31 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/26 14:48:29 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	parse_line_helper(char *line, t_map *map, bool *map_started, char *tmp)
 	else if (ft_strncmp(tmp, "1", 1) == 0)
 	{
 		*map_started = true;
-		map->count_lines++;
+		map->height++;
 		ft_lstadd_backmap(&map->data, ft_lstnewmap(ft_strdup(line)));
 	}
 	else if (tmp[0] != '\n')
@@ -105,7 +105,7 @@ void	parse_line(char *line, t_map *map, bool *map_started)
 	{
 		if (ft_strncmp(tmp, "1", 1) == 0 || tmp[0] == '\n')
 		{
-			map->count_lines++;
+			map->height++;
 			ft_lstadd_backmap(&map->data, ft_lstnewmap(ft_strdup(line)));
 		}
 		else if (tmp[0] != '\n')
