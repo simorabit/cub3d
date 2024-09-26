@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   events.c                                           :+:      :+:    :+:   */
+/*   events_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 08:18:00 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/22 10:39:31 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/26 12:06:55 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ void	close_door(t_window *window)
 	i = TILE_SIZE + 1;
 	while (i < 100)
 	{
-		new_x = window->player.x + (cos(window->player.rotation_angle + 3) * i);
-		new_y = window->player.y + (sin(window->player.rotation_angle + 3) * i);
+		new_x = window->player.x + (cos(window->player.rotation_angle + M_PI) * i);
+		new_y = window->player.y + (sin(window->player.rotation_angle + M_PI) * i);
 		if (new_x > 0 && new_y > 0 && new_x < window->width \
 			&& new_y < window->height && \
 			window->map->v_map[new_y / TILE_SIZE][new_x / TILE_SIZE] == 'C')

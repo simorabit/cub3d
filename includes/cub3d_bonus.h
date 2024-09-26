@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 08:11:00 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/26 11:39:11 by moel-fat         ###   ########.fr       */
+/*   Updated: 2024/09/26 12:04:48 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,7 +162,7 @@ typedef struct s_window
 	bool			is_mouse_on;
 	t_player		player;
 	double			fov_angle;
-	t_ray			ray_list[WIDTH + 1];
+	t_ray			ray_list[WIDTH];
 }	t_window;
 
 enum e_direction
@@ -192,7 +192,6 @@ void		my_keyhook(mlx_key_data_t keydata, void *param);
 void		rays_casting(t_window *window);
 void		init_horz_cast(t_ray_cast *ray_cast, t_window *window, t_ray *ray);
 void		init_vert_cast(t_ray_cast *ray_var, t_window *window, t_ray *ray);
-void		dda_algo(int X1, int Y1, double X, t_window *window);
 int			get_step(double dx, double dy);
 double		normalize_angle(double angle);
 void		detect_door(t_ray *ray, t_window *window);

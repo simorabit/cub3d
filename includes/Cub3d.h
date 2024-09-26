@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 08:11:00 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/26 10:47:05 by moel-fat         ###   ########.fr       */
+/*   Updated: 2024/09/26 12:04:24 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ typedef struct s_window
 	bool			is_key_press;
 	t_player		player;
 	double			fov_angle;
-	t_ray			ray_list[WIDTH + 1];
+	t_ray			ray_list[WIDTH];
 }	t_window;
 
 enum e_direction
