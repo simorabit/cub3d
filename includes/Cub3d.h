@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 08:11:00 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/22 15:51:24 by moel-fat         ###   ########.fr       */
+/*   Updated: 2024/09/24 15:41:56 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,15 +90,6 @@ typedef struct s_map
 	t_data	*data;
 }	t_map;
 
-typedef struct s_image
-{
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}	t_image;
-
 typedef struct s_ray
 {
 	double	distance;
@@ -147,7 +138,7 @@ typedef struct s_window
 	bool			is_key_press;
 	t_player		player;
 	double			fov_angle;
-	t_ray			ray_list[WIDTH + 1];
+	t_ray			ray_list[WIDTH];
 }	t_window;
 
 enum e_direction
@@ -174,7 +165,7 @@ void		my_keyhook(mlx_key_data_t keydata, void *param);
 void		rays_casting(t_window *window);
 void		init_horz_cast(t_ray_cast *ray_cast, t_window *window, t_ray *ray);
 void		init_vert_cast(t_ray_cast *ray_var, t_window *window, t_ray *ray);
-void		dda_algo(int X1, int Y1, double X, t_window *window);
+void		init_ray(t_ray *ray);
 int			get_step(double dx, double dy);
 double		normalize_angle(double angle);
 void		detect_door(t_ray *ray, t_window *window);
@@ -218,7 +209,6 @@ void		copy_map(t_map *map);
 char		*check_texture(char *str);
 bool		is_just_spaces(char *str);
 int			check_map_exists(char *file_name, t_map *map);
-// void		parse_line(char *line, t_map *map, int *count);
 void		parse_line(char *line, t_map *map, bool *map_started);
 void		free_array(char **array);
 void		ft_print_error(t_map *map, char *str, int flag);

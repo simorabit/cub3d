@@ -6,7 +6,7 @@
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 18:29:24 by mal-mora          #+#    #+#             */
-/*   Updated: 2024/09/21 09:55:45 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/26 09:43:13 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ double	calculate_wall_top_pixel(double wall_strip_height)
 	double	wall_top_pixel;
 
 	wall_top_pixel = (HEIGHT / 2) - (wall_strip_height / 2);
-	if (wall_top_pixel < 0)
-		wall_top_pixel = 0;
+	// if (wall_top_pixel < 0)
+	// 	wall_top_pixel = 0;
 	return (wall_top_pixel);
 }
 

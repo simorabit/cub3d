@@ -6,7 +6,7 @@
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 08:17:40 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/22 11:02:22 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/24 12:40:34 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ static void	loop_func(void *param)
 	t_window	*window;
 
 	window = (t_window *)param;
-	update_player(window);
 	render(window);
+	update_player(window);
 }
 
 static void	display_window(t_window *window)

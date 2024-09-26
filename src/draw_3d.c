@@ -6,7 +6,7 @@
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 08:17:51 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/22 11:05:32 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/26 09:43:43 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,11 @@ void	render_walls(t_window *window)
 		window->ray_index = i;
 		calculate_correct_distance(window, i);
 		wall_strip_height = get_wall_height(window, i);
+		if (wall_strip_height > HEIGHT)
+			wall_top_pixel -= (wall_strip_height - HEIGHT) / 2;
 		wall_top_pixel = calculate_wall_top_pixel(wall_strip_height);
 		wall_bottom_pixel = calculate_wall_bottom_pixel(wall_strip_height);
 		window->direction = get_wall_direction(&window->ray_list[i]);
-		if (wall_strip_height > HEIGHT)
-			wall_top_pixel -= (wall_strip_height - HEIGHT) / 2;
 		render_wall_strip(window, wall_top_pixel, \
 			wall_bottom_pixel, wall_strip_height);
 		i++;

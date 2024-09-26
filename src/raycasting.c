@@ -6,7 +6,7 @@
 /*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 08:18:19 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/22 14:09:58 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/24 15:21:05 by mal-mora         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,39 +70,17 @@ bool	verical_casting(t_ray *ray, t_window *window)
 	return (false);
 }
 
-void	init_ray(t_ray *ray, bool *find_hor, bool *find_ver, t_window *window)
+void	get_right_hit(t_window *window, t_ray *ray, bool find_h, bool find_v)
 {
-	ray->wall_hit_x = 0;
-	ray->wall_hit_y = 0;
-	if (ray->ray_angle > 0 && ray->ray_angle < M_PI)
-		ray->is_facing_down = true;
-	else
-		ray->is_facing_down = false;
-	ray->is_facing_up = !ray->is_facing_down;
-	if (ray->ray_angle < 0.5 * M_PI || ray->ray_angle > 1.5 * M_PI)
-		ray->is_facing_right = true;
-	else
-		ray->is_facing_right = false;
-	ray->is_facing_left = !ray->is_facing_right;
-	ray->distance = 0;
-	*find_hor = horizontal_casting(ray, window);
-	*find_ver = verical_casting(ray, window);
-}
-
-void	ray_cast(t_ray *ray, t_window *window)
-{
-	bool	find_h_wall;
-	bool	find_v_wall;
 	double	horz_distance;
 	double	vert_distance;
 
-	init_ray(ray, &find_h_wall, &find_v_wall, window);
 	horz_distance = INT_MAX;
 	vert_distance = INT_MAX;
-	if (find_h_wall)
+	if (find_h)
 		horz_distance = calc_distance(window->player.x, window->player.y, \
 			ray->wall_hit_x, ray->wall_hit_y);
-	if (find_v_wall)
+	if (find_v)
 		vert_distance = calc_distance(window->player.x, window->player.y, \
 			ray->wall_hit_x_ver, ray->wall_hit_y_ver);
 	if (horz_distance >= vert_distance)
@@ -114,6 +92,17 @@ void	ray_cast(t_ray *ray, t_window *window)
 	else
 		ray->distance = vert_distance;
 	ray->was_hit_horz = (vert_distance > horz_distance);
+}
+
+void	ray_cast(t_ray *ray, t_window *window)
+{
+	bool	find_h_wall;
+	bool	find_v_wall;
+
+	init_ray(ray);
+	find_h_wall = horizontal_casting(ray, window);
+	find_v_wall = verical_casting(ray, window);
+	get_right_hit(window, ray, find_h_wall, find_v_wall);
 }
 
 void	rays_casting(t_window *window)
