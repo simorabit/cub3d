@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_sprint.c                                      :+:      :+:    :+:   */
+/*   init_sprint_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
+/*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 12:40:59 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/22 10:39:31 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/26 11:42:12 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ void	init_sword(t_window *window)
 	{
 		window->sprite->sword[i] = mlx_load_png(sword_paths[i]);
 		if (!window->sprite->sword[i])
-			ft_error(window->map, 10);
+			(perror("lead fail"), free_on_error(), exit(EXIT_FAILURE));
 		window->sprite->sword_i[i] = mlx_texture_to_image(window->mlx_con,
 				window->sprite->sword[i]);
 		if (!window->sprite->sword_i[i]
 			|| !mlx_resize_image(window->sprite->sword_i[i], WIDTH, HEIGHT))
-			ft_error(window->map, 10);
+			(perror("lead fail"), free_on_error(), exit(EXIT_FAILURE));
 		i++;
 	}
 }
@@ -55,11 +55,11 @@ void	init_pickaxe(t_window *window)
 	{
 		window->sprite->pickaxe[i] = mlx_load_png(pickaxe_animation[i]);
 		if (!window->sprite->pickaxe[i])
-			ft_error(window->map, 6);
+			(perror("lead fail"), free_on_error(), exit(EXIT_FAILURE));
 		window->sprite->pickaxe_i[i] = mlx_texture_to_image(window->mlx_con,
 				window->sprite->pickaxe[i]);
 		if (!mlx_resize_image(window->sprite->pickaxe_i[i], WIDTH, HEIGHT))
-			ft_error(window->map, 6);
+			(perror("lead fail"), free_on_error(), exit(EXIT_FAILURE));
 		i++;
 	}
 }
@@ -80,11 +80,11 @@ void	init_axe(t_window *window)
 	{
 		window->sprite->axe[i] = mlx_load_png(axe_animation[i]);
 		if (!window->sprite->axe[i])
-			ft_error(window->map, 6);
+			(perror("lead fail"), free_on_error(), exit(EXIT_FAILURE));
 		window->sprite->axe_images[i] = mlx_texture_to_image(window->mlx_con,
 				window->sprite->axe[i]);
 		if (!mlx_resize_image(window->sprite->axe_images[i], WIDTH, HEIGHT))
-			ft_error(window->map, 6);
+			(perror("lead fail"), free_on_error(), exit(EXIT_FAILURE));
 		i++;
 	}
 }
@@ -93,22 +93,21 @@ void	init_hand(t_window *window)
 {
 	window->sprite->hand = mlx_load_png("assets/hand.png");
 	if (!window->sprite->hand)
-		ft_error(window->map, 6);
+		(perror("lead fail"), free_on_error(), exit(EXIT_FAILURE));
 	window->sprite->hand_image = mlx_texture_to_image(window->mlx_con,
 			window->sprite->hand);
 	if (!window->sprite->hand_image)
-		ft_error(window->map, 6);
+		(perror("lead fail"), free_on_error(), exit(EXIT_FAILURE));
 	if (!mlx_resize_image(window->sprite->hand_image, WIDTH, HEIGHT))
-		ft_error(window->map, 6);
+		(perror("lead fail"), free_on_error(), exit(EXIT_FAILURE));
 }
 
 void	init_sprint(t_window *window)
 {
 	window->sprite = safe_malloc(sizeof(t_sprite));
+	init_helper(window);
 	init_sword(window);
 	init_pickaxe(window);
 	init_axe(window);
 	init_hand(window);
-	window->sprite->enabled = false;
-	window->sprite->hand_on = false;
 }

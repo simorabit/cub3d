@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
+/*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 15:47:09 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/21 09:55:45 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/26 10:04:15 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	*safe_malloc(size_t size)
 	if (!ptr)
 	{
 		ft_putstr_fd("Error: malloc failed\n", 2);
+		free_on_error();
 		exit(EXIT_FAILURE);
 	}
 	return (ptr);

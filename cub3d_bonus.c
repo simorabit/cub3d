@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
+/*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 14:05:10 by mal-mora          #+#    #+#             */
-/*   Updated: 2024/09/22 14:07:36 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/26 11:13:03 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int	main(int argc, char *argv[])
 	map_init(map);
 	check_read_map(argv[1], map);
 	window.map = map;
+	data_grep(&window);
 	display_window(&window);
 	free_map(map);
 	return (0);

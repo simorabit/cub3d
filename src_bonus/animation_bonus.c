@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   animation.c                                        :+:      :+:    :+:   */
+/*   animation_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
+/*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 10:07:20 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/22 10:39:31 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/26 11:51:17 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,10 @@ void	re_load_images2(t_window *window, mlx_texture_t **textures
 	while (i < num_frames)
 	{
 		images[i] = mlx_texture_to_image(window->mlx_con, textures[i]);
+		if (!images[i])
+			(perror("lead fail"), free_on_error(), exit(EXIT_FAILURE));
 		if (!mlx_resize_image(images[i], WIDTH, HEIGHT))
-			ft_error(window->map, 6);
+			(perror("resize fail"), free_on_error(), exit(EXIT_FAILURE));
 		i++;
 	}
 }

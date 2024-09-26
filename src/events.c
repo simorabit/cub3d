@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
+/*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 08:18:00 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/22 11:16:16 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/26 10:48:55 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 int	close_handler(t_window *window)
 {
 	mlx_delete_image(window->mlx_con, window->img);
+	mlx_close_window(window->mlx_con);
+	free_on_error();
 	exit(EXIT_SUCCESS);
-	return (0);
 }
 
 void	player_direction(mlx_key_data_t keydata, int *key, int value)

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_func.c                                       :+:      :+:    :+:   */
+/*   utils_func_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
+/*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 18:27:05 by mal-mora          #+#    #+#             */
-/*   Updated: 2024/09/22 10:39:31 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/26 11:39:39 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,22 @@ bool	ray_protection(t_ray_cast ray_var, t_window *window)
 {
 	return (ray_var.xinter >= 0 && ray_var.xinter <= window->width && \
 		ray_var.yinter >= 0 && ray_var.yinter <= window->height);
+}
+
+void	init_helper(t_window *window)
+{
+	window->sprite->sword = NULL;
+	window->sprite->sword_i = NULL;
+	window->sprite->pickaxe = NULL;
+	window->sprite->pickaxe_i = NULL;
+	window->sprite->axe = NULL;
+	window->sprite->axe_images = NULL;
+	window->sprite->hand = NULL;
+	window->sprite->hand_image = NULL;
+	window->sprite->current_animation_images = NULL;
+	window->sprite->whatison = 0;
+	window->sprite->num_frames = 0;
+	window->sprite->num_frames_set = false;
+	window->sprite->hand_on = false;
+	window->sprite->enabled = false;
 }

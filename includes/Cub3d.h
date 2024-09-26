@@ -6,7 +6,7 @@
 /*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 08:11:00 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/22 15:51:24 by moel-fat         ###   ########.fr       */
+/*   Updated: 2024/09/26 10:47:05 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,15 +90,6 @@ typedef struct s_map
 	t_data	*data;
 }	t_map;
 
-typedef struct s_image
-{
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}	t_image;
-
 typedef struct s_ray
 {
 	double	distance;
@@ -132,18 +123,15 @@ typedef struct s_player
 typedef struct s_window
 {
 	mlx_t			*mlx_con;
-	void			*mlx_window;
 	mlx_image_t		*img;
 	t_map			*map;
-	char			**my_map;
-	char			*title;
+	mlx_texture_t	**texture;
 	int				width;
 	int				height;
 	int				ray_index;
 	int				direction;
 	uint32_t		floor_color;
 	uint32_t		ceiling_color;
-	mlx_texture_t	**texture;
 	bool			is_key_press;
 	t_player		player;
 	double			fov_angle;
@@ -225,5 +213,8 @@ void		ft_print_error(t_map *map, char *str, int flag);
 void		display_hand(t_window *window);
 void		select_weapon(t_window *window, int frames, int weapen);
 void		is_not_empty(char **line, t_map *map);
+t_window	*data_grep(t_window *data);
+void		free_on_error(void);
+t_window	*data_grep(t_window *data);
 
 #endif

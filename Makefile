@@ -6,14 +6,14 @@
 #    By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/22 14:13:48 by mal-mora          #+#    #+#              #
-#    Updated: 2024/09/22 15:51:31 by moel-fat         ###   ########.fr        #
+#    Updated: 2024/09/26 11:30:32 by moel-fat         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 .PHONY: all clean fclean re
 
 CC = cc
-FLAGS = -Wall -Wextra -Werror -o3
+FLAGS = #-Wall -Wextra -Werror -o3
 RM = rm -rf
 NAME = cub3D
 B_NAME = cub3D_bonus
@@ -38,7 +38,8 @@ CFILES = cub3d.c\
 		 src/parsing_utils.c\
 		 src/parsing_utils1.c\
 		 src/update_player.c\
-		 src/utils_func.c
+		 src/utils_func.c\
+		 src/utils1.c
 
 BFILES = cub3d_bonus.c\
 		 src_bonus/parsing_bonus.c\
@@ -64,6 +65,7 @@ BFILES = cub3d_bonus.c\
 		 src_bonus/init_sprint_bonus.c\
 		 src_bonus/update_player_bonus.c\
 		 src_bonus/utils_func_bonus.c\
+		 src_bonus/utils1_bonus.c\
 
 
 OBJ = $(patsubst %.c, %.o, $(CFILES))

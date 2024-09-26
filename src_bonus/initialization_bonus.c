@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   initialization.c                                   :+:      :+:    :+:   */
+/*   initialization_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mal-mora <mal-mora@student.42.fr>          +#+  +:+       +#+        */
+/*   By: moel-fat <moel-fat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 08:18:07 by moel-fat          #+#    #+#             */
-/*   Updated: 2024/09/22 10:39:31 by mal-mora         ###   ########.fr       */
+/*   Updated: 2024/09/26 11:54:15 by moel-fat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,21 +35,12 @@ void	init_player(t_player *player, t_map *map)
 
 void	init_window(t_window *window)
 {
-	window->title = "CUB3D";
-	if (!window->title)
-	{
-		perror("Error in allocation");
-		exit(EXIT_FAILURE);
-	}
-	window->mlx_con = mlx_init(WIDTH, HEIGHT, window->title, false);
+	window->mlx_con = mlx_init(WIDTH, HEIGHT, "Cub3D_bonus", false);
 	if (!window->mlx_con)
 		(perror("Error in allocation"), exit(EXIT_FAILURE));
 	window->img = mlx_new_image(window->mlx_con, WIDTH, HEIGHT);
 	if (!window->img)
-	{
-		mlx_delete_image(window->mlx_con, window->img);
-		(perror("Error in allocation"), exit(EXIT_FAILURE));
-	}
+		(perror("Error in allocation"), free_on_error(), exit(EXIT_FAILURE));
 	window->width = window->map->width * TILE_SIZE;
 	window->height = window->map->height * TILE_SIZE;
 	mlx_image_to_window(window->mlx_con, window->img, 0, 0);
@@ -57,6 +48,7 @@ void	init_window(t_window *window)
 	window->floor_color = convert_color(&window->map->ceiling);
 	window->is_mouse_on = false;
 	window->fov_angle = (60 * (M_PI / 180));
+	window->sprite = NULL;
 }
 
 void	init_texture(t_window *window)
