@@ -13,7 +13,7 @@
 .PHONY: all clean fclean re
 
 CC = cc
-FLAGS = -Wall -Wextra -Werror -o3
+FLAGS = -o3 #-Wall -Wextra -Werror -o3
 RM = rm -rf
 NAME = cub3D
 B_NAME = cub3D_bonus
@@ -80,16 +80,16 @@ $(OBJ) : %.o: %.c includes/cub3d.h
 	@$(CC) $(FLAGS) -c $< -o $@
 
 $(NAME) : libft/libft.a $(OBJ)
-	@$(CC) $(FLAGS) $(OBJ) ./.MLX/libmlx42.a -lglfw -L/Users/$(USER)/.brew/opt/glfw/lib -pthread -lm libft/libft.a -o $(NAME)
+	@$(CC) $(FLAGS) $(OBJ) ./MLX42/build/libmlx42.a -Iinclude -ldl -lglfw -pthread -lm libft/libft.a -o $(NAME)
 	@echo making mandatory... Done.
 
 bonus: lib $(B_NAME)
 
-$(B_OBJ) : %.o: %.c includes/cub3D_bonus.h
+$(B_OBJ) : %.o: %.c includes/cub3d_bonus.h
 	@$(CC) $(FLAGS) -c $< -o $@
 
 $(B_NAME) : libft/libft.a $(B_OBJ)
-	@$(CC) $(FLAGS) $(B_OBJ) ./.MLX/libmlx42.a -lglfw -L/Users/$(USER)/.brew/opt/glfw/lib -pthread -lm libft/libft.a -o $(B_NAME)
+	@$(CC) $(FLAGS) $(B_OBJ) ./MLX42/build/libmlx42.a -Iinclude -ldl -lglfw -pthread -lm libft/libft.a -o $(B_NAME)
 	@echo making bonus ... Done.
 
 clean:

@@ -15,7 +15,11 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 10
 # endif 
-# include <libc.h>
+# include <unistd.h>
+# include <fcntl.h>
+# include <stdlib.h>
+# include <stdio.h>
+
 
 char	*get_next_line(int fd);
 char	*ft_strjoin_gnl(char *s1, char *s2);

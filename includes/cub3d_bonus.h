@@ -15,7 +15,8 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <math.h>
-# include "../.MLX/MLX42.h"
+# include <limits.h>
+# include "../MLX/MLX42.h"
 # include <stdbool.h>
 # include "../libft/libft.h"
 # include <stdlib.h>
